@@ -1,15 +1,14 @@
 //
-//  ViewController.h
+//  PrefixHeader.pch
 //  School
 //
 //  Created by asus on 16/3/5.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#ifndef School_PrefixHeader_pch
+#define School_PrefixHeader_pch
 
-@interface ViewController : UIViewController
 
 
-@end
-
+#endif
