@@ -10,5 +10,36 @@
 #define School_PrefixHeader_pch
 
 
+/************************************************************************************
+ ***路径
+ ***********************************************************************************/
+
+
+
+
+#define FDRandomColor     [UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]
+
+#define FDRedColor  0
+#define FDWhiteColor  1
+#define FDBlackColor  2
+#define FDYellowColor  3
+
+#define FDSetSubviewsColor(FDColor) for (int i=0; i<self.subviews.count; i++) {\
+UIView *view = self.subviews[i];\
+switch (FDColor) {\
+case FDRedColor:view.backgroundColor = [UIColor whiteColor];break;\
+case FDWhiteColor:view.backgroundColor = [UIColor whiteColor];break;\
+case FDBlackColor:view.backgroundColor = [UIColor whiteColor];break;\
+case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
+}}
+
+#import "FDSingleton.h"
+#import "PureLayout.h"
+#import "UIView+FDViewExtension.h"
+#import "UIView+MJExtension.h"
+#import "FDMBProgressHUB.h"
+#import "FDXMPPTool.h"
+#import "FDUserInfo.h"
+
 
 #endif

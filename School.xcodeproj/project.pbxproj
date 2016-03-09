@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B8079351C8F061100FB3F78 /* FDMBProgressHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8079341C8F061100FB3F78 /* FDMBProgressHUB.m */; };
+		1B8079391C8F0B8300FB3F78 /* FDXMPPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8079381C8F0B8300FB3F78 /* FDXMPPTool.m */; };
+		1B8E06E01C8BD40D0024EE9B /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E06DF1C8BD40D0024EE9B /* Storyboard.storyboard */; };
 		1B8ED6A11C8AB61C00FB09F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8ED6A01C8AB61C00FB09F8 /* main.m */; };
 		1B8ED6A71C8AB61C00FB09F8 /* School.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B8ED6A51C8AB61C00FB09F8 /* School.xcdatamodeld */; };
 		1B8ED6AF1C8AB61C00FB09F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8ED6AE1C8AB61C00FB09F8 /* Images.xcassets */; };
 		1B8ED6B21C8AB61C00FB09F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8ED6B01C8AB61C00FB09F8 /* LaunchScreen.xib */; };
 		1B8ED6BE1C8AB61C00FB09F8 /* SchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8ED6BD1C8AB61C00FB09F8 /* SchoolTests.m */; };
+		1BA043EC1C8DB66500103401 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA043E81C8DB66500103401 /* MBProgressHUD+MJ.m */; };
+		1BA043ED1C8DB66500103401 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1BA043E91C8DB66500103401 /* MBProgressHUD.bundle */; };
+		1BA043EE1C8DB66500103401 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA043EB1C8DB66500103401 /* MBProgressHUD.m */; };
+		1BAE002B1C8AC140002B4570 /* FDLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE002A1C8AC140002B4570 /* FDLoginController.m */; };
+		1BAE00331C8AC1F3002B4570 /* FDNavigationBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE00321C8AC1F3002B4570 /* FDNavigationBaseController.m */; };
+		1BAE00361C8AC717002B4570 /* FDInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE00351C8AC717002B4570 /* FDInputView.m */; };
+		1BAE00391C8AC764002B4570 /* UIView+FDViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE00381C8AC764002B4570 /* UIView+FDViewExtension.m */; };
 		1BAEFFF31C8ABDBD002B4570 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */; };
+		1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBFDCD51C906C4B006496CE /* FDUserInfo.m */; };
 		C36C513E786762F64D67F486 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937B38FDA00E2E0357395D48 /* libPods.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -27,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B8079331C8F061100FB3F78 /* FDMBProgressHUB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDMBProgressHUB.h; path = School/Lib/FDMBProgressHUD/FDMBProgressHUB.h; sourceTree = SOURCE_ROOT; };
+		1B8079341C8F061100FB3F78 /* FDMBProgressHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDMBProgressHUB.m; path = School/Lib/FDMBProgressHUD/FDMBProgressHUB.m; sourceTree = SOURCE_ROOT; };
+		1B8079371C8F0B8300FB3F78 /* FDXMPPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDXMPPTool.h; sourceTree = "<group>"; };
+		1B8079381C8F0B8300FB3F78 /* FDXMPPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDXMPPTool.m; sourceTree = "<group>"; };
+		1B8E06DF1C8BD40D0024EE9B /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		1B8ED69B1C8AB61C00FB09F8 /* School.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = School.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B8ED69F1C8AB61C00FB09F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B8ED6A01C8AB61C00FB09F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -36,9 +52,25 @@
 		1B8ED6B71C8AB61C00FB09F8 /* SchoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B8ED6BC1C8AB61C00FB09F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B8ED6BD1C8AB61C00FB09F8 /* SchoolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolTests.m; sourceTree = "<group>"; };
+		1BA043E71C8DB66500103401 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		1BA043E81C8DB66500103401 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		1BA043E91C8DB66500103401 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		1BA043EA1C8DB66500103401 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		1BA043EB1C8DB66500103401 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1BAE00281C8ABE2C002B4570 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		1BAE00291C8AC140002B4570 /* FDLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDLoginController.h; sourceTree = "<group>"; };
+		1BAE002A1C8AC140002B4570 /* FDLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDLoginController.m; sourceTree = "<group>"; };
+		1BAE00311C8AC1F3002B4570 /* FDNavigationBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDNavigationBaseController.h; sourceTree = "<group>"; };
+		1BAE00321C8AC1F3002B4570 /* FDNavigationBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDNavigationBaseController.m; sourceTree = "<group>"; };
+		1BAE00341C8AC717002B4570 /* FDInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDInputView.h; sourceTree = "<group>"; };
+		1BAE00351C8AC717002B4570 /* FDInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDInputView.m; sourceTree = "<group>"; };
+		1BAE00371C8AC764002B4570 /* UIView+FDViewExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FDViewExtension.h"; sourceTree = "<group>"; };
+		1BAE00381C8AC764002B4570 /* UIView+FDViewExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FDViewExtension.m"; sourceTree = "<group>"; };
 		1BAEFFF11C8ABDBD002B4570 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1BBFDCD41C906C4B006496CE /* FDUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDUserInfo.h; sourceTree = "<group>"; };
+		1BBFDCD51C906C4B006496CE /* FDUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDUserInfo.m; sourceTree = "<group>"; };
+		1BBFDCD71C906C96006496CE /* FDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSingleton.h; sourceTree = "<group>"; };
 		347A777F4F80539A01167F4C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		937B38FDA00E2E0357395D48 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9533113CCF834505D451ABE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +95,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B8079321C8F05D000FB3F78 /* FDMBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1B8079331C8F061100FB3F78 /* FDMBProgressHUB.h */,
+				1B8079341C8F061100FB3F78 /* FDMBProgressHUB.m */,
+			);
+			path = FDMBProgressHUD;
+			sourceTree = "<group>";
+		};
+		1B8079361C8F0B6500FB3F78 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				1B8079371C8F0B8300FB3F78 /* FDXMPPTool.h */,
+				1B8079381C8F0B8300FB3F78 /* FDXMPPTool.m */,
+				1BBFDCD41C906C4B006496CE /* FDUserInfo.h */,
+				1BBFDCD51C906C4B006496CE /* FDUserInfo.m */,
+				1BBFDCD71C906C96006496CE /* FDSingleton.h */,
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
 		1B8ED6921C8AB61C00FB09F8 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +139,8 @@
 		1B8ED69D1C8AB61C00FB09F8 /* School */ = {
 			isa = PBXGroup;
 			children = (
+				1B8079361C8F0B6500FB3F78 /* Singleton */,
+				1BA043E51C8DB66500103401 /* Lib */,
 				1BAE000E1C8ABDC9002B4570 /* Register */,
 				1BAEFFF41C8ABDC9002B4570 /* Login */,
 				1BAEFFF91C8ABDC9002B4570 /* Organizations */,
@@ -96,6 +151,7 @@
 				1B8ED6A51C8AB61C00FB09F8 /* School.xcdatamodeld */,
 				1B8ED6B01C8AB61C00FB09F8 /* LaunchScreen.xib */,
 				1B8ED69E1C8AB61C00FB09F8 /* Supporting Files */,
+				1B8E06DF1C8BD40D0024EE9B /* Storyboard.storyboard */,
 			);
 			path = School;
 			sourceTree = "<group>";
@@ -125,6 +181,27 @@
 				1B8ED6BC1C8AB61C00FB09F8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BA043E51C8DB66500103401 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1B8079321C8F05D000FB3F78 /* FDMBProgressHUD */,
+				1BA043E61C8DB66500103401 /* MBProgressHUD */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1BA043E61C8DB66500103401 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1BA043E71C8DB66500103401 /* MBProgressHUD+MJ.h */,
+				1BA043E81C8DB66500103401 /* MBProgressHUD+MJ.m */,
+				1BA043E91C8DB66500103401 /* MBProgressHUD.bundle */,
+				1BA043EA1C8DB66500103401 /* MBProgressHUD.h */,
+				1BA043EB1C8DB66500103401 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		1BAE00001C8ABDC9002B4570 /* Controllers */ = {
@@ -439,9 +516,53 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1BAE002C1C8AC1BA002B4570 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE002D1C8AC1BA002B4570 /* Controllers */,
+				1BAE002E1C8AC1BA002B4570 /* Models */,
+				1BAE002F1C8AC1BA002B4570 /* Others */,
+				1BAE00301C8AC1BA002B4570 /* Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1BAE002D1C8AC1BA002B4570 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE00311C8AC1F3002B4570 /* FDNavigationBaseController.h */,
+				1BAE00321C8AC1F3002B4570 /* FDNavigationBaseController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1BAE002E1C8AC1BA002B4570 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1BAE002F1C8AC1BA002B4570 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		1BAE00301C8AC1BA002B4570 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE00371C8AC764002B4570 /* UIView+FDViewExtension.h */,
+				1BAE00381C8AC764002B4570 /* UIView+FDViewExtension.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1BAEFFF41C8ABDC9002B4570 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1BAE002C1C8AC1BA002B4570 /* Common */,
 				1BAEFFF51C8ABDC9002B4570 /* Controllers */,
 				1BAEFFF61C8ABDC9002B4570 /* Models */,
 				1BAEFFF71C8ABDC9002B4570 /* Others */,
@@ -453,6 +574,8 @@
 		1BAEFFF51C8ABDC9002B4570 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1BAE00291C8AC140002B4570 /* FDLoginController.h */,
+				1BAE002A1C8AC140002B4570 /* FDLoginController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -474,6 +597,8 @@
 		1BAEFFF81C8ABDC9002B4570 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1BAE00341C8AC717002B4570 /* FDInputView.h */,
+				1BAE00351C8AC717002B4570 /* FDInputView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -641,7 +766,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B8ED6B21C8AB61C00FB09F8 /* LaunchScreen.xib in Resources */,
+				1BA043ED1C8DB66500103401 /* MBProgressHUD.bundle in Resources */,
 				1B8ED6AF1C8AB61C00FB09F8 /* Images.xcassets in Resources */,
+				1B8E06E01C8BD40D0024EE9B /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,9 +834,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BAE00391C8AC764002B4570 /* UIView+FDViewExtension.m in Sources */,
+				1BAE00331C8AC1F3002B4570 /* FDNavigationBaseController.m in Sources */,
+				1B8079391C8F0B8300FB3F78 /* FDXMPPTool.m in Sources */,
+				1BAE00361C8AC717002B4570 /* FDInputView.m in Sources */,
 				1B8ED6A71C8AB61C00FB09F8 /* School.xcdatamodeld in Sources */,
+				1BA043EE1C8DB66500103401 /* MBProgressHUD.m in Sources */,
+				1BA043EC1C8DB66500103401 /* MBProgressHUD+MJ.m in Sources */,
+				1BAE002B1C8AC140002B4570 /* FDLoginController.m in Sources */,
+				1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */,
 				1B8ED6A11C8AB61C00FB09F8 /* main.m in Sources */,
 				1BAEFFF31C8ABDBD002B4570 /* AppDelegate.m in Sources */,
+				1B8079351C8F061100FB3F78 /* FDMBProgressHUB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +964,7 @@
 			baseConfigurationReference = 347A777F4F80539A01167F4C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/School/PrefixHeader.pch";
 				INFOPLIST_FILE = School/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -841,6 +978,7 @@
 			baseConfigurationReference = D9533113CCF834505D451ABE /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/School/PrefixHeader.pch";
 				INFOPLIST_FILE = School/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
