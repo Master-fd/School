@@ -1,0 +1,10 @@
+platform :ios, '8.0'
+pod 'XMPPFramework', '3.6.6' 
+pod 'AFNetworking', '2.5.0'
+pod 'FMDB'
+pod 'MJExtension'
+pod 'MJRefresh'
+pod 'PureLayout'
+pod 'SDWebImage'
+pod 'UITableView+FDTemplateLayoutCell', '1.3'
+
