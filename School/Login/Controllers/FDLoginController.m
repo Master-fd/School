@@ -59,7 +59,10 @@
     
     
     //设置单击事件
-    [_inputView.loginBtn addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    __weak typeof(self) _weakSelf = self;
+    _inputView.loginBtnClickBlock = ^(NSString *accountStr, NSString *passwordStr){
+        [_weakSelf userLoginOrRegister:accountStr pwd:passwordStr];
+    };
     [_registerBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
 
 }
@@ -119,31 +122,9 @@
 /**
  *  登录 、 注册
  */
-- (void)loginClick
+- (void)userLoginOrRegister:(NSString *)accountStr pwd:(NSString *)passwordStr
 {
-    //退出第一响应者身份
-    [self.view endEditing:YES];
-    
-    //验证账号和密码是否符合要求
-    NSString *accountStr = _inputView.accountTxFeild.text;
-    NSString *passwordStr = _inputView.passwordTxFeild.text;
-    
-    if ((accountStr.length >= 15) || (accountStr.length < 6)) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FDMBProgressHUB showError:@"合法账号长度6-15个字符"];
-        });
-        
-        [_inputView.accountTxFeild becomeFirstResponder];
-        return;
-    }
-    if (passwordStr.length >= 15 || (passwordStr.length < 6) ) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FDMBProgressHUB showError:@"合法密码长度6-15个字符"];
-        });
-        [_inputView.passwordTxFeild becomeFirstResponder];
-        return;
-    }
-    
+
     //保存账户密码到沙盒
     [FDUserInfo shareFDUserInfo].account = accountStr;
     [FDUserInfo shareFDUserInfo].password = passwordStr;

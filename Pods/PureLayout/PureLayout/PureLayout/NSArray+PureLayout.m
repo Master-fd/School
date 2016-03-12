@@ -1,6 +1,6 @@
 //
 //  NSArray+PureLayout.m
-//  https://github.com/PureLayout/PureLayout
+//  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2012 Richard Turton
 //  Copyright (c) 2013-2015 Tyler Fox

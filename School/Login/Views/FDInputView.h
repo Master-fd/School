@@ -14,5 +14,5 @@
 @property (nonatomic, strong) UITextField *passwordTxFeild;
 @property (nonatomic, strong) UIButton *loginBtn;
 
-
+@property (nonatomic, copy) void (^loginBtnClickBlock)(NSString *accountStr, NSString *passwordStr);
 @end
