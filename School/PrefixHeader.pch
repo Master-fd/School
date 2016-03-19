@@ -15,9 +15,17 @@
  ***********************************************************************************/
 
 
+#ifdef DEBUG
+#define FDLog(...)   NSLog(__VA_ARGS__)
+#else
+#define FDLog(...)
+#endif
+
+
 
 
 #define FDRandomColor     [UIColor colorWithRed:(arc4random()%255)/255.0 green:(arc4random()%255)/255.0 blue:(arc4random()%255)/255.0 alpha:1]
+
 
 #define FDRedColor  0
 #define FDWhiteColor  1
@@ -33,6 +41,9 @@ case FDBlackColor:view.backgroundColor = [UIColor whiteColor];break;\
 case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 }}
 
+#define  organizationPattern   @"^[a-zA-Z]"  //组织账户第一个字符必须是字母
+#define  studentPattern        @"^\\d"  //学生账户必须用数字开头
+
 #import "FDSingleton.h"
 #import "PureLayout.h"
 #import "UIView+FDViewExtension.h"
@@ -40,6 +51,7 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #import "FDMBProgressHUB.h"
 #import "FDXMPPTool.h"
 #import "FDUserInfo.h"
+#import "FDTestViewController.h"
 
 
 #endif

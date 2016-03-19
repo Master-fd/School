@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "XMPPFramework.h"
 
+
+#define ServerName    @"feidong.local"
+#define ServerIP      @"127.0.0.1"
+#define ClientName    @"iphone"
+#define ServerPort    5222
+
+
 @interface FDXMPPTool : NSObject
 
 singleton_interface(FDXMPPTool);
+
 
 
 typedef enum {
@@ -23,7 +31,7 @@ typedef enum {
 }XMPPRequireResultType;
 
 
-typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);
+typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义连接block
 
 
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
@@ -36,21 +44,19 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);
  *  当前是否是注册操作
  */
 @property (nonatomic, assign, getter=isRegisterOperation) BOOL registerOperation;
-
 /**
- *  用户注销
+ *  注册操作，检测下一步继续完成信息是否完毕
+ */
+@property (nonatomic, assign, getter=isInfoComplete) BOOL infoComplete;
+/**
+ *  用户注销登录
  */
 - (void)xmppUserLogout;
 
 /**
- *  用户注册
+ *  用户连接主机,登录和注册
  */
-- (void)xmppUserRegister;
-
-/**
- *  用户登录
- */
-- (void)xmppUserLogin;
+- (void)xmppUserConnetToHost:(XMPPRequireResultBlock)requireResultBlock;
 
 
 

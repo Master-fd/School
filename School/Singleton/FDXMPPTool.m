@@ -7,6 +7,7 @@
 //
 
 #import "FDXMPPTool.h"
+#import "FDLoginController.h"
 
 
 @interface FDXMPPTool()<XMPPStreamDelegate>{
@@ -93,14 +94,58 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)connectToHost
 {
+    //初始化模块
+    if (!_xmppStream) {
+        [self setupXmppStream];
+    }
     
+    //获取用户名
+    NSString *account = nil;
+    if (self.isRegisterOperation) {
+        account = [FDUserInfo shareFDUserInfo].registerAccount;
+    } else {
+        account = [FDUserInfo shareFDUserInfo].account;
+    }
+    
+    //设置JID
+    XMPPJID *jid = [XMPPJID jidWithUser:account domain:ServerName resource:ClientName];
+    _xmppStream.myJID = jid;
+    
+    //设置端口和服务器
+    _xmppStream.hostName = ServerIP;   //只能填IP
+    
+    //连接
+    _xmppStream.hostPort = ServerPort;
+    
+    NSError *error = nil;
+    if (![_xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
+        FDLog(@"xmpp 连接错误%@", error);
+    }
 }
 
 /**
- *  连接成功，发送密码请求授权
+ *  连接成功，发送密码登录则请求授权，或者注册
  */
 - (void)sendPasswordToHost
 {
+    NSString *password = nil;
+    NSError *error = nil;
+    
+    if (self.isRegisterOperation) {
+        //注册
+        password = [FDUserInfo shareFDUserInfo].registerPassword;
+        [_xmppStream registerWithPassword:password error:&error];
+        if (error) {
+            FDLog(@"发送注册密码失败%@", error);
+        }
+    } else {
+        //登录
+        password = [FDUserInfo shareFDUserInfo].password;
+        [_xmppStream authenticateWithPassword:password error:&error];
+        if (error) {
+            FDLog(@"发送登录密码失败%@", error);
+        }
+    }
     
 }
 
@@ -109,34 +154,47 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)sendOnlineToHost
 {
-    
+    XMPPPresence *presence = [XMPPPresence presence];
+    [_xmppStream sendElement:presence];
 }
 
+#pragma mark - 公共方法
 
 /**
  *  注销
  */
 - (void)xmppUserLogout
 {
+    //发送离线消息
+    XMPPPresence *offline = [XMPPPresence presenceWithType:@"unavailable"];
+    [_xmppStream sendElement:offline];
     
+    //断开连接
+    [_xmppStream disconnect];
+    
+    //更新用户信息状态到沙盒
+    [FDUserInfo shareFDUserInfo].loginStatus = NO;
+    [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
+    
+    //回到登录界面
+    FDLoginController *loginVC = [[FDLoginController alloc] init];
+    [[UIApplication sharedApplication] keyWindow].rootViewController = loginVC;
 }
 
 /**
- *  登录
+ *  登录或者注册
  */
-- (void)xmppUserLogin
+- (void)xmppUserConnetToHost:(XMPPRequireResultBlock)requireResultBlock
 {
+    //保存block
+    _requireResultBlock = requireResultBlock;
     
-}
-
-/**
- *  注册
- */
-- (void)xmppUserRegister
-{
+    //断开之前的连接
+    [_xmppStream disconnect];
     
+    //重新连接
+    [self connectToHost];
 }
-
 
 #pragma mark - XMPPStream delegate
 
@@ -145,7 +203,8 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStreamDidConnect:(XMPPStream *)sender
 {
-    
+    //发送密码,登录或者注册
+    [self sendPasswordToHost];
 }
 
 /**
@@ -153,7 +212,9 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
 {
-    
+    if (error && _requireResultBlock) {
+        _requireResultBlock(XMPPRequireResultTypeNetError);
+    }
 }
 
 /**
@@ -161,7 +222,12 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
+    //发送在线消息
+    [self sendOnlineToHost];
     
+    if (_requireResultBlock) {
+        _requireResultBlock(XMPPRequireResultTypeLoginSuccess);
+    }
 }
 
 /**
@@ -169,7 +235,9 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error
 {
-    
+    if (_requireResultBlock) {
+        _requireResultBlock(XMPPRequireResultTypeLoginFailure);
+    }
 }
 
 /**
@@ -177,7 +245,9 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
 {
-    
+    if (_requireResultBlock) {
+        _requireResultBlock(XMPPRequireResultTypeRegisterSuccess);
+    }
 }
 
 /**
@@ -185,7 +255,11 @@ singleton_implementation(FDXMPPTool);
  */
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(DDXMLElement *)error
 {
+    if (_requireResultBlock) {
+        _requireResultBlock(XMPPRequireResultTypeRegisterFailure);
+    }
     
+    FDLog(@"%@", error);
 }
 
 

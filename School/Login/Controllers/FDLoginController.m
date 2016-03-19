@@ -1,12 +1,13 @@
 //
 //  FDLoginController.m
 //  School
-//
+//   登录和注册界面控制器
 //  Created by asus on 16/3/5.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
 #import "FDLoginController.h"
+#import "FDBaseLoginController.h"
 #import "FDInputView.h"
 
 
@@ -81,7 +82,7 @@
     [_inputView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
     [_inputView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
     [_inputView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:70];
-    [_inputView autoSetDimension:ALDimensionHeight toSize:200];
+    [_inputView autoSetDimension:ALDimensionHeight toSize:260];
     [_inputView inputView];
     
     //registerBtn
@@ -100,49 +101,35 @@
     _inputView.passwordTxFeild.text = [FDUserInfo shareFDUserInfo].password;
 }
 
+
 /**
- *  用户登录
- */
-- (void)userLogin
-{
-    //联网登录
-    dispatch_async(dispatch_get_main_queue(), ^{
-       // [FDMBProgressHUB showMessage:@"正在登录..."];
-    });
-}
-/**
- *  用户注册
- */
-- (void)userRegister
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-     //   [FDMBProgressHUB showMessage:@"正在联网..."];
-    });
-}
-/**
- *  登录 、 注册
+ *  登录 、 注册、下一步
  */
 - (void)userLoginOrRegister:(NSString *)accountStr pwd:(NSString *)passwordStr
 {
-
-    //保存账户密码到沙盒
-    [FDUserInfo shareFDUserInfo].account = accountStr;
-    [FDUserInfo shareFDUserInfo].password = passwordStr;
-    [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
-
     if ([FDXMPPTool shareFDXMPPTool].isRegisterOperation) {
         //注册操作
-        [self userRegister];
+        [FDUserInfo shareFDUserInfo].registerAccount = accountStr;
+        [FDUserInfo shareFDUserInfo].registerPassword = passwordStr;
     }else{
         //登录操作  默认为no
-        [self userLogin];
+        [FDUserInfo shareFDUserInfo].account = accountStr;
+        [FDUserInfo shareFDUserInfo].password = passwordStr;
+        //保存账户密码到沙盒
+        [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
     }
+    
+    //连接登录/注册
+    [FDBaseLoginController UserConnetToHost];
 }
 
 - (void)registerClick
 {
-    [FDXMPPTool shareFDXMPPTool].registerOperation = ![FDXMPPTool shareFDXMPPTool].registerOperation;
+    //清空textfeild
+    [_inputView clearAllTextFeild];
     
+    [FDXMPPTool shareFDXMPPTool].registerOperation = ![FDXMPPTool shareFDXMPPTool].registerOperation;
+    //_inputView.loginBtn.enabled = YES;
     if ([FDXMPPTool shareFDXMPPTool].isRegisterOperation) {
         [_inputView.loginBtn setTitle:@"注册" forState:UIControlStateNormal];
         [_registerBtn setTitle:@"返回登录" forState:UIControlStateNormal];

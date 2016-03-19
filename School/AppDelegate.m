@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "FDNavigationBaseController.h"
+#import "FDBaseNavigationController.h"
 #import "FDLoginController.h"
+#import "FDBaseLoginController.h"
 #import "FDUserInfo.h"
 #import "FDXMPPTool.h"
 
@@ -22,11 +23,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+ 
     //创建window
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     FDLoginController *LoginCtl = [[FDLoginController alloc] init];
-    FDNavigationBaseController *nav = [[FDNavigationBaseController alloc] initWithRootViewController:LoginCtl];
+    FDBaseNavigationController *nav = [[FDBaseNavigationController alloc] initWithRootViewController:LoginCtl];
     
     self.window.rootViewController = nav;
     
@@ -35,6 +37,12 @@
     
     //读取用户信息
     [[FDUserInfo shareFDUserInfo] readUserInfoFromSabox];
+    if ([FDUserInfo shareFDUserInfo].isLoginStatus) {
+        //自动登录
+        FDLog(@"自动登录");
+        [FDXMPPTool shareFDXMPPTool].registerOperation = NO;
+        [FDBaseLoginController UserConnetToHost];
+    }
     
     return YES;
 }

@@ -15,4 +15,7 @@
 @property (nonatomic, strong) UIButton *loginBtn;
 
 @property (nonatomic, copy) void (^loginBtnClickBlock)(NSString *accountStr, NSString *passwordStr);
+
+- (void)clearAllTextFeild;
+
 @end

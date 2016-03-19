@@ -18,8 +18,18 @@
     UIImageView *_passwordBgImg;
     //passwordImg
     UIImageView *_passwordImg;
+    
+    UIImageView *_isOrganizationBgImg;
+    
+    UIImageView *_isOrganizationImg;
    
+    UIButton *_isOrganizationBtn;
+    
+    UILabel *_isOrganizationLab;
 }
+
+
+@property (nonatomic, assign, getter=isOrganizationFlag) BOOL organizationFlag;
 
 @end
 @implementation FDInputView
@@ -45,6 +55,26 @@
  */
 - (void)setupViews
 {
+    
+    _isOrganizationBgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_input_up"]];
+    [self addSubview:_isOrganizationBgImg];
+    _isOrganizationBgImg.userInteractionEnabled = YES;
+    
+    _isOrganizationImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_nav_name"]];
+    [_isOrganizationBgImg addSubview:_isOrganizationImg];
+    _isOrganizationImg.userInteractionEnabled = YES;
+    
+    _isOrganizationLab = [[UILabel alloc] init];
+    _isOrganizationLab.userInteractionEnabled = YES;
+    [_isOrganizationBgImg addSubview:_isOrganizationLab];
+    _isOrganizationLab.font = [UIFont systemFontOfSize:21];
+    _isOrganizationLab.textColor = [UIColor whiteColor];
+    _isOrganizationLab.text = @"学生";
+    
+    _isOrganizationBtn = [[UIButton alloc] init];
+    [_isOrganizationLab addSubview:_isOrganizationBtn];
+    [_isOrganizationBtn addTarget:self action:@selector(OrganizationBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     //accountBgImg
     _accountBgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_input_up"]];
     _accountBgImg.userInteractionEnabled = YES;
@@ -86,7 +116,6 @@
     self.passwordTxFeild.returnKeyType = UIReturnKeyJoin;
     self.passwordTxFeild.secureTextEntry = YES;
    
-    
     //add 登录图标
     self.loginBtn = [[UIButton alloc] init];
     [self addSubview:self.loginBtn];
@@ -106,14 +135,35 @@
     CGFloat topMargin = 20;
     CGFloat rightMargin = leftMargin;
     
+    //_isOrganizationBgImg
+    [_isOrganizationBgImg autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:topMargin];
+    [_isOrganizationBgImg autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:leftMargin];
+    [_isOrganizationBgImg autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:rightMargin];
+    [_isOrganizationBgImg autoSetDimension:ALDimensionHeight toSize:40];
+    
+    //_isOrganizationImg
+    [_isOrganizationImg autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10];  //距离父控件左边
+    [_isOrganizationImg autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
+    [_isOrganizationImg autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10];
+    [_isOrganizationImg autoSetDimension:ALDimensionWidth toSize:20];  //设置size
+    
+    //_isOrganizationLab
+    [_isOrganizationLab autoAlignAxis:ALAxisHorizontal toSameAxisOfView:_isOrganizationImg];  //水平同齐
+    [_isOrganizationLab autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_isOrganizationImg withOffset:15];
+    [_isOrganizationLab autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [_isOrganizationLab autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+    [_isOrganizationLab autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:5];
+    
+    //_isOrganizationBtn
+    [_isOrganizationBtn autoPinEdgesToSuperviewEdges];
+    
     //accountBgImg
-    [_accountBgImg autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:topMargin];  //距离父控件左边
     [_accountBgImg autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:leftMargin];
+    [_accountBgImg autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_isOrganizationBgImg withOffset:5];
     [_accountBgImg autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:rightMargin];
     [_accountBgImg autoSetDimension:ALDimensionHeight toSize:40];
     
     //accountImg
-
     [_accountImg autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10];  //距离父控件左边
     [_accountImg autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
     [_accountImg autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10];
@@ -154,6 +204,10 @@
 
 }
 
+
+/**
+ *  按钮单击事件
+ */
 - (void)loginClick
 {
     //退出第一响应者身份
@@ -162,12 +216,12 @@
     //验证账号和密码是否符合要求
     NSString *accountStr = self.accountTxFeild.text;
     NSString *passwordStr = self.passwordTxFeild.text;
-
+    
     if ((accountStr.length >= 15) || (accountStr.length < 6)) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [FDMBProgressHUB showError:@"合法账号长度6-15个字符"];
         });
-
+        
         [self.accountTxFeild becomeFirstResponder];
         return;
     }
@@ -179,6 +233,39 @@
         return;
     }
 
+    
+    //组织
+    if (self.isOrganizationFlag) {
+        NSRegularExpression *regux = [[NSRegularExpression alloc] initWithPattern:organizationPattern options:0 error:nil];
+        NSArray *result = [regux matchesInString:accountStr options:0 range:NSMakeRange(0, accountStr.length)];
+        
+        if (!result.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [FDMBProgressHUB showError:@"组织账号以字母开头"];
+            });
+        
+            [self.accountTxFeild becomeFirstResponder];
+            
+            return;
+        }
+    }
+    
+    //学生
+    if (!self.isOrganizationFlag) {
+        NSRegularExpression *regux = [[NSRegularExpression alloc] initWithPattern:studentPattern options:0 error:nil];
+        NSArray *result = [regux matchesInString:accountStr options:0 range:NSMakeRange(0, accountStr.length)];
+        
+        if (!result.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [FDMBProgressHUB showError:@"学生账号以数字开头"];
+            });
+            
+            [self.accountTxFeild becomeFirstResponder];
+            
+            return;
+        }
+    }
+    
     //传递账户和密码
     if (self.loginBtnClickBlock) {
         self.loginBtnClickBlock(accountStr, passwordStr);
@@ -186,5 +273,26 @@
 
 }
 
+/**
+ *  OrganizationBtnClick单击事件
+ */
+- (void)OrganizationBtnClick:(UIButton *)sender
+{
+    self.organizationFlag = !self.organizationFlag;
+    if (self.isOrganizationFlag) {
+       _isOrganizationLab.text = @"组织";
+    }else{
+       _isOrganizationLab.text = @"学生";
+    }
+    
+}
 
+/**
+ *  清空textFeild
+ */
+- (void)clearAllTextFeild
+{
+    self.accountTxFeild.text = nil;
+    self.passwordTxFeild.text = nil;
+}
 @end

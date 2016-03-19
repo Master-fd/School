@@ -14,6 +14,8 @@
 //用户信息保存在plist中的键值
 #define accountKey       @"accountKey"
 #define passwordKey      @"passwordKey"
+#define registerAccountKey       @"registerAccountKey"
+#define registerPasswordKey      @"registerPasswordKey"
 #define loginStatusKey      @"loginStatusKey"
 
 @implementation FDUserInfo
@@ -43,9 +45,17 @@ singleton_implementation(FDUserInfo);
 {
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     
-    [userInfo setObject:self.account forKey:accountKey];
-    [userInfo setObject:self.password forKey:passwordKey];
-    [userInfo setObject:[NSNumber numberWithBool:self.loginStatus] forKey:loginStatusKey];
+    if (self.account) {
+        [userInfo setObject:self.account forKey:accountKey];
+    }
+    if (self.password) {
+        [userInfo setObject:self.password forKey:passwordKey];
+    }
+    if (self.loginStatus) {
+        [userInfo setObject:[NSNumber numberWithBool:self.loginStatus] forKey:loginStatusKey];
+    }
+    
     [userInfo writeToFile:userPlistPath atomically:YES];
+    
 }
 @end

@@ -25,7 +25,27 @@ singleton_interface(FDUserInfo);
 @property (nonatomic, copy) NSString *password;
 
 /**
- *  登录状态
+ *  注册账户
+ */
+@property (nonatomic, copy) NSString *registerAccount;
+
+/**
+ *  注册密码
+ */
+@property (nonatomic, copy) NSString *registerPassword;
+
+/**
+ *  组织
+ */
+@property (nonatomic, copy) NSString *organization;
+
+/**
+ *  部门
+ */
+@property (nonatomic, copy) NSString *department;
+
+/**
+ *  登录状态,确认用户是否登录过
  */
 @property (nonatomic, assign, getter=isLoginStatus) BOOL loginStatus;
 
