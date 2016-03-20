@@ -35,12 +35,15 @@
     [self.contentView addSubview:_headIconBtn];
     _headIconBtn.backgroundColor = [UIColor clearColor];
     [_headIconBtn setImage:[UIImage imageNamed:@"user_avatar_default"] forState:UIControlStateNormal];
-    [_headIconBtn addTarget:self action:@selector(headIconBtnClick) forControlEvents:UIControlEventTouchDown];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headIconBtnDidTap:)];  //头像被单击了
+    [_headIconBtn addGestureRecognizer:tapGesture];
     
     _contentBg = [[UIImageView alloc] init];
     [self.contentView addSubview:_contentBg];
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(bgDidLongPressGesture:)];//内容被长按
+    [_contentBg addGestureRecognizer:longPressGesture];
     
-    if (self.isMeSender) {
+    if (self.chatmodel.isMeSender) {
         //自己发送的信息
         _contentBg.image = [[UIImage imageNamed:@"chat_send_nor"] stretchableImageWithLeftCapWidth:30 topCapHeight:30];
         _contentBg.highlightedImage = [[UIImage imageNamed:@"chat_send_press_pic"] stretchableImageWithLeftCapWidth:30 topCapHeight:30];
@@ -60,14 +63,14 @@
     //确定headIconBtn的 x。y和w。h
     [_headIconBtn autoSetDimensionsToSize:CGSizeMake(HeadIconSize, HeadIconSize)];
     [_headIconBtn autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:HeadIconToSuper];
-    if (self.isMeSender) {
+    if (self.chatmodel.isMeSender) {
         [_headIconBtn autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:HeadIconToSuper];
     } else {
         [_headIconBtn autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:HeadIconToSuper];
     }
     //确定_contentBg的X y  宽和高需要等待信息内容确定之后才可以确定
     [_contentBg autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:_headIconBtn withOffset:BgToHeadIconTop];
-    if (self.isMeSender) {
+    if (self.chatmodel.isMeSender) {
         [_contentBg autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:_headIconBtn withOffset:BgToHeadIconLorR];
     }else{
         [_contentBg autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_headIconBtn withOffset:BgToHeadIconLorR];
@@ -75,20 +78,22 @@
     
 }
 
-/**
- *  头像被单击，调用block
- */
-- (void)headIconBtnClick
+//头像被单击
+- (void)headIconBtnDidTap:(UITapGestureRecognizer *)tap
 {
-    if (_headIconBtnDidClickBlock) {
-        _headIconBtnDidClickBlock();
-    }
+    FDLog(@"头像被单击");
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+//内容被长按
+- (void)bgDidLongPressGesture:(UILongPressGestureRecognizer *)longPress
+{
+    FDLog(@"内容被长按");
+}
 
-    // Configure the view for the selected state
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return NO;
 }
 
 @end

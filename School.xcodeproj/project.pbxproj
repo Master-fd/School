@@ -174,6 +174,10 @@
 		1BAEE06A1C93FC1B0035367A /* FDBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE0671C93FC1B0035367A /* FDBaseTableViewController.m */; };
 		1BAEE07C1C940D7C0035367A /* FDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE07B1C940D7C0035367A /* FDTestViewController.m */; };
 		1BAEFFF31C8ABDBD002B4570 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */; };
+		1BB0C3D51C9CE87A00E75866 /* UIResponder+FDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D41C9CE87A00E75866 /* UIResponder+FDExtension.m */; };
+		1BB0C3D81C9CF55900E75866 /* FDChatInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */; };
+		1BB0C3DB1C9CF5C900E75866 /* FDChatMessageEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3DA1C9CF5C900E75866 /* FDChatMessageEmoji.m */; };
+		1BB7E1921C9E782F00D84D39 /* FDChatVoiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7E1911C9E782F00D84D39 /* FDChatVoiseView.m */; };
 		1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBFDCD51C906C4B006496CE /* FDUserInfo.m */; };
 		C36C513E786762F64D67F486 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 937B38FDA00E2E0357395D48 /* libPods.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -528,6 +532,14 @@
 		1BAEE07B1C940D7C0035367A /* FDTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDTestViewController.m; sourceTree = "<group>"; };
 		1BAEFFF11C8ABDBD002B4570 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1BB0C3D31C9CE87A00E75866 /* UIResponder+FDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+FDExtension.h"; sourceTree = "<group>"; };
+		1BB0C3D41C9CE87A00E75866 /* UIResponder+FDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+FDExtension.m"; sourceTree = "<group>"; };
+		1BB0C3D61C9CF55900E75866 /* FDChatInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDChatInputBar.h; sourceTree = "<group>"; };
+		1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatInputBar.m; sourceTree = "<group>"; };
+		1BB0C3D91C9CF5C900E75866 /* FDChatMessageEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDChatMessageEmoji.h; sourceTree = "<group>"; };
+		1BB0C3DA1C9CF5C900E75866 /* FDChatMessageEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatMessageEmoji.m; sourceTree = "<group>"; };
+		1BB7E1901C9E782F00D84D39 /* FDChatVoiseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDChatVoiseView.h; sourceTree = "<group>"; };
+		1BB7E1911C9E782F00D84D39 /* FDChatVoiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatVoiseView.m; sourceTree = "<group>"; };
 		1BBFDCD41C906C4B006496CE /* FDUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDUserInfo.h; sourceTree = "<group>"; };
 		1BBFDCD51C906C4B006496CE /* FDUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDUserInfo.m; sourceTree = "<group>"; };
 		1BBFDCD71C906C96006496CE /* FDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSingleton.h; sourceTree = "<group>"; };
@@ -1399,6 +1411,12 @@
 				1B8766671C9AF45F005B9E47 /* FDBaseChatViewCell.m */,
 				1B87666F1C9AF4C4005B9E47 /* FDChatTextViewCell.h */,
 				1B8766701C9AF4C4005B9E47 /* FDChatTextViewCell.m */,
+				1BB0C3D61C9CF55900E75866 /* FDChatInputBar.h */,
+				1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */,
+				1BB0C3D91C9CF5C900E75866 /* FDChatMessageEmoji.h */,
+				1BB0C3DA1C9CF5C900E75866 /* FDChatMessageEmoji.m */,
+				1BB7E1901C9E782F00D84D39 /* FDChatVoiseView.h */,
+				1BB7E1911C9E782F00D84D39 /* FDChatVoiseView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1408,6 +1426,8 @@
 			children = (
 				1B8D814F1C95624700E57402 /* UIView+FDViewExtension.h */,
 				1B8D81501C95624700E57402 /* UIView+FDViewExtension.m */,
+				1BB0C3D31C9CE87A00E75866 /* UIResponder+FDExtension.h */,
+				1BB0C3D41C9CE87A00E75866 /* UIResponder+FDExtension.m */,
 			);
 			path = Externsion;
 			sourceTree = "<group>";
@@ -2068,6 +2088,7 @@
 				1B2F4D991C93BE3600B6B9BB /* XMPPIQ+XEP_0060.m in Sources */,
 				1B2F4DA51C93BE3600B6B9BB /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
 				1B2F4C671C93BDF500B6B9BB /* XMPPAnonymousAuthentication.m in Sources */,
+				1BB7E1921C9E782F00D84D39 /* FDChatVoiseView.m in Sources */,
 				1B2F4D7B1C93BE3600B6B9BB /* XMPPPrivacy.m in Sources */,
 				1B2F4D6C1C93BE3600B6B9BB /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				1B2F4D7C1C93BE3600B6B9BB /* XMPPRoom.xcdatamodeld in Sources */,
@@ -2122,6 +2143,7 @@
 				1B8766681C9AF45F005B9E47 /* FDBaseChatViewCell.m in Sources */,
 				1B8D81771C9572E200E57402 /* FDMessageController.m in Sources */,
 				1B2F4D931C93BE3600B6B9BB /* XMPPvCardTempEmail.m in Sources */,
+				1BB0C3DB1C9CF5C900E75866 /* FDChatMessageEmoji.m in Sources */,
 				1B8D817A1C95732200E57402 /* FDContactController.m in Sources */,
 				1B2F4D681C93BE3600B6B9BB /* XMPPCoreDataStorage.m in Sources */,
 				1B8D81801C95739E00E57402 /* FDSettingController.m in Sources */,
@@ -2139,6 +2161,7 @@
 				1B2F4C7B1C93BDF500B6B9BB /* RFImageToDataTransformer.m in Sources */,
 				1B2F4C7A1C93BDF500B6B9BB /* GCDMulticastDelegate.m in Sources */,
 				1B2F4D7D1C93BE3600B6B9BB /* XMPPRoomCoreDataStorage.m in Sources */,
+				1BB0C3D81C9CF55900E75866 /* FDChatInputBar.m in Sources */,
 				1B2F4DB71C93BE3600B6B9BB /* XMPPTime.m in Sources */,
 				1B2F4C081C93B7D200B6B9BB /* DispatchQueueLogFormatter.m in Sources */,
 				1B2F4C1C1C93B80F00B6B9BB /* DDXMLDocument.m in Sources */,
@@ -2186,6 +2209,7 @@
 				1B2F4D731C93BE3600B6B9BB /* XMPPUserMemoryStorageObject.m in Sources */,
 				1B2F4DB11C93BE3600B6B9BB /* XMPPMessage+XEP_0184.m in Sources */,
 				1B2F4DBB1C93BE3600B6B9BB /* XMPPMessage+XEP_0224.m in Sources */,
+				1BB0C3D51C9CE87A00E75866 /* UIResponder+FDExtension.m in Sources */,
 				1B2F4DBE1C93BE3600B6B9BB /* XMPPMessage+XEP_0333.m in Sources */,
 				1B2F4DAD1C93BE3600B6B9BB /* XMPPMessageArchiving.m in Sources */,
 				1B2F4D801C93BE3600B6B9BB /* XMPPRoomHybrid.xcdatamodeld in Sources */,

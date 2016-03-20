@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FDChatModel.h"
+#import "UIResponder+FDExtension.h"
 
 #define HeadIconToSuper         (10)    //头像距离父视图距离
 #define HeadIconSize            (40)    //头像大小
@@ -28,10 +30,8 @@
 //消息内容背景
 @property (nonatomic, strong) UIImageView *contentBg;
 
-//是否是自己发送的消息
-@property (nonatomic, assign, getter=isMeSender) BOOL sender;
-
-//头像被单击回调block
-@property (nonatomic, copy) void(^headIconBtnDidClickBlock)();
+@property (nonatomic, strong) FDChatModel *chatmodel;
+//子类需要实现的长按方法
+- (void)bgDidLongPressGesture:(UILongPressGestureRecognizer *)longPress;
 
 @end

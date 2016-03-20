@@ -10,4 +10,9 @@
 
 @interface FDChatController : UITableViewController
 
+/**
+ *  保存FDChatModel 模型，一个模型就是一条信息，文本、图片、声音....
+ */
+@property (nonatomic, strong) NSMutableArray *messageSources;
+
 @end

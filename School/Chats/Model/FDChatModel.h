@@ -23,6 +23,13 @@ typedef enum{
     
 }FDChatCellType;
 
+#define kTimeCellReusedID        (@"time")
+//cell的重用ID，根据model来区分
+#define kCellReuseIDWithSenderAndType(isMeSender,chatCellType)    ([NSString stringWithFormat:@"%d-%d",isMeSender,chatCellType])
+
+//根据模型得到可重用Cell的 重用ID
+#define kCellReuseID(model)      ((model.chatCellType == FDChatCellType_Time)?kTimeCellReusedID:(kCellReuseIDWithSenderAndType(model.isMeSender,model.chatCellType)))
+
 
 @interface FDChatModel : NSObject
 
@@ -35,5 +42,10 @@ typedef enum{
 
 @property (nonatomic, strong) NSData *voise;
 
+//当前model类型
+@property (nonatomic, assign) FDChatCellType chatCellType;
+
+//是否是自己发送的消息, yes为自己发送
+@property (nonatomic, assign, getter=isMeSender) BOOL meSender;
 
 @end

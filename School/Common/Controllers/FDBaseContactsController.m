@@ -11,7 +11,7 @@
 #import "FDGroupModel.h"
 #import "FDContactModel.h"
 #import "FDContactHeaderViewCell.h"
-
+#import "FDChatController.h"
 
 
 @interface FDBaseContactsController ()<FDContactHeaderViewCellDelegate>
@@ -81,7 +81,11 @@
     cell.contactModel = contactModel;
     return cell;
 }
-
+//cell被点击
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self cellDidClick:indexPath];
+}
 //自动计算行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -124,6 +128,15 @@
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:groupHeaderViewCell.tag];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
     
+}
+
+//cell被点击
+- (void)cellDidClick:(NSIndexPath *)indexPath
+{
+    //push到聊天界面
+    FDChatController *vc = [[FDChatController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
 
