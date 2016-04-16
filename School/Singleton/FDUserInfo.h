@@ -20,6 +20,17 @@ singleton_interface(FDUserInfo);
 @property (nonatomic, copy) NSString *account;
 
 /**
+ *  JID
+ */
+@property (nonatomic, strong) XMPPJID *jid;
+
+/**
+ *  jidStr
+ */
+@property (nonatomic, copy) NSString *jidStr;
+
+
+/**
  *  密码
  */
 @property (nonatomic, copy) NSString *password;

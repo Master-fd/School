@@ -6,9 +6,9 @@
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FDBaseViewController.h"
 
-@interface FDChatController : UITableViewController
+@interface FDChatController : FDBaseViewController
 
 /**
  *  保存FDChatModel 模型，一个模型就是一条信息，文本、图片、声音....

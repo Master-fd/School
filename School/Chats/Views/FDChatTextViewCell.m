@@ -7,10 +7,12 @@
 //
 
 #import "FDChatTextViewCell.h"
+#import "FDLable.h"
+
 
 @interface FDChatTextViewCell(){
     //聊天内容为文本信息
-    UILabel *_textLab;
+    FDLable *_textLab;
 }
 
 @end
@@ -24,6 +26,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+
         [self setupViews];
         
         [self setupContraint];
@@ -37,11 +40,13 @@
  */
 - (void)setupViews
 {
-    _textLab = [[UILabel alloc] init];
+    _textLab = [[FDLable alloc] initForAutoLayout];
     [self.contentView addSubview:_textLab];
     _textLab.backgroundColor = [UIColor clearColor];
-    _textLab.numberOfLines = 0;  //自动换行
-    _textLab.font = [UIFont systemFontOfSize:14];
+    _textLab.font = [UIFont systemFontOfSize:16];
+    _textLab.textColor = [UIColor blackColor];
+    _textLab.alpha = 0.8;
+    _textLab.numberOfLines = 0;//自动换行
     
 }
 
@@ -51,36 +56,38 @@
  */
 - (void)setupContraint
 {
-    //设置_textLab的X Y 和宽高
-    [_textLab autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.headIconBtn withOffset:ContentToHeadIconTop];
-    [_textLab autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:ContentToSuperBottom];
-    if (self.chatmodel.isMeSender) {  //自己发送的信息
-        [_textLab autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headIconBtn withOffset:ContentToHeadIconLorR];
-        [_textLab autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:ContentToSuperLorR relation:NSLayoutRelationGreaterThanOrEqual];
-    } else {//接收到的信息
-        [_textLab autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.headIconBtn withOffset:ContentToHeadIconLorR];
-        [_textLab autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:ContentToSuperLorR relation:NSLayoutRelationGreaterThanOrEqual];
-    }
-    
-    //设置contentBg的宽高
-    [self.contentBg autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_textLab withOffset:BgToContentMargin];
-    if (self.chatmodel.isMeSender) {
+    //根据内容,设置contentBg的宽高  w h
+    [self.contentBg autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_textLab withOffset:BgToContentBottomMargin];
+    if (self.isSender) {//w
         //自己发送的文本信息
-        [self.contentBg autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_textLab withOffset:BgToContentMargin];
+        [self.contentBg autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_textLab withOffset:-BgToContentLorRMargin];
     }else{
         //接收到的文本信息
-        [self.contentBg autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_textLab withOffset:BgToContentMargin];
+        [self.contentBg autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_textLab withOffset:BgToContentLorRMargin];
     }
+
+    //设置_textLab的X Y 和宽高
+
+    [_textLab autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.headIconBtn withOffset:ContentToHeadIconTop];//y
+    [_textLab autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:ContentToSuperBottom];//h
+    if (self.isSender) {  //自己发送的信息   x  w
+        [_textLab autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.headIconBtn withOffset:-ContentToHeadIconLorR];//x
+        [_textLab autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:ContentToSuperLorR relation:NSLayoutRelationGreaterThanOrEqual]; //w
+    } else {//接收到的信息
+        [_textLab autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.headIconBtn withOffset:ContentToHeadIconLorR];
+        [_textLab autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:ContentToSuperLorR relation:NSLayoutRelationGreaterThanOrEqual]; //w
+    }
+
+    
 }
 
 
 //懒加载，设置数据
-- (void)setChatModel:(FDChatModel *)chatModel
+- (void)setChatmodel:(FDChatModel *)chatmodel
 {
-    _chatModel = chatModel;
-    _textLab.text = chatModel.text;
+    [_textLab AttributedTextFromText:chatmodel.text];
+    [super setChatmodel:chatmodel];
 }
-
 /**
  *  重写父类的longpress方法
  *  实现自己需要做的事
@@ -151,7 +158,7 @@
 - (void)menuDelete:(id)sender
 {
     FDLog(@"删除文本信息");
-    [self routerEventWithType:EventChatCellRemoveEvent userInfo:@{KModelKey : self.chatModel}];
+    [self routerEventWithType:EventChatCellRemoveEvent userInfo:@{KModelKey : self.chatmodel}];
 }
 
 /**

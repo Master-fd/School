@@ -44,6 +44,14 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #define  organizationPattern   @"^[a-zA-Z]"  //组织账户第一个字符必须是字母
 #define  studentPattern        @"^\\d"  //学生账户必须用数字开头
 
+#define  kBaseViewControlBackColor             [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1]
+#define  kBaseTableViewControlBackColor        [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1]
+
+#define ServerName    @"feidong.local"
+#define ServerIP      @"127.0.0.1"
+#define ClientName    @"iphone"
+#define ServerPort    5222
+
 #import "FDSingleton.h"
 #import "PureLayout.h"
 #import "UIView+FDViewExtension.h"
@@ -51,6 +59,7 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #import "FDMBProgressHUB.h"
 #import "FDXMPPTool.h"
 #import "FDUserInfo.h"
+#import "FDBaseViewController.h"
 #import "FDTestViewController.h"
 
 

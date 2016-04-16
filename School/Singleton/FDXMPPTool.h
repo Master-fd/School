@@ -10,11 +10,6 @@
 #import "XMPPFramework.h"
 
 
-#define ServerName    @"feidong.local"
-#define ServerIP      @"127.0.0.1"
-#define ClientName    @"iphone"
-#define ServerPort    5222
-
 
 @interface FDXMPPTool : NSObject
 

@@ -11,7 +11,6 @@
 
 @interface FDChatTextViewCell : FDBaseChatViewCell
 
-//聊天内容
-@property (nonatomic, strong) FDChatModel *chatModel;
+
 
 @end

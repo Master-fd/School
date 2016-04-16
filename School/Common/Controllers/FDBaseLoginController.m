@@ -85,8 +85,6 @@
     [FDUserInfo shareFDUserInfo].loginStatus = YES;
     [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
     
-    FDMessageController *contactsVC = [[FDMessageController alloc] initWithStyle:UITableViewStyleGrouped];
-    FDBaseNavigationController *contactsNav  = [[FDBaseNavigationController alloc] initWithRootViewController:contactsVC];
     FDContactController *organizationsVC = [[FDContactController alloc] initWithStyle:UITableViewStyleGrouped];
     FDBaseNavigationController *organizationsNav  = [[FDBaseNavigationController alloc] initWithRootViewController:organizationsVC];
     FDDiscoverController *discoversVC = [[FDDiscoverController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -99,12 +97,10 @@
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UITabBarController *tabbarVc = [[UITabBarController alloc] init];
     
-    [tabbarVc addChildViewController:contactsNav];
     [tabbarVc addChildViewController:organizationsNav];
     [tabbarVc addChildViewController:discoversNav];
     [tabbarVc addChildViewController:settingNav];
     //
-    contactsNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"tabbar_mainframe"] selectedImage:[UIImage imageNamed:@"tabbar_mainframeHL"]];
     organizationsNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人" image:[UIImage imageNamed:@"tabbar_contacts"] selectedImage:[UIImage imageNamed:@"tabbar_contactsHL"]];
     discoversNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_discover"] selectedImage:[UIImage imageNamed:@"tabbar_discoverHL"]];
     settingNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage imageNamed:@"tabbar_meHL"]];

@@ -19,5 +19,5 @@
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
 
-
+@property (nonatomic, assign) int temp;
 @end

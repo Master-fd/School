@@ -6,8 +6,8 @@
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FDBaseViewController.h"
 
-@interface FDTestViewController : UIViewController
+@interface FDTestViewController : FDBaseViewController
 
 @end

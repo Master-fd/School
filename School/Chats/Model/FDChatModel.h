@@ -30,11 +30,13 @@ typedef enum{
 //根据模型得到可重用Cell的 重用ID
 #define kCellReuseID(model)      ((model.chatCellType == FDChatCellType_Time)?kTimeCellReusedID:(kCellReuseIDWithSenderAndType(model.isMeSender,model.chatCellType)))
 
+#define kReuseIDSeparate               (@"-") //可重用ID字符串区分符号
+
 
 @interface FDChatModel : NSObject
 
 //聊天内容
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *text;   //包括图文混排
 
 @property (nonatomic, strong) NSString *time;
 

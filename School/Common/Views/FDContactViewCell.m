@@ -44,6 +44,7 @@
         [self setupViews];
         //添加约束
         [self setupContraint];
+    
     }
     
     return self;

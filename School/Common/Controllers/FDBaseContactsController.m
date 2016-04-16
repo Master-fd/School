@@ -12,6 +12,8 @@
 #import "FDContactModel.h"
 #import "FDContactHeaderViewCell.h"
 #import "FDChatController.h"
+#import "FDAddFriendViewController.h"
+
 
 
 @interface FDBaseContactsController ()<FDContactHeaderViewCellDelegate>
@@ -25,11 +27,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self setupNav];
+
+    [self setupViews];
+}
+
+- (void)setupViews
+{
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     self.tableView.sectionFooterHeight = 1;   //section之间距离
 }
 
-
+/**
+ *  设置导航栏
+ */
+- (void)setupNav
+{
+    
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ff_IconAdd"] style:UIBarButtonItemStyleDone target:self action:@selector(addFriend)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    self.title = self.navigationController.tabBarItem.title;
+}
+/**
+ *  跳转到添加好友界面
+ */
+- (void)addFriend
+{
+    FDAddFriendViewController *vc = [[FDAddFriendViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 /**
  *  懒加载
  */
@@ -81,10 +109,19 @@
     cell.contactModel = contactModel;
     return cell;
 }
-//cell被点击
+//cell被点击,联系人被点击
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self cellDidClick:indexPath];
+    FDGroupModel *groupModel = self.groups[indexPath.section];
+    FDContactModel *contactModel = groupModel.contacts[indexPath.row];
+
+    //push到聊天界面
+    FDChatController *vc = [[FDChatController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.title = contactModel.userName;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];  //取消选中状态
 }
 //自动计算行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,14 +167,7 @@
     
 }
 
-//cell被点击
-- (void)cellDidClick:(NSIndexPath *)indexPath
-{
-    //push到聊天界面
-    FDChatController *vc = [[FDChatController alloc] init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 @end
 
 

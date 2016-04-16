@@ -16,24 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //设置标题
-    self.navigationItem.title = self.navigationController.tabBarItem.title;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
     
+
 }
-
-
-- (void)logout
-{
-    [[FDXMPPTool shareFDXMPPTool] xmppUserLogout];
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
-}
-
-
 
 
 

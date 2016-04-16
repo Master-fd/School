@@ -7,19 +7,22 @@
 //
 
 #import "FDTestViewController.h"
+#import "NSString+FDExtension.h"
 
 @interface FDTestViewController ()
 
+@property (nonatomic, strong) UILabel *lable;
 @end
 
 @implementation FDTestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
+ 
+    self.lable = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 50, 100)];
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+    [self.view addSubview:self.lable];
+    self.lable.text = @"飞zhu";
     
     [btn setBackgroundColor:[UIColor redColor]];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -34,17 +37,7 @@
 }
 - (void)btnClick
 {
-    UIViewController *vc = [[UIViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    FDLog(@"%@", [NSString capitalizedWithFristCharactor:self.lable.text]);
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

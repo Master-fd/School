@@ -109,6 +109,7 @@ singleton_implementation(FDXMPPTool);
     
     //设置JID
     XMPPJID *jid = [XMPPJID jidWithUser:account domain:ServerName resource:ClientName];
+    [FDUserInfo shareFDUserInfo].jid = jid;
     _xmppStream.myJID = jid;
     
     //设置端口和服务器

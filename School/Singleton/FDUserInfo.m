@@ -58,4 +58,13 @@ singleton_implementation(FDUserInfo);
     [userInfo writeToFile:userPlistPath atomically:YES];
     
 }
+
+- (NSString *)jidStr
+{
+    if (!_jidStr) {
+        _jidStr = [NSString stringWithFormat:@"%@@%@", self.account, ServerName];
+    }
+    
+    return _jidStr;
+}
 @end
