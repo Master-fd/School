@@ -2,12 +2,12 @@
 //  FDSettingController.h
 //  School
 //
-//  Created by asus on 16/3/13.
+//  Created by asus on 16/4/18.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import "FDBaseContactsController.h"
+#import "FDBaseTableViewController.h"
 
-@interface FDSettingController : FDBaseContactsController
+@interface FDSettingController : FDBaseTableViewController
 
 @end

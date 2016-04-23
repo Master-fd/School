@@ -7,8 +7,6 @@
 //
 
 #import "FDAddFriendViewController.h"
-#import "FDAddFriendCellModel.h"
-
 
 @interface FDAddFriendViewController ()<UISearchBarDelegate>{
     
@@ -138,9 +136,65 @@
 #pragma mark - UISearchBar  delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    FDLog(@"开始联网搜索好友");
+    [searchBar endEditing:YES];
     
+    if ((searchBar.text.length > 6) && (searchBar.text.length < 15)) {
+        //不是数字或英文
+        NSString *pattern = @"^[0-9a-zA-Z]+$";
+        NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+            NSArray *results = [regex matchesInString:searchBar.text options:0 range:NSMakeRange(0, searchBar.text.length)];
+            
+            if (!results.count) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [FDMBProgressHUB showError:@"账户只能是数字或英文"];
+                });
+                [searchBar becomeFirstResponder];
+                searchBar.text = @"";
+                return;
+            }
+        
+        //发送账户，添加好友
+        [self addFriend:searchBar.text];
+        
+        
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [FDMBProgressHUB showError:@"合法账号长度6-15个字符"];
+        });
+        [searchBar becomeFirstResponder];
+        searchBar.text = @"";
+    }
+    
+    searchBar.text = @"";
 }
 
+/**
+ *  联网添加好友
+ */
+- (void)addFriend:(NSString *)account
+{
+    //判断是否是添加自己
+    if ([account isEqualToString:[FDUserInfo shareFDUserInfo].account]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"不能添加自己"];
+        });
+        
+        return;
+    }
+    
+    //判断好友是否存在
+    NSString *jidStr = [NSString stringWithFormat:@"%@@%@", account, ServerName];
+    XMPPJID *friendJid = [XMPPJID jidWithString:jidStr];
+    if ([[FDXMPPTool shareFDXMPPTool].rosterStorage userExistsWithJID:friendJid xmppStream:[FDXMPPTool shareFDXMPPTool].xmppStream]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"好友已存在"];
+        });
+        
+        return;
+    }
+        
+    //发送订阅请求，将nickname设置成默认
+    [[FDXMPPTool shareFDXMPPTool].roster addUser:friendJid withNickname:account];
+}
 
 @end

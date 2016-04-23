@@ -24,9 +24,8 @@
         //设置查询条件
         NSString *jidStr = [FDUserInfo alloc].jidStr;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", jidStr];
-        
         //排序
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"nikeName" ascending:YES];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];
         
         //关联表XMPPUserCoreDataStorageObject
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XMPPUserCoreDataStorageObject"];

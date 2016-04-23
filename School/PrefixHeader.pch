@@ -16,7 +16,7 @@
 
 
 #ifdef DEBUG
-#define FDLog(...)   NSLog(__VA_ARGS__)
+#define FDLog(...)   NSLog(@"%s %d \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
 #define FDLog(...)
 #endif
@@ -51,6 +51,11 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #define ServerIP      @"127.0.0.1"
 #define ClientName    @"iphone"
 #define ServerPort    5222
+
+//收到新信息通知
+#define kNotificationReciveNewMsg       @"NotificationReciveNewMsg"
+//收到新信息已经被阅读通知
+#define kNotificationNewMsgDidRead      @"NotificationNewMsgDidRead"
 
 #import "FDSingleton.h"
 #import "PureLayout.h"

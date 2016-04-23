@@ -51,14 +51,13 @@ singleton_interface(FDUserInfo);
 @property (nonatomic, copy) NSString *organization;
 
 /**
- *  部门
- */
-@property (nonatomic, copy) NSString *department;
-
-/**
  *  登录状态,确认用户是否登录过
  */
 @property (nonatomic, assign, getter=isLoginStatus) BOOL loginStatus;
+
+
+
+
 
 /**
  *  从沙盒获取用户信息

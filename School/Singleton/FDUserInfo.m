@@ -67,4 +67,8 @@ singleton_implementation(FDUserInfo);
     
     return _jidStr;
 }
+
+
+
+
 @end

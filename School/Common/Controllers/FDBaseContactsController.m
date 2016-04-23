@@ -8,15 +8,14 @@
 
 #import "FDBaseContactsController.h"
 #import "FDContactViewCell.h"
-#import "FDGroupModel.h"
 #import "FDContactModel.h"
-#import "FDContactHeaderViewCell.h"
 #import "FDChatController.h"
 #import "FDAddFriendViewController.h"
+#import "FDBaseContactsController+CoreDataExtension.h"
 
 
 
-@interface FDBaseContactsController ()<FDContactHeaderViewCellDelegate>
+@interface FDBaseContactsController ()
 
 
 
@@ -36,7 +35,11 @@
 {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = 45;
     self.tableView.sectionFooterHeight = 1;   //section之间距离
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableView) name:kNotificationNewMsgDidRead object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableView) name:kNotificationReciveNewMsg object:nil];
 }
 
 /**
@@ -58,24 +61,16 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 /**
- *  懒加载
+ *  刷新tableview
  */
-- (NSMutableArray *)groups
+- (void)refreshTableView
 {
-    if (!_groups) {
-        _groups = [NSMutableArray array];
-        
-        for (int i=0; i<10; i++) {
-            FDGroupModel *model = [[FDGroupModel alloc] init];
-            model.groupName = [NSString stringWithFormat:@"sada%d", i];
-            model.onlineCount = 1;
-            model.contactCount = 8;
-            [_groups addObject:model];
-        }
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
     
-    return _groups;
 }
 
 
@@ -83,25 +78,21 @@
 //返回组
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return self.groups.count;
+    return [[self.fetchedResultsController sections] count];
 }
 //返回行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
 
-    FDGroupModel *groupModel = self.groups[section];
-    if (groupModel.isVisible) {
-        return groupModel.contacts.count;
-    }else{
-        return 0;
-    }
+    return [sectionInfo numberOfObjects];
 }
 
 //设置cell数据
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //获取数据
-    FDGroupModel *groupModel = self.groups[indexPath.section];
-    FDContactModel *contactModel = groupModel.contacts[indexPath.row];
+    FDContactModel *contactModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     FDContactViewCell *cell = [FDContactViewCell contactViewCellWithTableView:tableView];
     
@@ -112,61 +103,110 @@
 //cell被点击,联系人被点击
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FDGroupModel *groupModel = self.groups[indexPath.section];
-    FDContactModel *contactModel = groupModel.contacts[indexPath.row];
 
+    FDContactModel *contactModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     //push到聊天界面
     FDChatController *vc = [[FDChatController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.title = contactModel.userName;
+    vc.title = contactModel.nickname;
+    vc.jidStr = contactModel.jidStr;
     [self.navigationController pushViewController:vc animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];  //取消选中状态
 }
-//自动计算行高
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
-
-//返回分组名称,不要返回uiview，需要返回UITableViewHeaderFooterView才可以重用
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    //获取数据
-    FDGroupModel *groupModel = self.groups[section];
-    
-    //新建cell
-    FDContactHeaderViewCell *cell = [FDContactHeaderViewCell contactHeaderViewCellWithTableView:tableView];
-    
-    //设置tag，记录当前是第几分组
-    cell.tag = section;
-    
-    //设置数据
-    cell.groupModel = groupModel;
-    
-    //设置代理
-    cell.delegate = self;
-    
-    return cell;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 20;
 }
 
-#pragma mark - FDContactHeaderViewCellDelegate
-//分组被点击，
-- (void)groupHeaderViewDidClickButton:(FDContactHeaderViewCell *)groupHeaderViewCell
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    NSString * const headViewId = @"headViewReuseId";
     
-    //刷新tableview,只刷新这个分组
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:groupHeaderViewCell.tag];
-    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    id <NSFetchedResultsSectionInfo> sectionInfo = nil;
+    if ([[self.fetchedResultsController sections] count]) {
+        sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    }
     
+    UITableViewHeaderFooterView *headview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headViewId];
+    if (!headview) {
+        headview = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headViewId];
+    }
+    headview.contentView.backgroundColor = [UIColor clearColor];
+    
+    UILabel *nameLab = [[UILabel alloc] init];
+    [headview.contentView addSubview:nameLab];
+    nameLab.text = sectionInfo.name;
+    nameLab.backgroundColor = [UIColor clearColor];
+    nameLab.textColor = [UIColor grayColor];
+    nameLab.alpha = 0.9;
+    nameLab.font = [UIFont systemFontOfSize:14];
+    [nameLab sizeToFit];
+    [nameLab autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeRight];
+    
+    return headview;
 }
 
+
+
+//允许cell编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //获取这一行对应用户的jid
+        FDContactModel *contactModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        XMPPJID *friendJid = [XMPPJID jidWithString:contactModel.jidStr];
+        
+        //删除数据库对应聊天数据
+        [self deleteRecordDataInJidStr:contactModel.jidStr];
+        //删除好友
+        [[FDXMPPTool shareFDXMPPTool].roster removeUser:friendJid];
+       
+    }
+        
+}
+
+
+/**
+ *  删除指定人的聊天数据
+ */
+- (void)deleteRecordDataInJidStr:(NSString *)jidStr
+{
+    //关联上下文
+    NSManagedObjectContext *context = [FDXMPPTool shareFDXMPPTool].msgStorage.mainThreadManagedObjectContext;
+    
+    //设置查询条件
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@", [FDUserInfo alloc].jidStr, jidStr];
+    
+    //关联表XMPPUserCoreDataStorageObject
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XMPPMessageArchiving_Message_CoreDataObject"];
+    request.predicate = predicate;
+    
+    //查找
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    
+    if (error) {
+        FDLog(@"%@", error);
+        return;
+    }
+    
+    for (NSManagedObject *object in results) {
+        [context deleteObject:object];  //删除
+    }
+
+    [context save:nil];
+}
 
 @end
 

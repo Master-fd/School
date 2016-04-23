@@ -6,8 +6,8 @@
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import "FDBaseContactsController.h"
+#import "FDBaseDiscoverController.h"
 
-@interface FDDiscoverController : FDBaseContactsController
+@interface FDDiscoverController : FDBaseDiscoverController
 
 @end

@@ -8,46 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum{
-    //时间
-    FDChatCellType_Time  = 0,
-    
-    //文本
-    FDChatCellType_Text  = 1,
-    
-    //图片
-    FDChatCellType_Image = 2,
-    
-    //语音
-    FDChatCellType_Voise = 3
-    
-}FDChatCellType;
 
-#define kTimeCellReusedID        (@"time")
 //cell的重用ID，根据model来区分
-#define kCellReuseIDWithSenderAndType(isMeSender,chatCellType)    ([NSString stringWithFormat:@"%d-%d",isMeSender,chatCellType])
+#define kCellReuseIDWithSenderAndType(isOutgoing)    ([NSString stringWithFormat:@"%d-ReuseID",isOutgoing])
 
-//根据模型得到可重用Cell的 重用ID
-#define kCellReuseID(model)      ((model.chatCellType == FDChatCellType_Time)?kTimeCellReusedID:(kCellReuseIDWithSenderAndType(model.isMeSender,model.chatCellType)))
-
-#define kReuseIDSeparate               (@"-") //可重用ID字符串区分符号
-
+#define kReuseIDSeparate  @"-"
 
 @interface FDChatModel : NSObject
 
 //聊天内容
-@property (nonatomic, strong) NSString *text;   //包括图文混排
+@property (nonatomic, strong) NSString *body;   //包括图文混排
 
-@property (nonatomic, strong) NSString *time;
+@property (nonatomic, strong) NSDate *timestamp;
 
-@property (nonatomic, strong) NSData *image;
-
-@property (nonatomic, strong) NSData *voise;
-
-//当前model类型
-@property (nonatomic, assign) FDChatCellType chatCellType;
 
 //是否是自己发送的消息, yes为自己发送
-@property (nonatomic, assign, getter=isMeSender) BOOL meSender;
+@property (nonatomic, assign, getter=isOutgoing) BOOL outgoing;
 
 @end

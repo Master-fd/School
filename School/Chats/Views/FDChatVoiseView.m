@@ -97,7 +97,6 @@
     FDLog(@"结束录音");
     
     FDChatModel *model = [[FDChatModel alloc] init];
-    model.chatCellType = FDChatCellType_Voise;
    // model.voise = @"声音转换成二进制之后的数据";
     NSDictionary *userInfo = @{KModelKey : model};
     [self routerEventWithType:EventChatCellTypeSendMsgEvent userInfo:userInfo];   //发布路由信息，等待控制器收到信息之后处理发送

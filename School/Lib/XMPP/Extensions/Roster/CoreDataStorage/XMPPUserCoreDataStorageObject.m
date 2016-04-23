@@ -332,7 +332,7 @@
 	self.nickname = [item attributeStringValueForName:@"name"];
 	
 	//self.displayName = (self.nickname != nil) ? self.nickname : jidStr;
-    self.displayName = (self.nickname != nil) ? [self capitalizedWithFristCharactor:self.nickname] : @"A";
+    self.displayName = (self.nickname != nil) ? [self capitalizedWithFristCharactor:self.nickname] : @"unknown";
 	self.subscription = [item attributeStringValueForName:@"subscription"];
 	self.ask = [item attributeStringValueForName:@"ask"];
     

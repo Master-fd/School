@@ -10,13 +10,25 @@
 
 @interface FDContactModel : NSObject
 
-@property (nonatomic, strong) NSData *icon;
+/**
+ *  好友头像
+ */
+@property (nonatomic, strong) NSData *photo;
 
-@property (nonatomic, copy) NSString *userName;
+/**
+ *  好友nickname
+ */
+@property (nonatomic, copy) NSString *nickname;
 
-@property (nonatomic, copy) NSString *nikeName;
+/**
+ *  分组名
+ */
+@property (nonatomic, copy) NSString *displayName;
 
-@property (nonatomic, copy) NSString *account;
+/**
+ *  好友jidstr
+ */
+@property (nonatomic, copy) NSString *jidStr;
 
-@property (nonatomic, assign, getter=isOnline) BOOL online;   //是否在线
+
 @end

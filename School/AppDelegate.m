@@ -39,7 +39,6 @@
     [[FDUserInfo shareFDUserInfo] readUserInfoFromSabox];
     if ([FDUserInfo shareFDUserInfo].isLoginStatus) {
         //自动登录
-        FDLog(@"自动登录");
         [FDXMPPTool shareFDXMPPTool].registerOperation = NO;
         [FDBaseLoginController UserConnetToHost];
     }

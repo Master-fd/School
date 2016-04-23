@@ -263,8 +263,35 @@ singleton_implementation(FDXMPPTool);
     FDLog(@"%@", error);
 }
 
-
-
-
+/**
+ *  接收到新信息
+ */
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
+{
+    NSString *from = [[message attributeForName:@"from"] stringValue];
+    NSString *msg = [[message elementForName:@"body"] stringValue];
+    
+    //接收到合法信息，发出通知
+    if (msg && from) {
+        
+        NSString *pattern = [NSString stringWithFormat:@"^[0-9a-zA-Z]+@%@", ServerName];
+        NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+        NSArray *results = [regex matchesInString:from options:0 range:NSMakeRange(0, from.length)];
+        NSTextCheckingResult *result = results[0];
+        if (!results.count) {
+            return;
+        }
+        
+        NSString *jidStr = [from substringWithRange:result.range];
+        NSString *account = [jidStr substringWithRange:NSMakeRange(0, jidStr.length-ServerName.length-1)];
+        if ((account.length>6) && (account.length<15)) {
+            
+            NSDictionary *userInfo = @{@"body" : msg,
+                                       @"account" : account,
+                                       @"jidStr" : jidStr};
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:userInfo];
+        }
+    }
+}
 
 @end

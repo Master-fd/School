@@ -13,6 +13,8 @@
 #import "FDBaseChatViewCell.h"
 #import "FDChatTextViewCell.h"
 #import "UIResponder+FDExtension.h"
+#import "FDChatController+FDCoreDateExtension.h"
+
 
 #define kMaxBachSize      (30)    //每次最多从数据库读取30条数据
 #define kPageSize         (10)    //一页10条数据
@@ -23,7 +25,7 @@
     
 }
 @property (nonatomic, strong) FDChatInputBar *inputBar;
-@property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation FDChatController
@@ -46,7 +48,19 @@
     
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //发出通知信息全部被读取
+    NSString *msg = @"";
+    NSString *jidStr = self.jidStr;
+    NSString *account = [jidStr substringWithRange:NSMakeRange(0, jidStr.length-ServerName.length-1)];
+    //发出通知
+    NSDictionary *userInfo = @{@"body" : msg,
+                               @"account" : account,
+                               @"jidStr" : jidStr};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsgDidRead object:self userInfo:userInfo];
+}
 /**
  *  单击view界面，退出键盘或者faceview，或者voiseview
  */
@@ -80,8 +94,8 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;  //没有横线
     _tableView.backgroundColor = [UIColor clearColor];
-    [_tableView registerClass:[FDChatTextViewCell class] forCellReuseIdentifier:kCellReuseIDWithSenderAndType(0, FDChatCellType_Text)];   //接收到的文本信息
-    [_tableView registerClass:[FDChatTextViewCell class] forCellReuseIdentifier:kCellReuseIDWithSenderAndType(1, FDChatCellType_Text)];    //自己发送的文本信息
+    [_tableView registerClass:[FDChatTextViewCell class] forCellReuseIdentifier:kCellReuseIDWithSenderAndType(0)];   //接收到的文本信息
+    [_tableView registerClass:[FDChatTextViewCell class] forCellReuseIdentifier:kCellReuseIDWithSenderAndType(1)];    //自己发送的文本信息
     
     //初始化刷新控件
     _refreshView = [[UIRefreshControl alloc] init];
@@ -148,43 +162,26 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - messageSources懒加载
-- (NSMutableArray *)messageSources
-{
-    if (!_messageSources) {
-        _messageSources = [NSMutableArray array];
-        
-        for (int i=0; i<3; i++) {
-            FDChatModel *model = [[FDChatModel alloc] init];
-            model.meSender = i%2;
-            
-            model.chatCellType = FDChatCellType_Text;
-            model.text = @"ji[004]sada[002]hui";
-            [_messageSources addObject:model];
-        }
-    }
-    
-    return _messageSources;
-}
 
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    return 1;
+    
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return self.messageSources.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
 //cell显示的内容
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FDChatModel *chatModel = self.messageSources[indexPath.row];
+    FDChatModel *chatModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    FDBaseChatViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseID(chatModel) forIndexPath:indexPath];
+    FDBaseChatViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIDWithSenderAndType(chatModel.isOutgoing) forIndexPath:indexPath];
     
     [self configureDataForCell:cell AtIndexPath:indexPath];
     
@@ -194,8 +191,9 @@
 //cell 高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FDChatModel *chatModel = self.messageSources[indexPath.row];
-    return [tableView fd_heightForCellWithIdentifier:kCellReuseID(chatModel) cacheByIndexPath:indexPath configuration:^(id cell) {
+    FDChatModel *chatModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    return [tableView fd_heightForCellWithIdentifier:kCellReuseIDWithSenderAndType(chatModel.isOutgoing) cacheByIndexPath:indexPath configuration:^(id cell) {
         [self configureDataForCell:cell AtIndexPath:indexPath];
     }];
 }
@@ -204,7 +202,7 @@
 - (void)configureDataForCell:(FDBaseChatViewCell *)cell AtIndexPath:(NSIndexPath *)indexPath
 {
     //取得数据
-    FDChatModel *chatModel = self.messageSources[indexPath.row];
+    FDChatModel *chatModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     //设置数据
     cell.chatmodel = chatModel;
@@ -223,7 +221,7 @@
     
     switch (eventType) {
         case EventChatCellTypeSendMsgEvent:
-            FDLog(@"发送信息:%@", model.text);
+            [self sendMessage:model];
             break;
             
         case EventChatCellHeadTapedEvent:
@@ -252,20 +250,102 @@
 }
 
 /**
+ *  联网发送信息
+ */
+- (void)sendMessage:(FDChatModel *)model
+{
+    //发送chat信息,固定格式
+    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:self.jidStr]];
+    
+    //拼接数据
+    [msg addBody:model.body];
+    
+    //发送数据
+    [[FDXMPPTool shareFDXMPPTool].xmppStream sendElement:msg];
+    //发送完信息，滚动到底部
+    [self scrollToBottom:YES];
+}
+/**
  *  滚动到底部
  */
 -(void)scrollToBottom:(BOOL)animated
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSInteger count = self.messageSources.count;
-        if (count >=1) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+{    //让其滚动到底部
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        NSInteger section = [[self.fetchedResultsController sections] count];
+        if (section >= 1)
+        {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section-1];
+            NSInteger row =  [sectionInfo numberOfObjects];
+            if (row >= 1)
+            {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row-1 inSection:section-1] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+            }
         }
     });
 }
 
+/**
+ *  加载更多信息
+ */
 -(void)loadMoreMessage
 {
+    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
+    
+    NSUInteger offset = fetchRequest.fetchOffset;
+    NSUInteger limit;
+    NSUInteger newRows;//新增了多少条数据?
+
+    if (offset>=kPageSize)
+    {//可以加载前10条数据
+        offset -= kPageSize;
+        newRows = kPageSize;
+        limit  =  [self.tableView numberOfRowsInSection:0] + newRows;
+    }else
+    {//前面不够一页，就显示所有数据
+        newRows = offset;
+        offset  = 0;
+        limit   = 0;
+    }
+    
+    [fetchRequest setFetchOffset:offset];
+    [fetchRequest  setFetchLimit:limit];
+    
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error])
+    {//再次执行查询请求
+        FDLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }else
+    {
+        if (newRows)
+        {
+            NSMutableArray *insertRows = [NSMutableArray arrayWithCapacity:newRows];
+            for (NSUInteger i =0; i<newRows; i++)
+            {
+                [insertRows addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];//如何避免一闪?
+            [self.tableView endUpdates];
+            FDLog(@"offset = %d", offset);
+        }else
+        {
+            NSLog(@"已经没有更多数据啦。");
+        }
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    {
+        [_refreshView endRefreshing];
+                       
+        if (newRows)
+        {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:newRows inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
+                       
+    });
     
 }
 
@@ -274,22 +354,11 @@
  */
 - (void)refreshLoadMoreMessage
 {
-    NSLog(@"从数据库中加载数据，每次最多加载30条数据");
     //联网刷新数据
     [self loadMoreMessage];
-    //启动计时器
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(refreshTimerOut) userInfo:nil repeats:NO];
 }
 
-/**
- *  刷新超时
- */
-- (void)refreshTimerOut
-{
-    [_refreshView endRefreshing];
-    
-    FDLog(@"已经没有更多的数据");
-}
+
 
 
 @end

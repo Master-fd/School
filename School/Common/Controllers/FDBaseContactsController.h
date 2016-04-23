@@ -14,7 +14,10 @@
     NSFetchedResultsController *_fetchedResultsController;
 }
 
-//等待设置数据，只需要给groups赋值，就可以显示， group里面保存FDGroupModel
-@property (nonatomic, strong) NSMutableArray *groups;
+/**
+ *  删除指定人的聊天记录
+ */
+- (void)deleteRecordDataInJidStr:(NSString *)jidStr;
+
 
 @end

@@ -8,11 +8,20 @@
 
 #import "FDBaseViewController.h"
 
-@interface FDChatController : FDBaseViewController
+@interface FDChatController : FDBaseViewController{
+    NSFetchedResultsController *_fetchedResultsController;
+}
+
+@property (nonatomic, strong) UITableView *tableView;
 
 /**
- *  保存FDChatModel 模型，一个模型就是一条信息，文本、图片、声音....
+ *  好友jidstr
  */
-@property (nonatomic, strong) NSMutableArray *messageSources;
+@property (nonatomic, copy) NSString *jidStr;
 
+
+/**
+ *  滚动到底部
+ */
+-(void)scrollToBottom:(BOOL)animated;
 @end

@@ -15,9 +15,10 @@
 @interface FDContactViewCell(){
     
     UIImageView *_iconView;      //头像
-    UILabel *_userName;      //名称,社团名称
-    UILabel *_nikeName;     //昵称,社团的部门名称
+    UILabel *_nickName;     //昵称,社团的部门名称
     UILabel *_accocunt;     //账号
+    UILabel *_messageLab;   //新信息条数
+    
 }
 
 
@@ -57,16 +58,16 @@
     _contactModel = contactModel;
     
     //设置数据
-    _iconView.image = [UIImage imageWithData:contactModel.icon];
-    _userName.text = contactModel.userName;
+    _iconView.image = [UIImage imageWithData:contactModel.photo];
     
-    if (contactModel.nikeName) {
-        _nikeName.hidden = NO;
-        _nikeName.text = [NSString stringWithFormat:@"(%@)", contactModel.nikeName];
+    if (contactModel.nickname.length) {
+        _nickName.hidden = NO;
+        _nickName.text = contactModel.nickname;
     }else{
-        _nikeName.hidden = YES;
+        _nickName.hidden = YES;
     }
-    _accocunt.text = contactModel.account;
+    
+    _accocunt.text = [contactModel.jidStr substringWithRange:NSMakeRange(0, contactModel.jidStr.length - ServerName.length - 1)];
 
 }
 
@@ -78,24 +79,73 @@
     _iconView = [[UIImageView alloc] init];
     [self.contentView addSubview:_iconView];
     
-    _userName = [[UILabel alloc] init];
-    [self.contentView addSubview:_userName];
-    _userName.font = [UIFont systemFontOfSize:16];
-    
-    _nikeName = [[UILabel alloc] init];
-    [self.contentView addSubview:_nikeName];
-    _nikeName.font = [UIFont systemFontOfSize:14];
-    _nikeName.hidden = YES;
+    _nickName = [[UILabel alloc] init];
+    [self.contentView addSubview:_nickName];
+    _nickName.font = [UIFont systemFontOfSize:14];
+    _nickName.hidden = YES;
     
     _accocunt = [[UILabel alloc] init];
     [self.contentView addSubview:_accocunt];
-    _accocunt.font = [UIFont systemFontOfSize:14];
+    _accocunt.font = [UIFont systemFontOfSize:12];
     
+    _messageLab = [[UILabel alloc] init];
+    [self.contentView addSubview:_messageLab];
+    _messageLab.layer.cornerRadius = 10;
+    _messageLab.layer.masksToBounds = YES;
+    _messageLab.textColor = [UIColor whiteColor];
+    _messageLab.textAlignment = NSTextAlignmentCenter;
+    _messageLab.font = [UIFont systemFontOfSize:10];
+    _messageLab.backgroundColor = [UIColor redColor];
+    _messageLab.hidden = YES;
+    //监听通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMessageLab:) name:kNotificationReciveNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMessageLab:) name:kNotificationNewMsgDidRead object:nil];
 }
 
+- (void)dealloc
+{
+    FDLog(@"dealloc");
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)changeMessageLab:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    //NSString *msg = [userInfo objectForKey:@"body"];
+    //NSString *account = [userInfo objectForKey:@"account"];
+    NSString *jidStr = [userInfo objectForKey:@"jidStr"];
+    
+    if ([jidStr isEqualToString:self.contactModel.jidStr]) {
+         static int numOfMsg = 0;
+        if ([notification.name isEqualToString:kNotificationReciveNewMsg]) {
+            numOfMsg += 1;
+            if (numOfMsg > 100) {
+                numOfMsg = 110;
+            }
+            _messageLab.hidden = NO;
+        }
+        
+        if ([notification.name isEqualToString:kNotificationNewMsgDidRead]) {
+            numOfMsg = 0;
+            _messageLab.hidden = YES;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (numOfMsg > 100) {
+                _messageLab.text = @"...";
+            }else{
+                _messageLab.text = [NSString  stringWithFormat:@"%d", numOfMsg];
+            }
+        });
+        
+    }
+    
+    
+}
 #define IconToSuperMargin   5   //icon距离父控件左、上、下的距离
 #define IconSizeWidth       40
-#define userNameMargin      5   //username 距离其他控件的距离
 #define nikeNameMargin      5
 #define accountMargin       5
 /**
@@ -108,21 +158,20 @@
     [_iconView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:IconToSuperMargin];
     [_iconView autoSetDimensionsToSize:CGSizeMake(IconSizeWidth, IconSizeWidth)];
     
-    //_userName
-    [_userName sizeToFit];
-    [_userName autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:userNameMargin];
-    [_userName autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_iconView withOffset:userNameMargin];
+    //_nickName
+    [_nickName sizeToFit];
+    [_nickName autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:nikeNameMargin];
+    [_nickName autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_iconView withOffset:nikeNameMargin];
     
-    //_nikeName
-    [_nikeName sizeToFit];
-    [_nikeName autoAlignAxis:ALAxisHorizontal toSameAxisOfView:_userName];
-    [_nikeName autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_userName withOffset:nikeNameMargin];
-    
-    //_account
+     //_account
     [_accocunt sizeToFit];
-    [_accocunt autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_userName];
-    [_accocunt autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_userName withOffset:accountMargin];
+    [_accocunt autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_nickName];
+    [_accocunt autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:nikeNameMargin];
     
+    //_messageLab
+    [_messageLab autoSetDimensionsToSize:CGSizeMake(17, 17)];
+    [_messageLab autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:_nickName];
+    [_messageLab autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:10];
 }
 
 

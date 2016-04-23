@@ -11,6 +11,7 @@
 
 
 
+
 @interface FDXMPPTool : NSObject
 
 singleton_interface(FDXMPPTool);

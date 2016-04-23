@@ -161,8 +161,7 @@
 {
     if (_inputTextView.text.length != 0) {
         FDChatModel *model = [[FDChatModel alloc] init];
-        model.chatCellType = FDChatCellType_Text;
-        model.text = _inputTextView.text;
+        model.body = _inputTextView.text;
         NSDictionary *userInfo = @{KModelKey : model};
         [self routerEventWithType:EventChatCellTypeSendMsgEvent userInfo:userInfo];
         

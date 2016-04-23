@@ -85,7 +85,7 @@
 //懒加载，设置数据
 - (void)setChatmodel:(FDChatModel *)chatmodel
 {
-    [_textLab AttributedTextFromText:chatmodel.text];
+    [_textLab AttributedTextFromText:chatmodel.body];
     [super setChatmodel:chatmodel];
 }
 /**

@@ -9,7 +9,6 @@
 #import "FDBaseLoginController.h"
 #import "FDBaseNavigationController.h"
 //学生端
-#import "FDMessageController.h"
 #import "FDContactController.h"
 #import "FDDiscoverController.h"
 #import "FDSettingController.h"
