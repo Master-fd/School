@@ -10,4 +10,13 @@
 
 @implementation FDContactModel
 
+//- (void)setNickname:(NSString *)nickname
+//{
+//    _nickname = nickname;
+//}
+//
+//- (void)setPhoto:(NSData *)photo
+//{
+//    _photo = photo;
+//}
 @end

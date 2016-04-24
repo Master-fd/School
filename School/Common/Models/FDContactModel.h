@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface FDContactModel : NSObject
 
+//这些名称字母必须完全和xmpp向对应,名称可以减少,但是不能出现没有的
 /**
  *  好友头像
  */

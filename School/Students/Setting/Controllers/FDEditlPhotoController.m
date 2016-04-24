@@ -86,7 +86,8 @@
     if (image) {
         NSData *data = UIImagePNGRepresentation(image);
         [FDStudent shareFDStudent].myVcard.photo = data;
-        [[FDStudent shareFDStudent] updateMyvCard];
+        [[FDStudent shareFDStudent] updateMyvCard]; //将图像保存到vcard
+        
     }
 }
 

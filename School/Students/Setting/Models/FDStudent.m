@@ -1,7 +1,7 @@
 //
 //  FDStudent.m
 //  School
-//
+//  将会显示在设置里面
 //  Created by asus on 16/3/13.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
@@ -72,7 +72,6 @@ singleton_implementation(FDStudent);
 
     self.myVcard.logo = data; //使用vcard的logo字段作为简历
     [self updateMyvCard];
-    FDLog(@"saveResume");
 }
 
 @end

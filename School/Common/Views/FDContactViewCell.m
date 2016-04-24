@@ -8,7 +8,7 @@
 
 #import "FDContactViewCell.h"
 #import "FDContactModel.h"
-
+#import "XMPPvCardTemp.h"
 
 
 
@@ -21,7 +21,7 @@
     
 }
 
-
+@property (nonatomic, assign, getter=isRemark) BOOL remark;
 
 @end
 
@@ -58,19 +58,33 @@
     _contactModel = contactModel;
     
     //设置数据
-    _iconView.image = [UIImage imageWithData:contactModel.photo];
-    
-    if (contactModel.nickname.length) {
-        _nickName.hidden = NO;
-        _nickName.text = contactModel.nickname;
-    }else{
-        _nickName.hidden = YES;
-    }
-    
     _accocunt.text = [contactModel.jidStr substringWithRange:NSMakeRange(0, contactModel.jidStr.length - ServerName.length - 1)];
-
+    
+    if (contactModel.nickname.length && ![contactModel.nickname isEqualToString:_accocunt.text]) {  //自己已经设置了备注,而且使用备注和用户账户不同
+        _nickName.text = contactModel.nickname;
+        self.remark = YES;
+    }else{//没有备注
+        self.remark = NO;
+    }
 }
 
+- (void)setVCard:(XMPPvCardTemp *)vCard
+{
+    _vCard = vCard;
+    
+    _iconView.image = [UIImage imageWithData:self.vCard.photo];
+    
+    if (!self.isRemark) {
+        //没有使用备注,, 使用用户的vcard上nickname
+        if (self.vCard.nickname.length) {
+            _nickName.text = self.vCard.nickname;
+        }else{//用户自己也没有设置昵称，使用用户的account
+            _nickName.text = _accocunt.text;
+        }
+    }
+    
+
+}
 /**
  *  添加控件
  */
@@ -78,15 +92,19 @@
 {
     _iconView = [[UIImageView alloc] init];
     [self.contentView addSubview:_iconView];
+    _iconView.layer.cornerRadius = 4;
+    _iconView.layer.masksToBounds = YES;
+    _iconView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     
     _nickName = [[UILabel alloc] init];
     [self.contentView addSubview:_nickName];
-    _nickName.font = [UIFont systemFontOfSize:14];
-    _nickName.hidden = YES;
+    _nickName.font = [UIFont boldSystemFontOfSize:14];
+    _nickName.textColor = [UIColor blackColor];
     
     _accocunt = [[UILabel alloc] init];
     [self.contentView addSubview:_accocunt];
-    _accocunt.font = [UIFont systemFontOfSize:12];
+    _accocunt.font = [UIFont systemFontOfSize:13];
+    _accocunt.textColor = [UIColor grayColor];
     
     _messageLab = [[UILabel alloc] init];
     [self.contentView addSubview:_messageLab];
@@ -104,17 +122,16 @@
 
 - (void)dealloc
 {
-    FDLog(@"dealloc");
-
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+/**
+ *  显示有信息来时的小圆点
+ */
 - (void)changeMessageLab:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
     
-    //NSString *msg = [userInfo objectForKey:@"body"];
-    //NSString *account = [userInfo objectForKey:@"account"];
     NSString *jidStr = [userInfo objectForKey:@"jidStr"];
     
     if ([jidStr isEqualToString:self.contactModel.jidStr]) {
@@ -146,8 +163,8 @@
 }
 #define IconToSuperMargin   5   //icon距离父控件左、上、下的距离
 #define IconSizeWidth       40
-#define nikeNameMargin      5
-#define accountMargin       5
+#define nikeNameMarginTop      5
+#define nikeNameMarginLeft       15
 /**
  *  设置控件约束
  */
@@ -160,13 +177,13 @@
     
     //_nickName
     [_nickName sizeToFit];
-    [_nickName autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:nikeNameMargin];
-    [_nickName autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_iconView withOffset:nikeNameMargin];
+    [_nickName autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:nikeNameMarginTop];
+    [_nickName autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_iconView withOffset:nikeNameMarginLeft];
     
      //_account
     [_accocunt sizeToFit];
     [_accocunt autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_nickName];
-    [_accocunt autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:nikeNameMargin];
+    [_accocunt autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:nikeNameMarginTop];
     
     //_messageLab
     [_messageLab autoSetDimensionsToSize:CGSizeMake(17, 17)];

@@ -606,8 +606,57 @@ NSString *const kXMPPvCardTempElement = @"vCard";
 		}
 	}
 }
+/****************************自己添加*******************************************************************/
 
 
+- (NSArray *)jobs {
+    NSArray *result = nil;
+    NSXMLElement *jobs = [self elementForName:@"JOBS"];
+    
+    if (jobs != nil) {
+        NSArray *elems = [jobs elementsForName:@"KEYWORD"];
+        NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:[elems count]];
+        
+        for (NSXMLElement *elem in elems) {
+            NSData *base64Data = [[elem stringValue] dataUsingEncoding:NSASCIIStringEncoding];
+            NSData *decodedData = [base64Data xmpp_base64Decoded];
+            [arr addObject:decodedData];
+        }
+        
+        result = [NSArray arrayWithArray:arr];
+    }
+    
+    return result;
+}
+
+
+- (void)setJobs:(NSArray *)jobs {
+    NSXMLElement *cat = [self elementForName:@"JOBS"];
+    
+    if (jobs != nil) {
+        if (cat == nil) {
+            cat = [NSXMLElement elementWithName:@"JOBS"];
+            [self addChild:cat];
+        }
+        
+        NSArray *elems = [cat elementsForName:@"KEYWORD"];
+        for (NSXMLElement *elem in elems) {
+            [cat removeChildAtIndex:[[cat children] indexOfObject:elem]];
+        }
+        
+        for (NSData *kw in jobs) {
+            NSXMLElement *elem = [NSXMLElement elementWithName:@"KEYWORD"];
+            [cat addChild:elem];
+            [elem setStringValue:[kw xmpp_base64Encoded]];;
+
+        }
+    } else if (cat != nil) {
+        [self removeChildAtIndex:[[self children] indexOfObject:cat]];
+    }
+}
+
+
+/**********************************************************************************************/
 #pragma mark Explanatory Types
 
 

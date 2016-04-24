@@ -193,7 +193,7 @@
         return;
     }
         
-    //发送订阅请求，将nickname设置成默认
+    //发送订阅请求，将nickname设置成默认account
     [[FDXMPPTool shareFDXMPPTool].roster addUser:friendJid withNickname:account];
 }
 

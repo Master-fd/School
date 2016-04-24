@@ -12,7 +12,7 @@
 #import "FDChatController.h"
 #import "FDAddFriendViewController.h"
 #import "FDBaseContactsController+CoreDataExtension.h"
-
+#import "XMPPvCardTemp.h"
 
 
 @interface FDBaseContactsController ()
@@ -35,7 +35,7 @@
 {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 45;
+    self.tableView.rowHeight = 50;
     self.tableView.sectionFooterHeight = 1;   //section之间距离
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableView) name:kNotificationNewMsgDidRead object:nil];
@@ -91,13 +91,18 @@
 //设置cell数据
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //获取数据
+    //获取联系人模型数据
     FDContactModel *contactModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    FDContactViewCell *cell = [FDContactViewCell contactViewCellWithTableView:tableView];
+    //获取联系人vcard信息
+    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:contactModel.jidStr shouldFetch:YES];
     
+    FDContactViewCell *cell = [FDContactViewCell contactViewCellWithTableView:tableView];
+ 
     //设置数据
     cell.contactModel = contactModel;
+    cell.vCard = vCard;
+    
     return cell;
 }
 //cell被点击,联系人被点击
@@ -207,6 +212,8 @@
 
     [context save:nil];
 }
+
+
 
 @end
 

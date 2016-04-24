@@ -32,6 +32,7 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义�
 
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
 @property (nonatomic, strong, readonly) XMPPvCardTempModule *vCard;
+@property (nonatomic, strong, readonly) XMPPvCardAvatarModule *avatar;
 @property (nonatomic, strong, readonly) XMPPRoster *roster;
 @property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *rosterStorage;
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *msgStorage;
@@ -54,6 +55,19 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义�
  */
 - (void)xmppUserConnetToHost:(XMPPRequireResultBlock)requireResultBlock;
 
+/**
+ *  根据传入的JID，获取获取对应的Vcard
+ */
+- (XMPPvCardTemp *)xmppvCardTempForJID:(XMPPJID *)jid shouldFetch:(BOOL)shouldFetch;
 
+/**
+ *  根据传入的jidstr  获取用户vcard
+ */
+- (XMPPvCardTemp *)xmppvCardTempForJIDStr:(NSString *)jidStr shouldFetch:(BOOL)shouldFetch;
+
+/**
+ *  更新用户昵称
+ */
+- (void)xmppUpdateNickname:(NSString *)nickname;
 
 @end

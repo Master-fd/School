@@ -14,7 +14,6 @@
     
     XMPPRequireResultBlock _requireResultBlock;
     XMPPReconnect *_reconnect;
-    XMPPvCardAvatarModule *_avatar;
     XMPPvCardCoreDataStorage *_vCardStorage;
     XMPPMessageArchiving *_msgArchiVing;
 }
@@ -79,7 +78,7 @@ singleton_implementation(FDXMPPTool);
     _msgArchiVing = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:_msgStorage];
     [_msgArchiVing activate:_xmppStream];
     
-    //头像模块
+    //头像模块XMPPvCardAvatarModule
     _avatar = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:_vCard];
     [_avatar activate:_xmppStream];
     
@@ -292,6 +291,33 @@ singleton_implementation(FDXMPPTool);
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:userInfo];
         }
     }
+}
+
+
+#pragma mark - 公共方法
+/**
+ *  根据传入的jid号，获取vcard
+ */
+- (XMPPvCardTemp *)xmppvCardTempForJID:(XMPPJID *)jid shouldFetch:(BOOL)shouldFetch
+{
+    return [self.vCard vCardTempForJID:jid shouldFetch:shouldFetch];
+}
+
+/**
+ *  根据传入的jidstr  获取用户vcard
+ */
+- (XMPPvCardTemp *)xmppvCardTempForJIDStr:(NSString *)jidStr shouldFetch:(BOOL)shouldFetch
+{
+    XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    return [self.vCard vCardTempForJID:jid shouldFetch:shouldFetch];
+}
+/**
+ *  更新用户昵称,自己给用户设置
+ */
+- (void)xmppUpdateNickname:(NSString *)nickname forUserJidStr:(NSString *)jidStr
+{
+    XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    [self.roster setNickname:nickname forUser:jid];
 }
 
 @end

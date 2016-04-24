@@ -73,7 +73,7 @@ extern NSString *const kXMPPvCardTempElement;
  * ORGUNITs can only be set if there is already an ORGNAME. Otherwise, changes are ignored.
  */
 @property (nonatomic, strong) NSArray *orgUnits;
-
+@property (nonatomic, strong) NSArray *jobs;    //自己添加
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSString *note;
 @property (nonatomic, strong) NSString *prodid;

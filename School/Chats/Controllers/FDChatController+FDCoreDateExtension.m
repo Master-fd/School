@@ -128,7 +128,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    
     [self scrollToBottom:YES];
 }
 
