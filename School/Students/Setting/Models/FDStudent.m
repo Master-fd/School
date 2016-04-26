@@ -33,7 +33,7 @@ singleton_implementation(FDStudent);
 }
 
 /**
- *  获取简历
+ *  获取简历,视同logo字段来保存简历
  */
 - (FDResume *)resume
 {

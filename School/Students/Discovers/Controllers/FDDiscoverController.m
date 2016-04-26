@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self updateMyJob];  //测试用
+//    [self updateTestMyJob];  //测试用
     
     [self setupViews];
     
@@ -79,7 +79,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [FDStudent shareFDStudent].myVcard.jobs.count;
-//    return self.myOrganizations.count;
+//    return self.myOrganizations.count;  //获取组织个数
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -95,7 +95,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //获取数据
-    FDJobModel *jobModel = [self getData:indexPath];
+    FDJobModel *jobModel = [self getTestData:indexPath];
 //    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath];
     //新建cell
     FDDiscoverCell *cell = [FDDiscoverCell cellWithTableView:tableView];
@@ -114,14 +114,15 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    FDContactModel *contactModel = self.myOrganizations[indexPath.row];   //获取联系人模型
+    FDContactModel *contactModel = self.myOrganizations[indexPath.row];   //获取从联系人列表,获取联系人模型
 //    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
-    FDJobModel *jobModel = [self getData:indexPath];
+    FDJobModel *jobModel = [self getTestData:indexPath];
     
     FDJobInfoController *vc = [[FDJobInfoController alloc] init];
     vc.title = @"职位详情";
     vc.jobModel = jobModel; //传递数据
     vc.contactModel = contactModel; //联系人模型
+    vc.hideBar = NO;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -136,6 +137,9 @@
     return 0.1;
 }
 #pragma mark - 公共方法
+/**
+ *  获取工作模型
+ */
 - (FDJobModel *)getJobModelAtIndexPath:(NSIndexPath *)indexPath
 {
     FDJobModel *jobModel = nil;
@@ -158,7 +162,7 @@
 /**
  *  测试数据
  */
-- (void)updateMyJob
+- (void)updateTestMyJob
 {
     NSMutableArray *arrayM = [NSMutableArray array];
     
@@ -182,7 +186,7 @@
     [[FDStudent shareFDStudent] updateMyvCard];
 }
 
-- (FDJobModel *)getData:(NSIndexPath *)indexPath
+- (FDJobModel *)getTestData:(NSIndexPath *)indexPath
 {
     FDJobModel *jobModel = nil;
     XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];

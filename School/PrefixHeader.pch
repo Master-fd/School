@@ -57,6 +57,19 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 //收到新信息已经被阅读通知
 #define kNotificationNewMsgDidRead      @"NotificationNewMsgDidRead"
 
+
+//给用户添加了备注通知
+#define  kEditBeizhuNotification    @"EditBeizhuNotification "
+//取出用户备注的key
+#define  kBeizhuNameKey             @"BeizhuNameKey"
+
+//保存应聘信息plist文件路径
+#define  kMyApplyInfoPlistPath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] \
+                                 stringByAppendingPathComponent:@"myApplyJobInfo.plist"]
+
+//简历字段标识符
+#define  kBodyResume   @"BodyResume"
+
 #import "FDSingleton.h"
 #import "PureLayout.h"
 #import "UIView+FDViewExtension.h"

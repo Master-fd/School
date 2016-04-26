@@ -14,6 +14,7 @@
 #import "FDChatTextViewCell.h"
 #import "UIResponder+FDExtension.h"
 #import "FDChatController+FDCoreDateExtension.h"
+#import "FDAboutFriendController.h"
 
 
 #define kMaxBachSize      (30)    //每次最多从数据库读取30条数据
@@ -32,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     //设置导航栏
     [self setupNav];
@@ -83,10 +85,7 @@
  */
 - (void)setupViews
 {
-    //添加手势识别器，方便退出键盘
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chatViewDidTap:)];
-    [self.view addGestureRecognizer:tapGesture];
-    
+   
     //初始化tableview, 注册cell
     _tableView = [[UITableView alloc] init];
     [self.view addSubview:_tableView];
@@ -110,6 +109,11 @@
     //监听inputbar发出的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrameTableview) name:kInputBarFrameDidChangeNotification object:_inputBar];
     
+    //添加手势识别器，方便退出键盘
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chatViewDidTap:)];
+    [_tableView addGestureRecognizer:tapGesture];
+
 }
 
 /**
@@ -126,6 +130,7 @@
 {
     //添加约束
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 0, 0);
+
     //tableview约束
     [_tableView autoPinEdgesToSuperviewEdgesWithInsets:insets excludingEdge:ALEdgeBottom];
     
@@ -139,19 +144,35 @@
  */
 - (void)setupNav
 {
-    
     UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_username"] style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonClick)];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beizhuDidchange:) name:kEditBeizhuNotification object:nil];
 }
-
+/**
+ *  收到通知的时候，马上修改对应的显示
+ */
+- (void)beizhuDidchange:(NSNotification *)notification
+{
+    NSString *name = [notification.userInfo objectForKey:kBeizhuNameKey];
+    self.title = name;
+    self.nickname = name;
+}
+/**
+ *  一定要移除监听
+ */
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 /**
  *  查看好友属性按钮被点击，进入查看
  */
 - (void)rightBarButtonClick
 {
-    UIViewController *vc = [[UIViewController alloc] init];
-    vc.view.backgroundColor = [UIColor redColor];
+    FDAboutFriendController *vc = [[FDAboutFriendController alloc] init];
     vc.title = self.title;
+    vc.jidStr = self.jidStr;   //jid
+    vc.nickname = self.nickname;  //备注
     [self.navigationController pushViewController:vc animated:YES];
 }
 /**

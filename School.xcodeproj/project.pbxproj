@@ -205,6 +205,11 @@
 		1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBFDCD51C906C4B006496CE /* FDUserInfo.m */; };
 		1BCA9CF51CBA446E00788C91 /* FDEmojiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCA9CF41CBA446E00788C91 /* FDEmojiModel.m */; };
 		1BCA9CF81CBA45E000788C91 /* FDEmojiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCA9CF71CBA45E000788C91 /* FDEmojiCollectionViewCell.m */; };
+		1BE3087A1CCE424800192F42 /* FDAboutFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE308791CCE424800192F42 /* FDAboutFriendController.m */; };
+		1BE3087D1CCE42BB00192F42 /* FDAboutFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3087C1CCE42BB00192F42 /* FDAboutFriendCell.m */; };
+		1BE308801CCE49E300192F42 /* FDEditBeizhuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3087F1CCE49E300192F42 /* FDEditBeizhuController.m */; };
+		1BE308861CCE584E00192F42 /* FDResumejobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE308851CCE584E00192F42 /* FDResumejobModel.m */; };
+		1BE4E7E01CCFB30700974969 /* FDMyApplyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4E7DF1CCFB30700974969 /* FDMyApplyInfoCell.m */; };
 		1BF8B4721CBC03F200FD39F5 /* FDLable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8B4711CBC03F200FD39F5 /* FDLable.m */; };
 		1BFD37FA1CC340C1009C7E49 /* heros.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BFD37F91CC340C1009C7E49 /* heros.plist */; };
 		1BFD37FD1CC37AD9009C7E49 /* FDBaseDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD37FC1CC37AD9009C7E49 /* FDBaseDiscoverController.m */; };
@@ -626,6 +631,16 @@
 		1BCA9CF41CBA446E00788C91 /* FDEmojiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEmojiModel.m; sourceTree = "<group>"; };
 		1BCA9CF61CBA45E000788C91 /* FDEmojiCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEmojiCollectionViewCell.h; sourceTree = "<group>"; };
 		1BCA9CF71CBA45E000788C91 /* FDEmojiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEmojiCollectionViewCell.m; sourceTree = "<group>"; };
+		1BE308781CCE424800192F42 /* FDAboutFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAboutFriendController.h; sourceTree = "<group>"; };
+		1BE308791CCE424800192F42 /* FDAboutFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAboutFriendController.m; sourceTree = "<group>"; };
+		1BE3087B1CCE42BB00192F42 /* FDAboutFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAboutFriendCell.h; sourceTree = "<group>"; };
+		1BE3087C1CCE42BB00192F42 /* FDAboutFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAboutFriendCell.m; sourceTree = "<group>"; };
+		1BE3087E1CCE49E300192F42 /* FDEditBeizhuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditBeizhuController.h; sourceTree = "<group>"; };
+		1BE3087F1CCE49E300192F42 /* FDEditBeizhuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditBeizhuController.m; sourceTree = "<group>"; };
+		1BE308841CCE584E00192F42 /* FDResumejobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDResumejobModel.h; sourceTree = "<group>"; };
+		1BE308851CCE584E00192F42 /* FDResumejobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDResumejobModel.m; sourceTree = "<group>"; };
+		1BE4E7DE1CCFB30700974969 /* FDMyApplyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDMyApplyInfoCell.h; path = School/Students/Setting/Views/FDMyApplyInfoCell.h; sourceTree = SOURCE_ROOT; };
+		1BE4E7DF1CCFB30700974969 /* FDMyApplyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDMyApplyInfoCell.m; path = School/Students/Setting/Views/FDMyApplyInfoCell.m; sourceTree = SOURCE_ROOT; };
 		1BF8B4701CBC03F200FD39F5 /* FDLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDLable.h; sourceTree = "<group>"; };
 		1BF8B4711CBC03F200FD39F5 /* FDLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDLable.m; sourceTree = "<group>"; };
 		1BFD37F91CC340C1009C7E49 /* heros.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = heros.plist; sourceTree = "<group>"; };
@@ -1828,6 +1843,8 @@
 				1BA4483C1CC533D800B1BB42 /* FDStudent.m */,
 				1BA448271CC50A7100B1BB42 /* FDSettingModel.h */,
 				1BA448281CC50A7100B1BB42 /* FDSettingModel.m */,
+				1BE308841CCE584E00192F42 /* FDResumejobModel.h */,
+				1BE308851CCE584E00192F42 /* FDResumejobModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1838,6 +1855,8 @@
 				1B4B44D51CCB1F8700F6D48F /* Resume */,
 				1B19CA711CC9106D00E73D8E /* FDSettingCell.h */,
 				1B19CA721CC9106D00E73D8E /* FDSettingCell.m */,
+				1BE4E7DE1CCFB30700974969 /* FDMyApplyInfoCell.h */,
+				1BE4E7DF1CCFB30700974969 /* FDMyApplyInfoCell.m */,
 				1B19CA6E1CC9104300E73D8E /* FDResumePhotoCell.h */,
 				1B19CA6F1CC9104300E73D8E /* FDResumePhotoCell.m */,
 				1B19CA741CC9110B00E73D8E /* FDResumeBaseInfoCell.h */,
@@ -1884,6 +1903,10 @@
 				1B8B19661CC1DE95002EE4FF /* FDBaseViewController.m */,
 				1BFD37FB1CC37AD9009C7E49 /* FDBaseDiscoverController.h */,
 				1BFD37FC1CC37AD9009C7E49 /* FDBaseDiscoverController.m */,
+				1BE308781CCE424800192F42 /* FDAboutFriendController.h */,
+				1BE308791CCE424800192F42 /* FDAboutFriendController.m */,
+				1BE3087E1CCE49E300192F42 /* FDEditBeizhuController.h */,
+				1BE3087F1CCE49E300192F42 /* FDEditBeizhuController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1902,6 +1925,8 @@
 			children = (
 				1B8D81481C955F8900E57402 /* FDContactViewCell.h */,
 				1B8D81491C955F8900E57402 /* FDContactViewCell.m */,
+				1BE3087B1CCE42BB00192F42 /* FDAboutFriendCell.h */,
+				1BE3087C1CCE42BB00192F42 /* FDAboutFriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2162,6 +2187,7 @@
 				1B2F4D921C93BE3600B6B9BB /* XMPPvCardTempBase.m in Sources */,
 				1BAEE0691C93FC1B0035367A /* FDBaseNavigationController.m in Sources */,
 				1B2F4D9A1C93BE3600B6B9BB /* XMPPPubSub.m in Sources */,
+				1BE3087D1CCE42BB00192F42 /* FDAboutFriendCell.m in Sources */,
 				1B8D814A1C955F8900E57402 /* FDContactViewCell.m in Sources */,
 				1B2F4D791C93BE3600B6B9BB /* XMPPIQ+LastActivity.m in Sources */,
 				1B2F4D811C93BE3600B6B9BB /* XMPPRoomHybridStorage.m in Sources */,
@@ -2270,6 +2296,7 @@
 				1B2F4C1C1C93B80F00B6B9BB /* DDXMLDocument.m in Sources */,
 				1B19CA731CC9106D00E73D8E /* FDSettingCell.m in Sources */,
 				1B2F4C6E1C93BDF500B6B9BB /* NSData+XMPP.m in Sources */,
+				1BE308861CCE584E00192F42 /* FDResumejobModel.m in Sources */,
 				1B2F4D9F1C93BE3600B6B9BB /* XMPPDateTimeProfiles.m in Sources */,
 				1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */,
 				1B2F4D7F1C93BE3600B6B9BB /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
@@ -2282,6 +2309,7 @@
 				1B2F4C6B1C93BDF500B6B9BB /* XMPPPlainAuthentication.m in Sources */,
 				1B19CA791CC9113F00E73D8E /* FDResumeExperienceCell.m in Sources */,
 				1B8D81511C95624700E57402 /* UIView+FDViewExtension.m in Sources */,
+				1BE308801CCE49E300192F42 /* FDEditBeizhuController.m in Sources */,
 				1B2F4D881C93BE3600B6B9BB /* XMPPMUC.m in Sources */,
 				1B2F4C691C93BDF500B6B9BB /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				1B2F4DB31C93BE3600B6B9BB /* XMPPBlocking.m in Sources */,
@@ -2333,7 +2361,9 @@
 				1B2F4D841C93BE3600B6B9BB /* XMPPRoomMemoryStorage.m in Sources */,
 				1B2F4C1E1C93B80F00B6B9BB /* DDXMLNode.m in Sources */,
 				1B9092991CCBD6A400C88CBB /* FDJobInfoController.m in Sources */,
+				1BE3087A1CCE424800192F42 /* FDAboutFriendController.m in Sources */,
 				1B4B44DB1CCB2BB200F6D48F /* FDEditBaseInfoView.m in Sources */,
+				1BE4E7E01CCFB30700974969 /* FDMyApplyInfoCell.m in Sources */,
 				1B2F4DA01C93BE3600B6B9BB /* XMPPMessage+XEP_0085.m in Sources */,
 				1B2F4D831C93BE3600B6B9BB /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				1BCA9CF51CBA446E00788C91 /* FDEmojiModel.m in Sources */,

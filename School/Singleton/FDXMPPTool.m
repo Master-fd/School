@@ -270,6 +270,9 @@ singleton_implementation(FDXMPPTool);
     NSString *from = [[message attributeForName:@"from"] stringValue];
     NSString *msg = [[message elementForName:@"body"] stringValue];
     
+    FDLog(@"msg = %@", msg);
+    FDLog(@"message = %@", message);
+    
     //接收到合法信息，发出通知
     if (msg && from) {
         
@@ -312,7 +315,7 @@ singleton_implementation(FDXMPPTool);
     return [self.vCard vCardTempForJID:jid shouldFetch:shouldFetch];
 }
 /**
- *  更新用户昵称,自己给用户设置
+ *  更新用户昵称,自己给用户设置的备注
  */
 - (void)xmppUpdateNickname:(NSString *)nickname forUserJidStr:(NSString *)jidStr
 {

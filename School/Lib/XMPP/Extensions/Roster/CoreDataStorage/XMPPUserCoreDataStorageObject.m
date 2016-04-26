@@ -272,7 +272,7 @@
         
         //转成不带声调的拼音
         CFStringTransform((CFMutableStringRef)stringM, NULL, kCFStringTransformStripDiacritics, NO);
-    }if ([self isEnglishFristWithString:string]) {
+    }else if ([self isEnglishFristWithString:string]) {
         
     } else {
         return @"unknown";
@@ -331,8 +331,8 @@
 	self.jid = jid;
 	self.nickname = [item attributeStringValueForName:@"name"];
 	
-	//self.displayName = (self.nickname != nil) ? self.nickname : jidStr;
-    self.displayName = (self.nickname != nil) ? [self capitalizedWithFristCharactor:self.nickname] : @"unknown";
+//	self.displayName = (self.nickname != nil) ? self.nickname : jidStr;
+    self.displayName = (self.nickname != nil) ? [self capitalizedWithFristCharactor:self.nickname] : @"unknow";
 	self.subscription = [item attributeStringValueForName:@"subscription"];
 	self.ask = [item attributeStringValueForName:@"ask"];
     

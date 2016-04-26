@@ -61,6 +61,7 @@
     //将表情名字封装一个[]
     emojiName = [NSString stringWithFormat:@"[%@]", emojiName];
     
+    FDLog(@"insert emojiname %@", emojiName);
     if (deleteBack) {
         //删除表情
         self.text = [self.text stringByReplacingCharactersInRange:NSMakeRange(self.selectedRange.location-5, 5) withString:@""];

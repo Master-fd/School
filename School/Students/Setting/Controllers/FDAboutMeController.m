@@ -86,14 +86,9 @@
         }
         
     }else if (indexPath.section == 2){
-       cell = (FDSettingCell *)[[FDSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"QRCode"];
+        cell = (FDSettingCell *)[[FDSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"QRCode"];
         cell.iconView.hidden = NO;
-        if ([FDStudent shareFDStudent].QRCode.length) {
-            cell.iconView.image = [UIImage imageWithData:[FDStudent shareFDStudent].QRCode];
-        }else{
-            cell.iconView.image = [UIImage imageNamed:@"setting_myQR"];
-        }
-        
+        cell.iconView.image = [UIImage imageNamed:@"setting_myQR"];
         cell.titleLab.text = @"二维码";
         cell.titleLab.alpha = 0.8;
     }

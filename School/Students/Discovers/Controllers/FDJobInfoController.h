@@ -16,4 +16,8 @@
 
 @property (nonatomic, strong) FDContactModel *contactModel;
 
+/**
+ *  是否隐藏底部的发送简历bar
+ */
+@property (nonatomic, assign, getter=iShideBar) BOOL hideBar;
 @end

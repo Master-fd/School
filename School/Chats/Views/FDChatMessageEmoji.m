@@ -165,7 +165,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FDEmojiModel *model = self.emojiSources[indexPath.row];
-    
     if ([model.emojiName isEqualToString:@"0"]) {
         if (self.emojiBlock) {
             self.emojiBlock(model, deleteEmoji);

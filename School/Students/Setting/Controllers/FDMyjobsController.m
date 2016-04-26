@@ -7,8 +7,16 @@
 //
 
 #import "FDMyjobsController.h"
+#import "FDResumejobModel.h"
+#import "FDJobInfoController.h"
+#import "XMPPvCardTemp.h"
+#import "FDJobModel.h"
+#import "FDMyApplyInfoCell.h"
+
 
 @interface FDMyjobsController ()
+
+@property (nonatomic, strong) NSArray *dataSources;  //保存的子元素是FDResumejobModel
 
 @end
 
@@ -17,84 +25,158 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setupViews];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+/**
+ *  初始化views
+ */
+- (void)setupViews
+{
+    if (!self.dataSources.count) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"没有应聘信息"];
+        });
+        
+        return;
+    }
+    
+    self.tableView.rowHeight = 60;
 }
+/**
+ *  懒加载
+ */
+- (NSArray *)dataSources
+{
+    if (!_dataSources) {
+        //从plist里面加载工作数据
+        NSArray *data = [NSArray arrayWithContentsOfFile:kMyApplyInfoPlistPath];
+        NSMutableArray *arrayM = [NSMutableArray array];
+        for (NSDictionary *dic in data) {
+            FDResumejobModel *model = [FDResumejobModel resumeJobWithDict:dic];
+            [arrayM addObject:model];
+        }
+        _dataSources = arrayM;
+    }
+    
+    return _dataSources;
+}
+
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataSources.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * const cellId = @"cellJobId";
     
-    // Configure the cell...
+    FDResumejobModel *model = self.dataSources[indexPath.row];
+    //新建cell
+    FDMyApplyInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[FDMyApplyInfoCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    }
+    //设置数据
+    cell.model = model;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
+//    FDJobModel *jobModel = [self getTestData:indexPath];   //测试使用
+    FDJobInfoController *vc = [[FDJobInfoController alloc] init];
+    vc.title = @"职位详情";
+    vc.jobModel = jobModel; //传递数据
+    vc.hideBar = YES;  //隐藏底部的发送简历bar
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - 公共方法
+//根据jidstr,获取用户vcard，找到用户的jobs段，判断是否这个信息还有效，如果有效，则连接到招聘信息处
+- (FDJobModel *)getJobModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    FDJobModel *myJobModel = nil;
+    FDResumejobModel *model = self.dataSources[indexPath.row];  //获取已应聘job模型
+    
+    //modeljidstr，获取好友Vcard
+    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:model.jidStr shouldFetch:YES];
+    //遍历用户的所有发布的jobs，查看这条信息是否还存在
+    if (vCard.jobs.count)
+    {
+        for (NSData *data in vCard.jobs) {
+            //Card.jobs  使用这个字段作为招聘信息,保存的nsstring类型
+            //转换成工作模型
+            if (data.length) {
+                FDJobModel *jobmodel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                if ([model.jobName isEqualToString:jobmodel.jobName]) {
+                    myJobModel = jobmodel;  //这条招聘信息还在
+                    break;
+                }
+            }
+        }
+    }
+    
+    return myJobModel;
+}
+//删除jobinfo
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        //删除一条数据
+        [self deleteApplyInfoWithPlist:indexPath];
+        //刷新tableview
+        [self.tableView reloadData];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+#pragma mark - 公共方法
+/**
+ *  删除一条应聘信息
+ */
+- (void)deleteApplyInfoWithPlist:(NSIndexPath *)indexPath
+{
+    //删除一条数据
+    NSMutableArray *arrayM = [NSMutableArray arrayWithArray:self.dataSources];
+    [arrayM removeObjectAtIndex:indexPath.row];
+    self.dataSources = arrayM;
+    //先读取数据
+    NSMutableArray *data = [NSMutableArray arrayWithContentsOfFile:kMyApplyInfoPlistPath];
+    [data removeObjectAtIndex:indexPath.row];
+    //重新写入
+    [data writeToFile:kMyApplyInfoPlistPath atomically:YES];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (FDJobModel *)getTestData:(NSIndexPath *)indexPath
+{
+    FDJobModel *jobModel = nil;
+    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];
+    NSData *data = vCard.jobs[indexPath.row]; // 取出一条数据
+    //Card.jobs  使用这个字段作为招聘信息,保存的nsstring类型
+    //转换成工作模型
+    if (data.length) {
+        jobModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }else{
+        jobModel = nil;
+    }
+    return jobModel;
+    
 }
-*/
-
 @end

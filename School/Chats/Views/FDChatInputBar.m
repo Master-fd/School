@@ -337,7 +337,7 @@
         //注销第一响应者
         [_inputTextView resignFirstResponder];
         
-        //弹出按钮声音按钮弹框
+        //弹出表情按钮弹框
         _faceView = [[FDChatMessageEmoji alloc] init];
         [self addSubview:_faceView];
         //添加block处理
@@ -350,7 +350,6 @@
                 [weakInputTextView insertEmojiName:model.emojiName doType:NO];
             }
         };
-        
         
         //_faceView 添加约束,已经有固定高度，只需要设置底部，左右约束即可
         [_faceView autoPinEdgeToSuperviewEdge:ALEdgeLeading];

@@ -85,7 +85,12 @@
 //懒加载，设置数据
 - (void)setChatmodel:(FDChatModel *)chatmodel
 {
-    [_textLab AttributedTextFromText:chatmodel.body];
+    if ([chatmodel.body isEqualToString:kBodyResume])
+    {
+        [_textLab AttributedTextFromText:@"!!!简历已发送,请及时查收!!!"];
+    }else{
+        [_textLab AttributedTextFromText:chatmodel.body];
+    }
     [super setChatmodel:chatmodel];
 }
 /**

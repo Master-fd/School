@@ -52,6 +52,7 @@ typedef void(^emojiHasClickBlock)(FDEmojiModel *model, doType type);
 
 @interface FDChatMessageEmoji : UIView
 
+//表情被选中，可能是delete按键，需要做处理
 @property (nonatomic, copy) emojiHasClickBlock emojiBlock;
 
 

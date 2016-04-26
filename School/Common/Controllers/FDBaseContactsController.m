@@ -114,6 +114,7 @@
     FDChatController *vc = [[FDChatController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = contactModel.nickname;
+    vc.nickname = contactModel.nickname;
     vc.jidStr = contactModel.jidStr;
     [self.navigationController pushViewController:vc animated:YES];
     

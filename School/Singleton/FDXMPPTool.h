@@ -66,8 +66,10 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义�
 - (XMPPvCardTemp *)xmppvCardTempForJIDStr:(NSString *)jidStr shouldFetch:(BOOL)shouldFetch;
 
 /**
- *  更新用户昵称
+ *  更新自己给用户设置的备注
  */
-- (void)xmppUpdateNickname:(NSString *)nickname;
+- (void)xmppUpdateNickname:(NSString *)nickname forUserJidStr:(NSString *)jidStr;
+
+
 
 @end

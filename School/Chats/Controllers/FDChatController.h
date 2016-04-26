@@ -15,7 +15,12 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 /**
- *  好友jidstr
+ *  好友备注
+ **/
+@property (nonatomic, strong) NSString *nickname;
+
+/**
+ *  正在聊天的好友jidstr
  */
 @property (nonatomic, copy) NSString *jidStr;
 
