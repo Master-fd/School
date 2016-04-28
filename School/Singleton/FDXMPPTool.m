@@ -105,7 +105,6 @@ singleton_implementation(FDXMPPTool);
     } else {
         account = [FDUserInfo shareFDUserInfo].account;
     }
-    
     //设置JID
     XMPPJID *jid = [XMPPJID jidWithUser:account domain:ServerName resource:ClientName];
     [FDUserInfo shareFDUserInfo].jid = jid;

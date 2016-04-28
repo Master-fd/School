@@ -22,7 +22,8 @@
         NSManagedObjectContext *context = [FDXMPPTool shareFDXMPPTool].rosterStorage.mainThreadManagedObjectContext;
         
         //设置查询条件
-        NSString *jidStr = [FDUserInfo alloc].jidStr;
+        NSString *jidStr = [FDUserInfo shareFDUserInfo].jidStr;
+       
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", jidStr];
         //排序
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];

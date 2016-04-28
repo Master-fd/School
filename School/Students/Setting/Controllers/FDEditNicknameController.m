@@ -8,6 +8,7 @@
 
 #import "FDEditNicknameController.h"
 #import "FDStudent.h"
+#import "FDOrganization.h"
 #import "XMPPvCardTemp.h"
 
 
@@ -48,7 +49,6 @@
 
 - (void)setupNav
 {
-    self.title = @"昵称";
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(saveNickname)];
     self.navigationItem.rightBarButtonItem = item;
 }
@@ -58,18 +58,35 @@
 {
     [_nicknameTextFeild resignFirstResponder];
     if (_nicknameTextFeild.text.length) {
-        [FDStudent shareFDStudent].myVcard.nickname = _nicknameTextFeild.text;
-        [[FDStudent shareFDStudent] updateMyvCard];
+        if (self.isOrganization) {
+            //组织
+            [FDOrganization shareFDOrganization].myVcard.nickname = _nicknameTextFeild.text;
+            [[FDOrganization shareFDOrganization] updateMyvCard];
+        } else if(self.isDepartment) {
+            //部门名
+            [FDOrganization shareFDOrganization].myVcard.familyName = _nicknameTextFeild.text;
+            [[FDOrganization shareFDOrganization] updateMyvCard];
+        } else {
+            //学生
+            [FDStudent shareFDStudent].myVcard.nickname = _nicknameTextFeild.text;
+            [[FDStudent shareFDStudent] updateMyvCard];
+        }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [FDMBProgressHUB showError:@"请输入昵称"];
+            [FDMBProgressHUB showError:@"不能为空"];
         });
         [_nicknameTextFeild becomeFirstResponder];
     }
     
 }
 
+- (void)setPlaceholder:(NSString *)placeholder
+{
+    _placeholder = placeholder;
+    _nicknameTextFeild.placeholder = placeholder;
+    
+}
 - (void)backgroundDidTap
 {
     [self.view endEditing:YES];

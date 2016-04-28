@@ -10,4 +10,8 @@
 
 @interface FDEditNicknameController : FDBaseViewController
 
+@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, assign, getter=isOrganization) BOOL organization;
+@property (nonatomic, assign, getter=isDepartment) BOOL department;
+
 @end

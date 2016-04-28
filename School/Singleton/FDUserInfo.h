@@ -13,6 +13,10 @@
 //单例
 singleton_interface(FDUserInfo);
 
+/**
+ *  是否是组织标志
+ */
+@property (nonatomic, assign, getter=isOrganizationFlag) BOOL organizationFlag;
 
 /**
  *  账户

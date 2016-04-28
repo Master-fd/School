@@ -146,6 +146,16 @@
 		1B2F4DBD1C93BE3600B6B9BB /* XMPPMessage+XEP_0308.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F4D601C93BE3600B6B9BB /* XMPPMessage+XEP_0308.m */; };
 		1B2F4DBE1C93BE3600B6B9BB /* XMPPMessage+XEP_0333.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F4D631C93BE3600B6B9BB /* XMPPMessage+XEP_0333.m */; };
 		1B2F4DBF1C93BE3600B6B9BB /* NSXMLElement+XEP_0335.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F4D661C93BE3600B6B9BB /* NSXMLElement+XEP_0335.m */; };
+		1B3F77D71CD0E0A3008123EB /* FDQDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F77D61CD0E0A3008123EB /* FDQDiscoverController.m */; };
+		1B3F77DA1CD0E309008123EB /* FDOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F77D91CD0E309008123EB /* FDOrganization.m */; };
+		1B3F77DD1CD0ED0C008123EB /* FDEditJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F77DC1CD0ED0C008123EB /* FDEditJobController.m */; };
+		1B3F77E31CD0FCAD008123EB /* FDEditJobInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F77E21CD0FCAD008123EB /* FDEditJobInfoView.m */; };
+		1B3F77E61CD1008F008123EB /* FDEditJobDescriberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F77E51CD1008F008123EB /* FDEditJobDescriberView.m */; };
+		1B41C58B1CD25A9900EC732A /* FDApplyResumeInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41C5841CD25A9900EC732A /* FDApplyResumeInfoController.m */; };
+		1B41C58C1CD25A9900EC732A /* FDQAboutMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41C5861CD25A9900EC732A /* FDQAboutMeController.m */; };
+		1B41C58D1CD25A9900EC732A /* FDQEditPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41C5881CD25A9900EC732A /* FDQEditPhotoController.m */; };
+		1B41C58E1CD25A9900EC732A /* FDQSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41C58A1CD25A9900EC732A /* FDQSettingTableViewController.m */; };
+		1B41C5911CD25AC700EC732A /* FDResumeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B41C5901CD25AC700EC732A /* FDResumeInfoCell.m */; };
 		1B425A6A1CCC60260057B57E /* FDJobButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B425A691CCC60260057B57E /* FDJobButtonView.m */; };
 		1B425A721CCC648F0057B57E /* FDJobDescribeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B425A6F1CCC648F0057B57E /* FDJobDescribeViewCell.m */; };
 		1B425A731CCC648F0057B57E /* FDJobInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B425A711CCC648F0057B57E /* FDJobInfoViewCell.m */; };
@@ -210,6 +220,7 @@
 		1BE308801CCE49E300192F42 /* FDEditBeizhuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3087F1CCE49E300192F42 /* FDEditBeizhuController.m */; };
 		1BE308861CCE584E00192F42 /* FDResumejobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE308851CCE584E00192F42 /* FDResumejobModel.m */; };
 		1BE4E7E01CCFB30700974969 /* FDMyApplyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4E7DF1CCFB30700974969 /* FDMyApplyInfoCell.m */; };
+		1BE4E7E31CCFC51800974969 /* FDOContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4E7E21CCFC51800974969 /* FDOContactController.m */; };
 		1BF8B4721CBC03F200FD39F5 /* FDLable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8B4711CBC03F200FD39F5 /* FDLable.m */; };
 		1BFD37FA1CC340C1009C7E49 /* heros.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BFD37F91CC340C1009C7E49 /* heros.plist */; };
 		1BFD37FD1CC37AD9009C7E49 /* FDBaseDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD37FC1CC37AD9009C7E49 /* FDBaseDiscoverController.m */; };
@@ -514,6 +525,26 @@
 		1B2F4D651C93BE3600B6B9BB /* NSXMLElement+XEP_0335.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XEP_0335.h"; sourceTree = "<group>"; };
 		1B2F4D661C93BE3600B6B9BB /* NSXMLElement+XEP_0335.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XEP_0335.m"; sourceTree = "<group>"; };
 		1B2F4DC11C93BEB900B6B9BB /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		1B3F77D51CD0E0A3008123EB /* FDQDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDQDiscoverController.h; sourceTree = "<group>"; };
+		1B3F77D61CD0E0A3008123EB /* FDQDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDQDiscoverController.m; sourceTree = "<group>"; };
+		1B3F77D81CD0E309008123EB /* FDOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDOrganization.h; sourceTree = "<group>"; };
+		1B3F77D91CD0E309008123EB /* FDOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDOrganization.m; sourceTree = "<group>"; };
+		1B3F77DB1CD0ED0C008123EB /* FDEditJobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditJobController.h; sourceTree = "<group>"; };
+		1B3F77DC1CD0ED0C008123EB /* FDEditJobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditJobController.m; sourceTree = "<group>"; };
+		1B3F77E11CD0FCAD008123EB /* FDEditJobInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditJobInfoView.h; sourceTree = "<group>"; };
+		1B3F77E21CD0FCAD008123EB /* FDEditJobInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditJobInfoView.m; sourceTree = "<group>"; };
+		1B3F77E41CD1008F008123EB /* FDEditJobDescriberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditJobDescriberView.h; sourceTree = "<group>"; };
+		1B3F77E51CD1008F008123EB /* FDEditJobDescriberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditJobDescriberView.m; sourceTree = "<group>"; };
+		1B41C5831CD25A9900EC732A /* FDApplyResumeInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDApplyResumeInfoController.h; sourceTree = "<group>"; };
+		1B41C5841CD25A9900EC732A /* FDApplyResumeInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDApplyResumeInfoController.m; sourceTree = "<group>"; };
+		1B41C5851CD25A9900EC732A /* FDQAboutMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDQAboutMeController.h; sourceTree = "<group>"; };
+		1B41C5861CD25A9900EC732A /* FDQAboutMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDQAboutMeController.m; sourceTree = "<group>"; };
+		1B41C5871CD25A9900EC732A /* FDQEditPhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDQEditPhotoController.h; sourceTree = "<group>"; };
+		1B41C5881CD25A9900EC732A /* FDQEditPhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDQEditPhotoController.m; sourceTree = "<group>"; };
+		1B41C5891CD25A9900EC732A /* FDQSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDQSettingTableViewController.h; sourceTree = "<group>"; };
+		1B41C58A1CD25A9900EC732A /* FDQSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDQSettingTableViewController.m; sourceTree = "<group>"; };
+		1B41C58F1CD25AC700EC732A /* FDResumeInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDResumeInfoCell.h; sourceTree = "<group>"; };
+		1B41C5901CD25AC700EC732A /* FDResumeInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDResumeInfoCell.m; sourceTree = "<group>"; };
 		1B425A681CCC60260057B57E /* FDJobButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDJobButtonView.h; sourceTree = "<group>"; };
 		1B425A691CCC60260057B57E /* FDJobButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDJobButtonView.m; sourceTree = "<group>"; };
 		1B425A6E1CCC648F0057B57E /* FDJobDescribeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDJobDescribeViewCell.h; sourceTree = "<group>"; };
@@ -641,6 +672,8 @@
 		1BE308851CCE584E00192F42 /* FDResumejobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDResumejobModel.m; sourceTree = "<group>"; };
 		1BE4E7DE1CCFB30700974969 /* FDMyApplyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDMyApplyInfoCell.h; path = School/Students/Setting/Views/FDMyApplyInfoCell.h; sourceTree = SOURCE_ROOT; };
 		1BE4E7DF1CCFB30700974969 /* FDMyApplyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDMyApplyInfoCell.m; path = School/Students/Setting/Views/FDMyApplyInfoCell.m; sourceTree = SOURCE_ROOT; };
+		1BE4E7E11CCFC51800974969 /* FDOContactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDOContactController.h; path = School/Organizations/Contacts/Controller/FDOContactController.h; sourceTree = SOURCE_ROOT; };
+		1BE4E7E21CCFC51800974969 /* FDOContactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDOContactController.m; path = School/Organizations/Contacts/Controller/FDOContactController.m; sourceTree = SOURCE_ROOT; };
 		1BF8B4701CBC03F200FD39F5 /* FDLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDLable.h; sourceTree = "<group>"; };
 		1BF8B4711CBC03F200FD39F5 /* FDLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDLable.m; sourceTree = "<group>"; };
 		1BFD37F91CC340C1009C7E49 /* heros.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = heros.plist; sourceTree = "<group>"; };
@@ -1693,6 +1726,10 @@
 		1BAE00001C8ABDC9002B4570 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1B3F77D51CD0E0A3008123EB /* FDQDiscoverController.h */,
+				1B3F77D61CD0E0A3008123EB /* FDQDiscoverController.m */,
+				1B3F77DB1CD0ED0C008123EB /* FDEditJobController.h */,
+				1B3F77DC1CD0ED0C008123EB /* FDEditJobController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1700,6 +1737,8 @@
 		1BAE00011C8ABDC9002B4570 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B3F77D81CD0E309008123EB /* FDOrganization.h */,
+				1B3F77D91CD0E309008123EB /* FDOrganization.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1707,6 +1746,10 @@
 		1BAE00031C8ABDC9002B4570 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B3F77E11CD0FCAD008123EB /* FDEditJobInfoView.h */,
+				1B3F77E21CD0FCAD008123EB /* FDEditJobInfoView.m */,
+				1B3F77E41CD1008F008123EB /* FDEditJobDescriberView.h */,
+				1B3F77E51CD1008F008123EB /* FDEditJobDescriberView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1715,7 +1758,6 @@
 			isa = PBXGroup;
 			children = (
 				1BAE00051C8ABDC9002B4570 /* Controllers */,
-				1BAE00061C8ABDC9002B4570 /* Models */,
 				1BAE00081C8ABDC9002B4570 /* Views */,
 			);
 			path = Setting;
@@ -1724,20 +1766,23 @@
 		1BAE00051C8ABDC9002B4570 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1B41C5831CD25A9900EC732A /* FDApplyResumeInfoController.h */,
+				1B41C5841CD25A9900EC732A /* FDApplyResumeInfoController.m */,
+				1B41C5851CD25A9900EC732A /* FDQAboutMeController.h */,
+				1B41C5861CD25A9900EC732A /* FDQAboutMeController.m */,
+				1B41C5871CD25A9900EC732A /* FDQEditPhotoController.h */,
+				1B41C5881CD25A9900EC732A /* FDQEditPhotoController.m */,
+				1B41C5891CD25A9900EC732A /* FDQSettingTableViewController.h */,
+				1B41C58A1CD25A9900EC732A /* FDQSettingTableViewController.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		1BAE00061C8ABDC9002B4570 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1BAE00081C8ABDC9002B4570 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B41C58F1CD25AC700EC732A /* FDResumeInfoCell.h */,
+				1B41C5901CD25AC700EC732A /* FDResumeInfoCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1972,8 +2017,6 @@
 			isa = PBXGroup;
 			children = (
 				1BAEFFFB1C8ABDC9002B4570 /* Controllers */,
-				1BAEFFFC1C8ABDC9002B4570 /* Models */,
-				1BAEFFFE1C8ABDC9002B4570 /* Views */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -1981,22 +2024,10 @@
 		1BAEFFFB1C8ABDC9002B4570 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1BE4E7E11CCFC51800974969 /* FDOContactController.h */,
+				1BE4E7E21CCFC51800974969 /* FDOContactController.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		1BAEFFFC1C8ABDC9002B4570 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		1BAEFFFE1C8ABDC9002B4570 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		1BAEFFFF1C8ABDC9002B4570 /* Discovers */ = {
@@ -2202,6 +2233,7 @@
 				1B2F4C6F1C93BDF500B6B9BB /* NSNumber+XMPP.m in Sources */,
 				1B2F4D771C93BE3600B6B9BB /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				1B2F4D711C93BE3600B6B9BB /* XMPPResourceMemoryStorageObject.m in Sources */,
+				1B3F77E31CD0FCAD008123EB /* FDEditJobInfoView.m in Sources */,
 				1B2F4D941C93BE3600B6B9BB /* XMPPvCardTempLabel.m in Sources */,
 				1B2F4D991C93BE3600B6B9BB /* XMPPIQ+XEP_0060.m in Sources */,
 				1B9092901CCB707000C88CBB /* FDEditSpecialtyController.m in Sources */,
@@ -2231,6 +2263,7 @@
 				1B425A6A1CCC60260057B57E /* FDJobButtonView.m in Sources */,
 				1B2F4DA81C93BE3600B6B9BB /* XMPPCapabilities.m in Sources */,
 				1B2F4D861C93BE3600B6B9BB /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
+				1B3F77DD1CD0ED0C008123EB /* FDEditJobController.m in Sources */,
 				1B2F4D691C93BE3600B6B9BB /* XMPPGoogleSharedStatus.m in Sources */,
 				1B2F4D8F1C93BE3600B6B9BB /* XMPPvCardTemp.m in Sources */,
 				1B2F4C6C1C93BDF500B6B9BB /* XMPPXFacebookPlatformAuthentication.m in Sources */,
@@ -2243,6 +2276,7 @@
 				1B2F4D7E1C93BE3600B6B9BB /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				1B2F4C1B1C93B80F00B6B9BB /* NSString+DDXML.m in Sources */,
 				1B2F4C1D1C93B80F00B6B9BB /* DDXMLElement.m in Sources */,
+				1B3F77D71CD0E0A3008123EB /* FDQDiscoverController.m in Sources */,
 				1B2F4D6A1C93BE3600B6B9BB /* XMPPProcessOne.m in Sources */,
 				1B2F4D981C93BE3600B6B9BB /* XMPPResultSet.m in Sources */,
 				1B2F4C751C93BDF500B6B9BB /* XMPPModule.m in Sources */,
@@ -2260,6 +2294,7 @@
 				1B2F4DAC1C93BE3600B6B9BB /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				1BA0D3F11CBA8B0D006DFE3E /* FDTextView.m in Sources */,
 				1B425A731CCC648F0057B57E /* FDJobInfoViewCell.m in Sources */,
+				1B41C58C1CD25A9900EC732A /* FDQAboutMeController.m in Sources */,
 				1B2F4D821C93BE3600B6B9BB /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				1B19CA7C1CC9119500E73D8E /* FDResumeSpecialtyCell.m in Sources */,
 				1B8D817D1C95735B00E57402 /* FDDiscoverController.m in Sources */,
@@ -2279,6 +2314,7 @@
 				1B2F4D741C93BE3600B6B9BB /* XMPPRoster.m in Sources */,
 				1B2F4D761C93BE3600B6B9BB /* XMPPIQ+JabberRPC.m in Sources */,
 				1B87666E1C9AF4AA005B9E47 /* FDChatController.m in Sources */,
+				1B3F77E61CD1008F008123EB /* FDEditJobDescriberView.m in Sources */,
 				1B2F4D911C93BE3600B6B9BB /* XMPPvCardTempAdrTypes.m in Sources */,
 				1B2F4D781C93BE3600B6B9BB /* XMPPJabberRPCModule.m in Sources */,
 				1B19CA7F1CC911CA00E73D8E /* FDResumePurposeCell.m in Sources */,
@@ -2309,7 +2345,9 @@
 				1B2F4C6B1C93BDF500B6B9BB /* XMPPPlainAuthentication.m in Sources */,
 				1B19CA791CC9113F00E73D8E /* FDResumeExperienceCell.m in Sources */,
 				1B8D81511C95624700E57402 /* UIView+FDViewExtension.m in Sources */,
+				1B41C58B1CD25A9900EC732A /* FDApplyResumeInfoController.m in Sources */,
 				1BE308801CCE49E300192F42 /* FDEditBeizhuController.m in Sources */,
+				1B41C5911CD25AC700EC732A /* FDResumeInfoCell.m in Sources */,
 				1B2F4D881C93BE3600B6B9BB /* XMPPMUC.m in Sources */,
 				1B2F4C691C93BDF500B6B9BB /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				1B2F4DB31C93BE3600B6B9BB /* XMPPBlocking.m in Sources */,
@@ -2320,8 +2358,10 @@
 				1B2F4DBC1C93BE3600B6B9BB /* NSXMLElement+XEP_0297.m in Sources */,
 				1BA4483E1CC533D800B1BB42 /* FDStudent.m in Sources */,
 				1B8ED6A11C8AB61C00FB09F8 /* main.m in Sources */,
+				1B41C58E1CD25A9900EC732A /* FDQSettingTableViewController.m in Sources */,
 				1B2F4C051C93B7D200B6B9BB /* DDLog.m in Sources */,
 				1B2F4D8A1C93BE3600B6B9BB /* XMPPvCard.xcdatamodeld in Sources */,
+				1BE4E7E31CCFC51800974969 /* FDOContactController.m in Sources */,
 				1B2F4D9B1C93BE3600B6B9BB /* TURNSocket.m in Sources */,
 				1B90928D1CCB5C0C00C88CBB /* FDEditExperienceController.m in Sources */,
 				1B2F4D9D1C93BE3600B6B9BB /* XMPPMessage+XEP_0066.m in Sources */,
@@ -2368,10 +2408,12 @@
 				1B2F4D831C93BE3600B6B9BB /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				1BCA9CF51CBA446E00788C91 /* FDEmojiModel.m in Sources */,
 				1B8079351C8F061100FB3F78 /* FDMBProgressHUB.m in Sources */,
+				1B3F77DA1CD0E309008123EB /* FDOrganization.m in Sources */,
 				1B2F4D6F1C93BE3600B6B9BB /* XMPPRosterCoreDataStorage.m in Sources */,
 				1B2F4D871C93BE3600B6B9BB /* XMPPMessage+XEP0045.m in Sources */,
 				1B2F4C7E1C93BDF500B6B9BB /* XMPPStringPrep.m in Sources */,
 				1B2F4C071C93B7D200B6B9BB /* ContextFilterLogFormatter.m in Sources */,
+				1B41C58D1CD25A9900EC732A /* FDQEditPhotoController.m in Sources */,
 				1B2F4DB01C93BE3600B6B9BB /* XMPPPresence+XEP_0172.m in Sources */,
 				1BFD38031CC37DEE009C7E49 /* FDChatController+FDCoreDateExtension.m in Sources */,
 				1B2F4D671C93BE3600B6B9BB /* XMPPBandwidthMonitor.m in Sources */,

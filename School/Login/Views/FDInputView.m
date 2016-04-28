@@ -7,6 +7,8 @@
 //
 
 #import "FDInputView.h"
+#import "FDUserInfo.h"
+
 
 @interface FDInputView()
 {
@@ -29,7 +31,7 @@
 }
 
 
-@property (nonatomic, assign, getter=isOrganizationFlag) BOOL organizationFlag;
+//@property (nonatomic, assign, getter=isOrganizationFlag) BOOL organizationFlag;
 
 @end
 @implementation FDInputView
@@ -69,7 +71,11 @@
     [_isOrganizationBgImg addSubview:_isOrganizationLab];
     _isOrganizationLab.font = [UIFont systemFontOfSize:21];
     _isOrganizationLab.textColor = [UIColor whiteColor];
-    _isOrganizationLab.text = @"学生";
+    if ([FDUserInfo shareFDUserInfo].isOrganizationFlag) {
+        _isOrganizationLab.text = @"组织";
+    }else{
+        _isOrganizationLab.text = @"学生";
+    }
     
     _isOrganizationBtn = [[UIButton alloc] init];
     [_isOrganizationLab addSubview:_isOrganizationBtn];
@@ -235,7 +241,7 @@
 
     
     //组织
-    if (self.isOrganizationFlag) {
+    if ([FDUserInfo shareFDUserInfo].isOrganizationFlag) {
         NSRegularExpression *regux = [[NSRegularExpression alloc] initWithPattern:organizationPattern options:0 error:nil];
         NSArray *result = [regux matchesInString:accountStr options:0 range:NSMakeRange(0, accountStr.length)];
         
@@ -251,7 +257,7 @@
     }
     
     //学生
-    if (!self.isOrganizationFlag) {
+    if (![FDUserInfo shareFDUserInfo].isOrganizationFlag) {
         NSRegularExpression *regux = [[NSRegularExpression alloc] initWithPattern:studentPattern options:0 error:nil];
         NSArray *result = [regux matchesInString:accountStr options:0 range:NSMakeRange(0, accountStr.length)];
         
@@ -278,8 +284,10 @@
  */
 - (void)OrganizationBtnClick:(UIButton *)sender
 {
-    self.organizationFlag = !self.organizationFlag;
-    if (self.isOrganizationFlag) {
+    [FDUserInfo shareFDUserInfo].organizationFlag = ![FDUserInfo shareFDUserInfo].organizationFlag;
+    [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
+    
+    if ([FDUserInfo shareFDUserInfo].isOrganizationFlag) {
        _isOrganizationLab.text = @"组织";
     }else{
        _isOrganizationLab.text = @"学生";

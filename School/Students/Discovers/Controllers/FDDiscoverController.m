@@ -78,25 +78,24 @@
 #pragma mark - uitableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [FDStudent shareFDStudent].myVcard.jobs.count;
-//    return self.myOrganizations.count;  //获取组织个数
+//    return [FDStudent shareFDStudent].myVcard.jobs.count;
+    return self.myOrganizations.count;  //获取组织个数
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    FDContactModel *model = self.myOrganizations[section];
-//    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:model.jidStr shouldFetch:YES];;
-//    NSArray *array = vCard.jobs; // 从电子名片中可以获取知道这个人有多少个招聘信息
-    
-//    return array.count;
-    return 1;
+    FDContactModel *model = self.myOrganizations[section];
+    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:model.jidStr shouldFetch:YES];;
+    NSArray *array = vCard.jobs; // 从电子名片中可以获取知道这个人有多少个招聘信息
+    return array.count;
+//    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //获取数据
-    FDJobModel *jobModel = [self getTestData:indexPath];
-//    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath];
+//    FDJobModel *jobModel = [self getTestData:indexPath];
+    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath];
     //新建cell
     FDDiscoverCell *cell = [FDDiscoverCell cellWithTableView:tableView];
     //设置数据
@@ -114,9 +113,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    FDContactModel *contactModel = self.myOrganizations[indexPath.row];   //获取从联系人列表,获取联系人模型
-//    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
-    FDJobModel *jobModel = [self getTestData:indexPath];
+    FDContactModel *contactModel = self.myOrganizations[indexPath.section];   //获取从联系人列表,获取联系人模型
+    FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
+//    FDJobModel *jobModel = [self getTestData:indexPath];
     
     FDJobInfoController *vc = [[FDJobInfoController alloc] init];
     vc.title = @"职位详情";
@@ -144,7 +143,7 @@
 {
     FDJobModel *jobModel = nil;
     //根据账号，获取好友Vcard
-    FDContactModel *model = self.myOrganizations[indexPath.row];
+    FDContactModel *model = self.myOrganizations[indexPath.section];
     XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:model.jidStr shouldFetch:YES];
     NSData *data = vCard.jobs[indexPath.row]; // 取出一条数据
     //Card.jobs  使用这个字段作为招聘信息,保存的nsstring类型

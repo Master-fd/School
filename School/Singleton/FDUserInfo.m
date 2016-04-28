@@ -17,6 +17,7 @@
 #define registerAccountKey       @"registerAccountKey"
 #define registerPasswordKey      @"registerPasswordKey"
 #define loginStatusKey      @"loginStatusKey"
+#define organizationKey      @"organizationKey"
 
 @implementation FDUserInfo
 
@@ -35,7 +36,7 @@ singleton_implementation(FDUserInfo);
     self.account = [userInfo objectForKey:accountKey];
     self.password = [userInfo objectForKey:passwordKey];
     self.loginStatus = [[userInfo objectForKey:loginStatusKey] boolValue];
-    
+    self.organizationFlag = [[userInfo objectForKey:organizationKey] boolValue];
 }
 
 /**
@@ -54,6 +55,9 @@ singleton_implementation(FDUserInfo);
     if (self.loginStatus) {
         [userInfo setObject:[NSNumber numberWithBool:self.loginStatus] forKey:loginStatusKey];
     }
+    if (self.organizationFlag) {
+        [userInfo setObject:[NSNumber numberWithBool:self.organizationFlag] forKey:organizationKey];
+    }
     
     [userInfo writeToFile:userPlistPath atomically:YES];
     
@@ -61,9 +65,7 @@ singleton_implementation(FDUserInfo);
 
 - (NSString *)jidStr
 {
-    if (!_jidStr) {
-        _jidStr = [NSString stringWithFormat:@"%@@%@", self.account, ServerName];
-    }
+    _jidStr = [NSString stringWithFormat:@"%@@%@", self.account, ServerName];
     
     return _jidStr;
 }

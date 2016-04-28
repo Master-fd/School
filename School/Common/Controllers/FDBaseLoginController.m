@@ -14,6 +14,10 @@
 #import "FDSettingController.h"
 
 //组织端
+#import "FDOContactController.h"
+#import "FDQDiscoverController.h"
+#import "FDQSettingTableViewController.h"
+
 
 @interface FDBaseLoginController ()
 
@@ -58,7 +62,7 @@
             case XMPPRequireResultTypeLoginSuccess:
                 [FDMBProgressHUB showSuccess:@"登录成功"];
                 //跳转页面
-                [self enterStudentClientMainPage];  //学生端
+                [self switchUserClient];  //学生端
                 break;
             case XMPPRequireResultTypeRegisterFailure:
                 [FDMBProgressHUB showError:@"注册失败,账户已被使用"];
@@ -76,7 +80,24 @@
 }
 
 /**
- *  主界面
+ *  切换学生或者组织客户端
+ */
++ (void)switchUserClient
+{
+    NSString *pattern = @"^[a-zA-Z]+";
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+    NSArray *results = [regex matchesInString:[FDUserInfo shareFDUserInfo].account options:0 range:NSMakeRange(0, [FDUserInfo shareFDUserInfo].account.length)];
+    
+    if (results.count) {
+        //组织账户
+        [self enterOrganizationClientMainPage];
+    }else{
+        //学生账户
+        [self enterStudentClientMainPage];
+    }
+}
+/**
+ *  学生端主界面
  */
 + (void)enterStudentClientMainPage
 {
@@ -107,7 +128,38 @@
     
     window.rootViewController = tabbarVc;
     
+}
+
+/**
+ *  组织端主界面
+ */
++ (void)enterOrganizationClientMainPage
+{
+    //保存该用户已经登录过,只要能进来主界面，说明就是登录过了
+    [FDUserInfo shareFDUserInfo].loginStatus = YES;
+    [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
+    
+    FDOContactController *organizationsVC = [[FDOContactController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDBaseNavigationController *organizationsNav  = [[FDBaseNavigationController alloc] initWithRootViewController:organizationsVC];
+    FDQDiscoverController *discoversVC = [[FDQDiscoverController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDBaseNavigationController *discoversNav  = [[FDBaseNavigationController alloc] initWithRootViewController:discoversVC];
+    FDQSettingTableViewController *settingVC = [[FDQSettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDBaseNavigationController *settingNav  = [[FDBaseNavigationController alloc] initWithRootViewController:settingVC];
+
+
+    //获取主窗口
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UITabBarController *tabbarVc = [[UITabBarController alloc] init];
+    
+    [tabbarVc addChildViewController:organizationsNav];
+    [tabbarVc addChildViewController:discoversNav];
+    [tabbarVc addChildViewController:settingNav];
+    
+    organizationsNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人" image:[UIImage imageNamed:@"tabbar_contacts"] selectedImage:[UIImage imageNamed:@"tabbar_contactsHL"]];
+    discoversNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_discover"] selectedImage:[UIImage imageNamed:@"tabbar_discoverHL"]];
+    settingNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage imageNamed:@"tabbar_meHL"]];
     
     
+    window.rootViewController = tabbarVc;
 }
 @end

@@ -1,30 +1,32 @@
 //
-//  FDSettingController.m
+//  FDQSettingTableViewController.m
 //  School
 //
-//  Created by asus on 16/4/18.
+//  Created by asus on 16/4/28.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import "FDSettingController.h"
-#import "FDAboutMeController.h"
-#import "FDMyjobsController.h"
-#import "FDResumeController.h"
+#import "FDQSettingTableViewController.h"
+#import "FDQAboutMeController.h"
+#import "FDApplyResumeInfoController.h"
 #import "FDAboutSoftwareController.h"
 #import "FDSettingModel.h"
-#import "FDStudent.h"
+#import "FDOrganization.h"
 
-@interface FDSettingController ()
+
+@interface FDQSettingTableViewController ()
 
 @property (nonatomic, strong) NSArray *dataSources;   //cell需要显示的数据
 
 @end
 
-@implementation FDSettingController
+
+
+@implementation FDQSettingTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.tableView.rowHeight = 44;
     self.title = self.navigationController.tabBarItem.title;
 }
@@ -36,24 +38,22 @@
 - (NSArray *)dataSources
 {
     if (!_dataSources) {
-        FDSettingModel *aboutMe = [[FDSettingModel alloc] init];
-        FDSettingModel *allJob = [[FDSettingModel alloc] init];
+        FDSettingModel *applyResume = [[FDSettingModel alloc] init];
         FDSettingModel *clearMem = [[FDSettingModel alloc] init];
         FDSettingModel *aboutSoftware = [[FDSettingModel alloc] init];
         FDSettingModel *logout = [[FDSettingModel alloc] init];
-        
-        aboutMe.title = @"简历";
-        allJob.title = @"已应聘职位";
+
+        applyResume.title = @"应聘简历";
         clearMem.title = @"清除缓存";
         aboutSoftware.title = @"关于软件";
         logout.title = @"退出账号";
         
-        NSArray *section1 = @[aboutMe];
-        NSArray *section2 = @[allJob,clearMem,aboutSoftware];
+        NSArray *section1 = @[applyResume];
+        NSArray *section2 = @[clearMem,aboutSoftware];
         NSArray *section3 = @[logout];
         _dataSources = @[section1, section2, section3];
     }
-
+    
     return _dataSources;
 }
 
@@ -66,12 +66,12 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return self.dataSources.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     NSArray *array = self.dataSources[section];
     
     return array.count;
@@ -107,24 +107,13 @@
     if ((indexPath.section == self.dataSources.count-1)) {
         //退出账号
         [self logout];
-    }else if (indexPath.section == 0){
-        //简历设置
-        FDResumeController *vc = [[FDResumeController alloc] init];
-        vc.title = model.title;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-        
+    }else if ((indexPath.section == 0) && (indexPath.row == 0)){
+        //应聘者简历
+        [self applyResumeInfo];
     }else if ((indexPath.section == 1) && (indexPath.row == 0)){
-        //已应聘职位
-        FDMyjobsController *vc = [[FDMyjobsController alloc] init];
-        vc.title = model.title;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if ((indexPath.section == 1) && (indexPath.row == 1)){
-        //清除缓存
+         //清除缓存
         [self clearAllCache];
-    }else if ((indexPath.section == 1) && (indexPath.row == 2)){
+    }else if ((indexPath.section == 1) && (indexPath.row == 1)){
         //关于软件
         FDAboutSoftwareController *vc = [[FDAboutSoftwareController alloc] init];
         vc.title = model.title;
@@ -140,46 +129,46 @@
 {
     UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] init];
     if (section == 0) {
-    
+        
         UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"setting_head_bg"]];
         [headerView.contentView addSubview:bgImageView];
-    
+        
         bgImageView.userInteractionEnabled = YES;
         
         UIButton *imageBtn = [[UIButton alloc] init];
         [bgImageView addSubview:imageBtn];
-        imageBtn.layer.masksToBounds = YES;
-        imageBtn.layer.cornerRadius = 40;
         [imageBtn addTarget:self action:@selector(editMyvCard) forControlEvents:UIControlEventTouchDown];
-        if ([FDStudent shareFDStudent].photo) {
-            [imageBtn setBackgroundImage:[UIImage imageWithData:[FDStudent shareFDStudent].photo] forState:UIControlStateNormal];
+        if ([FDOrganization shareFDOrganization].photo) {
+            [imageBtn setBackgroundImage:[UIImage imageWithData:[FDOrganization shareFDOrganization].photo] forState:UIControlStateNormal];
         }else{
             [imageBtn setBackgroundImage:[UIImage imageNamed:@"user_avatar_default"] forState:UIControlStateNormal];
         }
-       
+        
         
         UILabel *descLab = [[UILabel alloc] init];
         [bgImageView addSubview:descLab];
-        if ([FDStudent shareFDStudent].nickname) {
-            descLab.text = [FDStudent shareFDStudent].nickname;
+        imageBtn.layer.masksToBounds = YES;
+        imageBtn.layer.cornerRadius = 40;
+        if ([FDOrganization shareFDOrganization].nickname) {
+            descLab.text = [FDOrganization shareFDOrganization].nickname;
         }else{
-            descLab.text = [FDStudent shareFDStudent].account;
+            descLab.text = [FDOrganization shareFDOrganization].account;
         }
         descLab.textColor = [UIColor grayColor];
         descLab.backgroundColor = [UIColor clearColor];
         descLab.font = [UIFont systemFontOfSize:15];
         descLab.textAlignment = NSTextAlignmentCenter;
-
+        
         //添加约束
         //bgImageView
         [bgImageView autoPinEdgesToSuperviewEdges];
-
+        
         //imageView
         [imageBtn autoAlignAxisToSuperviewAxis:ALAxisVertical];
         [imageBtn autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:bgImageView];
         [imageBtn autoSetDimensionsToSize:CGSizeMake(80, 80)];
         
-    
+        
         //descLab
         [descLab autoSetDimension:ALDimensionHeight toSize:15];
         [descLab autoSetDimension:ALDimensionWidth toSize:200];
@@ -214,6 +203,15 @@
     [[FDXMPPTool shareFDXMPPTool] xmppUserLogout];
 }
 
+/**
+ *  进入查看应聘者简历
+ */
+- (void)applyResumeInfo
+{
+    FDApplyResumeInfoController *vc = [[FDApplyResumeInfoController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 /**
  *  清除缓存，包括所有聊天记录
  */
@@ -256,13 +254,15 @@
 }
 
 /**
- *  修改自己的昵称头像之类的
+ *  修改自己的vcard
  */
 - (void)editMyvCard
 {
-    FDAboutMeController *vc = [[FDAboutMeController alloc] init];
+    FDQAboutMeController *vc = [[FDQAboutMeController alloc] init];
     vc.title = @"我";
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 @end

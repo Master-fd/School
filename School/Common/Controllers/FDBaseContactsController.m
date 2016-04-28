@@ -33,6 +33,9 @@
 
 - (void)setupViews
 {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 50;
@@ -71,6 +74,7 @@
         [self.tableView reloadData];
     });
     
+    [self.refreshControl endRefreshing];
 }
 
 
