@@ -14,6 +14,11 @@
 @property (nonatomic, strong) UITextView *jobContent;
 @property (nonatomic, strong) UILabel *jobTitle;
 
+/**
+ *  是否可编辑
+ */
+@property (nonatomic, assign, getter=isEditEnable) BOOL editEnable;
+
 @property (nonatomic, copy) void(^infoBlock)();
 
 + (FDResumeExperienceCell *)cellWithTableView:(UITableView *)tableView;

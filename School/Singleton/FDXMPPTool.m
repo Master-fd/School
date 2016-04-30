@@ -16,10 +16,18 @@
     XMPPReconnect *_reconnect;
     XMPPvCardCoreDataStorage *_vCardStorage;
     XMPPMessageArchiving *_msgArchiVing;
+    
+    
 }
 
-
+//标记离线有接受到信息
+@property (nonatomic, assign, getter=iSRecord) BOOL record;
+//记录离线收到的jidstr信息
+@property (nonatomic, strong) NSMutableArray *jidStrs;
 @end
+
+
+
 @implementation FDXMPPTool
 
 singleton_implementation(FDXMPPTool);
@@ -49,12 +57,24 @@ singleton_implementation(FDXMPPTool);
     _roster = nil;
     _rosterStorage = nil;
     _xmppStream = nil;
+
 }
 - (void)dealloc
 {
     [self teardownXmpp];   //释放资源
 }
 
+/**
+ *  懒加载
+ */
+- (NSMutableArray *)jidStrs
+{
+    if (!_jidStrs) {
+        _jidStrs = [NSMutableArray array];
+    }
+    
+    return _jidStrs;
+}
 /**
  *  初始化
  */
@@ -85,6 +105,7 @@ singleton_implementation(FDXMPPTool);
     //重连模块
     _reconnect = [[XMPPReconnect alloc] init];
     [_reconnect activate:_xmppStream];
+    
     
 }
 
@@ -155,6 +176,18 @@ singleton_implementation(FDXMPPTool);
 {
     XMPPPresence *presence = [XMPPPresence presence];
     [_xmppStream sendElement:presence];
+    
+    //延迟执行，刚开机的时候看看有没有离线消息，有的话就2s后再发通知出来
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if (self.jidStrs.count) {
+            for (NSDictionary *dic in self.jidStrs) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:dic];
+            }
+            [self.jidStrs removeAllObjects];
+        }
+        self.record = YES;
+    });
 }
 
 #pragma mark - 公共方法
@@ -178,6 +211,8 @@ singleton_implementation(FDXMPPTool);
     //回到登录界面
     FDLoginController *loginVC = [[FDLoginController alloc] init];
     [[UIApplication sharedApplication] keyWindow].rootViewController = loginVC;
+    
+    self.record = NO;
 }
 
 /**
@@ -258,7 +293,6 @@ singleton_implementation(FDXMPPTool);
         _requireResultBlock(XMPPRequireResultTypeRegisterFailure);
     }
     
-    FDLog(@"%@", error);
 }
 
 /**
@@ -271,6 +305,7 @@ singleton_implementation(FDXMPPTool);
     
     FDLog(@"msg = %@", msg);
     FDLog(@"message = %@", message);
+    
     
     //接收到合法信息，发出通知
     if (msg && from) {
@@ -286,17 +321,26 @@ singleton_implementation(FDXMPPTool);
         NSString *jidStr = [from substringWithRange:result.range];
         NSString *account = [jidStr substringWithRange:NSMakeRange(0, jidStr.length-ServerName.length-1)];
         if ((account.length>6) && (account.length<15)) {
+            //发出通知，让联系人列表显示新消息图标
             
             NSDictionary *userInfo = @{@"body" : msg,
                                        @"account" : account,
                                        @"jidStr" : jidStr};
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:userInfo];
+            if (self.iSRecord) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:userInfo];
+            } else {
+                //先记录离线消息，延迟一下在发通知
+                [self.jidStrs addObject:userInfo];
+            }
+            
+            
         }
     }
 }
 
 
 #pragma mark - 公共方法
+
 /**
  *  根据传入的jid号，获取vcard
  */

@@ -64,6 +64,7 @@
     [_editBtn setBackgroundImage:[UIImage imageNamed:@"icon_edit_text"] forState:UIControlStateNormal];
     [_editBtn addTarget:self action:@selector(editBtnClick) forControlEvents:UIControlEventTouchDown];
     
+    
     _specialtyLabOne = [[UILabel alloc] init];
     [_bgView addSubview:_specialtyLabOne];
     _specialtyLabOne.font = [UIFont systemFontOfSize:kfontSize];
@@ -133,6 +134,15 @@
 
 
 #pragma mark - 公共方法
+- (void)setEditEnable:(BOOL)editEnable
+{
+    _editEnable = editEnable;
+    if (editEnable) {
+        _editBtn.hidden = NO;
+    }else{
+        _editBtn.hidden = YES;
+    }
+}
 
 //修改按钮被点击
 - (void)editBtnClick
@@ -151,6 +161,7 @@
 {
     return kCellHeight;
 }
+
 
 
 @end

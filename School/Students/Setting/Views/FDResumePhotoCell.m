@@ -8,6 +8,7 @@
 
 #import "FDResumePhotoCell.h"
 
+
 #define kCellHeight     100
 
 @interface FDResumePhotoCell()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
@@ -62,7 +63,7 @@
     [_bgView addSubview:_photoBtn];
     [_photoBtn setBackgroundImage:[UIImage imageNamed:@"icon_headimge_placeholder"] forState:UIControlStateNormal];
     [_photoBtn addTarget:self action:@selector(photoBtnClick) forControlEvents:UIControlEventTouchDown];
-    
+
     _titleLab = [[UILabel alloc] init];
     [_bgView addSubview:_titleLab];
     _titleLab.text = @"点击更换";
@@ -86,8 +87,16 @@
     
     
 }
+#pragma mark - 公共方法
 
-
+- (void)setEditEnable:(BOOL)editEnable
+{
+    if (editEnable) {
+        _titleLab.hidden = NO;
+    }else{
+        _titleLab.hidden = YES;
+    }
+}
 //photoclick
 - (void)photoBtnClick
 {

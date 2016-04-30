@@ -25,11 +25,6 @@ singleton_interface(FDOrganization);
 @property (nonatomic, strong) NSString *department;  //部门名称
 
 /**
- *  收到的所有简历
- */
-@property (nonatomic, strong) NSArray *allResume;
-
-/**
  *  自己发布的jobs 信息,每个元素都是fdjobmodel
  */
 @property (nonatomic, strong) NSArray *jobs;

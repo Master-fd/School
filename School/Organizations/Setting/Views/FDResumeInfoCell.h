@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class FDQResume;
 @interface FDResumeInfoCell : UITableViewCell
+
+@property (nonatomic, strong) FDQResume *model;
+
+@property (nonatomic, copy) NSString *department;
 
 + (FDResumeInfoCell *)cellForTableView:(UITableView *)tableView;
 

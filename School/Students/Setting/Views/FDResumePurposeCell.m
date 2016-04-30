@@ -63,6 +63,7 @@
     [_bgView addSubview:_editBtn];
     [_editBtn setBackgroundImage:[UIImage imageNamed:@"icon_edit_text"] forState:UIControlStateNormal];
     [_editBtn addTarget:self action:@selector(editBtnClick) forControlEvents:UIControlEventTouchDown];
+
     
     _purposeLabOne = [[UILabel alloc] init];
     [_bgView addSubview:_purposeLabOne];
@@ -133,6 +134,15 @@
 
 
 #pragma mark - 公共方法
+- (void)setEditEnable:(BOOL)editEnable
+{
+    _editEnable = editEnable;
+    if (editEnable) {
+        _editBtn.hidden = NO;
+    }else{
+        _editBtn.hidden = YES;
+    }
+}
 
 //修改按钮被点击
 - (void)editBtnClick

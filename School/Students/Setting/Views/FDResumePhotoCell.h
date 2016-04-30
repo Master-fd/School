@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class FDResumePhotoCell;
-
 @interface FDResumePhotoCell : UITableViewCell
+
 
 + (FDResumePhotoCell *)cellWithTableView:(UITableView *)tableView;
 
@@ -19,4 +19,10 @@
 @property (nonatomic, copy) void (^photoBlock)(UIButton *btn);
 
 @property (nonatomic, strong) UIButton *photoBtn;
+
+/**
+ *  是否允许编辑
+ */
+@property (nonatomic, assign, getter=isEditEnable) BOOL editEnable;
+
 @end

@@ -164,6 +164,12 @@
 		1B4280EA1CC134F8009DD6F4 /* FDBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4280E91CC134F8009DD6F4 /* FDBaseTableViewController.m */; };
 		1B4B44D01CCB0B4C00F6D48F /* FDEditBaseInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4B44CF1CCB0B4C00F6D48F /* FDEditBaseInfoController.m */; };
 		1B4B44DB1CCB2BB200F6D48F /* FDEditBaseInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4B44DA1CCB2BB200F6D48F /* FDEditBaseInfoView.m */; };
+		1B6377DB1CD389B2005E03BB /* FDQResumeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377DA1CD389B2005E03BB /* FDQResumeController.m */; };
+		1B6377DE1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377DD1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.m */; };
+		1B6377E11CD3AF96005E03BB /* NSObject+CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377E01CD3AF96005E03BB /* NSObject+CoreDataHelper.m */; };
+		1B6377E51CD3B059005E03BB /* FDQResume.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377E41CD3B059005E03BB /* FDQResume.m */; };
+		1B6377EB1CD3C030005E03BB /* FDQResume+FDCoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377EA1CD3C030005E03BB /* FDQResume+FDCoreDataProperties.m */; };
+		1B6377F21CD3C214005E03BB /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B6377F01CD3C214005E03BB /* Data.xcdatamodeld */; };
 		1B8079351C8F061100FB3F78 /* FDMBProgressHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8079341C8F061100FB3F78 /* FDMBProgressHUB.m */; };
 		1B8079391C8F0B8300FB3F78 /* FDXMPPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8079381C8F0B8300FB3F78 /* FDXMPPTool.m */; };
 		1B8766681C9AF45F005B9E47 /* FDBaseChatViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8766671C9AF45F005B9E47 /* FDBaseChatViewCell.m */; };
@@ -560,6 +566,17 @@
 		1B4B44CF1CCB0B4C00F6D48F /* FDEditBaseInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDEditBaseInfoController.m; path = Resume/FDEditBaseInfoController.m; sourceTree = "<group>"; };
 		1B4B44D91CCB2BB200F6D48F /* FDEditBaseInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditBaseInfoView.h; sourceTree = "<group>"; };
 		1B4B44DA1CCB2BB200F6D48F /* FDEditBaseInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditBaseInfoView.m; sourceTree = "<group>"; };
+		1B6377D91CD389B2005E03BB /* FDQResumeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDQResumeController.h; sourceTree = "<group>"; };
+		1B6377DA1CD389B2005E03BB /* FDQResumeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDQResumeController.m; sourceTree = "<group>"; };
+		1B6377DC1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FDApplyResumeInfoController+FDCoeData.h"; sourceTree = "<group>"; };
+		1B6377DD1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FDApplyResumeInfoController+FDCoeData.m"; sourceTree = "<group>"; };
+		1B6377DF1CD3AF96005E03BB /* NSObject+CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CoreDataHelper.h"; sourceTree = "<group>"; };
+		1B6377E01CD3AF96005E03BB /* NSObject+CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CoreDataHelper.m"; sourceTree = "<group>"; };
+		1B6377E31CD3B059005E03BB /* FDQResume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDQResume.h; path = Models/FDQResume.h; sourceTree = "<group>"; };
+		1B6377E41CD3B059005E03BB /* FDQResume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDQResume.m; path = Models/FDQResume.m; sourceTree = "<group>"; };
+		1B6377E91CD3C030005E03BB /* FDQResume+FDCoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FDQResume+FDCoreDataProperties.h"; path = "Models/FDQResume+FDCoreDataProperties.h"; sourceTree = "<group>"; };
+		1B6377EA1CD3C030005E03BB /* FDQResume+FDCoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FDQResume+FDCoreDataProperties.m"; path = "Models/FDQResume+FDCoreDataProperties.m"; sourceTree = "<group>"; };
+		1B6377F11CD3C214005E03BB /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		1B8079331C8F061100FB3F78 /* FDMBProgressHUB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDMBProgressHUB.h; path = School/Lib/FDMBProgressHUD/FDMBProgressHUB.h; sourceTree = SOURCE_ROOT; };
 		1B8079341C8F061100FB3F78 /* FDMBProgressHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDMBProgressHUB.m; path = School/Lib/FDMBProgressHUD/FDMBProgressHUB.m; sourceTree = SOURCE_ROOT; };
 		1B8079371C8F0B8300FB3F78 /* FDXMPPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDXMPPTool.h; sourceTree = "<group>"; };
@@ -1519,6 +1536,25 @@
 			path = Resume;
 			sourceTree = "<group>";
 		};
+		1B6377E21CD3B01F005E03BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B6377E31CD3B059005E03BB /* FDQResume.h */,
+				1B6377E41CD3B059005E03BB /* FDQResume.m */,
+				1B6377E91CD3C030005E03BB /* FDQResume+FDCoreDataProperties.h */,
+				1B6377EA1CD3C030005E03BB /* FDQResume+FDCoreDataProperties.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1B6377EC1CD3C1BF005E03BB /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				1B6377F01CD3C214005E03BB /* Data.xcdatamodeld */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		1B8079321C8F05D000FB3F78 /* FDMBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1642,6 +1678,8 @@
 				1BAE00131C8ABDC9002B4570 /* Students */,
 				1BAEFFF11C8ABDBD002B4570 /* AppDelegate.h */,
 				1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */,
+				1B6377DF1CD3AF96005E03BB /* NSObject+CoreDataHelper.h */,
+				1B6377E01CD3AF96005E03BB /* NSObject+CoreDataHelper.m */,
 				1B8ED6A01C8AB61C00FB09F8 /* main.m */,
 				1B8ED6A51C8AB61C00FB09F8 /* School.xcdatamodeld */,
 				1B8ED6B01C8AB61C00FB09F8 /* LaunchScreen.xib */,
@@ -1757,6 +1795,8 @@
 		1BAE00041C8ABDC9002B4570 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				1B6377EC1CD3C1BF005E03BB /* DataModel */,
+				1B6377E21CD3B01F005E03BB /* Models */,
 				1BAE00051C8ABDC9002B4570 /* Controllers */,
 				1BAE00081C8ABDC9002B4570 /* Views */,
 			);
@@ -1766,14 +1806,18 @@
 		1BAE00051C8ABDC9002B4570 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1B41C5831CD25A9900EC732A /* FDApplyResumeInfoController.h */,
-				1B41C5841CD25A9900EC732A /* FDApplyResumeInfoController.m */,
 				1B41C5851CD25A9900EC732A /* FDQAboutMeController.h */,
 				1B41C5861CD25A9900EC732A /* FDQAboutMeController.m */,
 				1B41C5871CD25A9900EC732A /* FDQEditPhotoController.h */,
 				1B41C5881CD25A9900EC732A /* FDQEditPhotoController.m */,
 				1B41C5891CD25A9900EC732A /* FDQSettingTableViewController.h */,
 				1B41C58A1CD25A9900EC732A /* FDQSettingTableViewController.m */,
+				1B41C5831CD25A9900EC732A /* FDApplyResumeInfoController.h */,
+				1B41C5841CD25A9900EC732A /* FDApplyResumeInfoController.m */,
+				1B6377DC1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.h */,
+				1B6377DD1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.m */,
+				1B6377D91CD389B2005E03BB /* FDQResumeController.h */,
+				1B6377DA1CD389B2005E03BB /* FDQResumeController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2244,12 +2288,14 @@
 				1B2F4D6C1C93BE3600B6B9BB /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				1B8B196D1CC21299002EE4FF /* NSString+FDExtension.m in Sources */,
 				1B2F4D7C1C93BE3600B6B9BB /* XMPPRoom.xcdatamodeld in Sources */,
+				1B6377DE1CD3AEC1005E03BB /* FDApplyResumeInfoController+FDCoeData.m in Sources */,
 				1B2F4C681C93BDF500B6B9BB /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				1BF8B4721CBC03F200FD39F5 /* FDLable.m in Sources */,
 				1B2F4DB61C93BE3600B6B9BB /* XMPPAutoTime.m in Sources */,
 				1BA4483D1CC533D800B1BB42 /* FDResume.m in Sources */,
 				1B2F4D901C93BE3600B6B9BB /* XMPPvCardTempAdr.m in Sources */,
 				1B2F4DA31C93BE3600B6B9BB /* NSString+XEP_0106.m in Sources */,
+				1B6377E11CD3AF96005E03BB /* NSObject+CoreDataHelper.m in Sources */,
 				1BA448381CC532CE00B1BB42 /* FDAboutMeController.m in Sources */,
 				1B2F4C711C93BDF500B6B9BB /* XMPPElement.m in Sources */,
 				1B8079391C8F0B8300FB3F78 /* FDXMPPTool.m in Sources */,
@@ -2261,6 +2307,7 @@
 				1B2F4D7A1C93BE3600B6B9BB /* XMPPLastActivity.m in Sources */,
 				1B1DED161CC7C4ED00955AF4 /* FDEditlPhotoController.m in Sources */,
 				1B425A6A1CCC60260057B57E /* FDJobButtonView.m in Sources */,
+				1B6377DB1CD389B2005E03BB /* FDQResumeController.m in Sources */,
 				1B2F4DA81C93BE3600B6B9BB /* XMPPCapabilities.m in Sources */,
 				1B2F4D861C93BE3600B6B9BB /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				1B3F77DD1CD0ED0C008123EB /* FDEditJobController.m in Sources */,
@@ -2326,12 +2373,15 @@
 				1B2F4C7A1C93BDF500B6B9BB /* GCDMulticastDelegate.m in Sources */,
 				1BA4482F1CC5164E00B1BB42 /* FDMyjobsController.m in Sources */,
 				1B2F4D7D1C93BE3600B6B9BB /* XMPPRoomCoreDataStorage.m in Sources */,
+				1B6377E51CD3B059005E03BB /* FDQResume.m in Sources */,
 				1BB0C3D81C9CF55900E75866 /* FDChatInputBar.m in Sources */,
 				1B2F4DB71C93BE3600B6B9BB /* XMPPTime.m in Sources */,
 				1B2F4C081C93B7D200B6B9BB /* DispatchQueueLogFormatter.m in Sources */,
 				1B2F4C1C1C93B80F00B6B9BB /* DDXMLDocument.m in Sources */,
+				1B6377F21CD3C214005E03BB /* Data.xcdatamodeld in Sources */,
 				1B19CA731CC9106D00E73D8E /* FDSettingCell.m in Sources */,
 				1B2F4C6E1C93BDF500B6B9BB /* NSData+XMPP.m in Sources */,
+				1B6377EB1CD3C030005E03BB /* FDQResume+FDCoreDataProperties.m in Sources */,
 				1BE308861CCE584E00192F42 /* FDResumejobModel.m in Sources */,
 				1B2F4D9F1C93BE3600B6B9BB /* XMPPDateTimeProfiles.m in Sources */,
 				1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */,
@@ -2746,6 +2796,16 @@
 			);
 			currentVersion = 1B2F4D2D1C93BE3600B6B9BB /* XMPPMessageArchiving.xcdatamodel */;
 			path = XMPPMessageArchiving.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		1B6377F01CD3C214005E03BB /* Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B6377F11CD3C214005E03BB /* Data.xcdatamodel */,
+			);
+			currentVersion = 1B6377F11CD3C214005E03BB /* Data.xcdatamodel */;
+			path = Data.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

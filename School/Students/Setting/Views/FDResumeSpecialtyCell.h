@@ -14,6 +14,12 @@
 
 @property (nonatomic, strong) UILabel *specialtyTwo;
 
+/**
+ *  是否可编辑
+ */
+@property (nonatomic, assign, getter=isEditEnable) BOOL editEnable;
+
+
 @property (nonatomic, copy) void(^infoBlock)();
 
 + (FDResumeSpecialtyCell *)cellWithTableView:(UITableView *)tableView;

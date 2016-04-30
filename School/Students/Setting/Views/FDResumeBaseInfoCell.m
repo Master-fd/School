@@ -8,7 +8,6 @@
 
 #import "FDResumeBaseInfoCell.h"
 
-
 #define kCellHeight     150
 #define kmarge          15  //行与行之间的间隔
 #define kfontSize       14
@@ -67,6 +66,7 @@
     [_bgView addSubview:_editBtn];
     [_editBtn setBackgroundImage:[UIImage imageNamed:@"icon_edit_text"] forState:UIControlStateNormal];
     [_editBtn addTarget:self action:@selector(editBtnClick) forControlEvents:UIControlEventTouchDown];
+
     
     _nameLab = [[UILabel alloc] init];
     [_bgView addSubview:_nameLab];
@@ -172,6 +172,7 @@
 }
 
 #pragma mark -  公共方法
+
 //修改按钮被点击
 - (void)editBtnClick
 {
@@ -180,7 +181,15 @@
     }
 }
 
-
+- (void)setEditEnable:(BOOL)editEnable
+{
+    _editEnable = editEnable;
+    if (editEnable) {
+        _editBtn.hidden = NO;
+    }else{
+        _editBtn.hidden = YES;
+    }
+}
 
 //设置固有高度
 - (CGSize)intrinsicContentSize

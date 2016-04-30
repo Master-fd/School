@@ -8,6 +8,9 @@
 
 #import "FDBaseTableViewController.h"
 
-@interface FDApplyResumeInfoController : FDBaseTableViewController
+@interface FDApplyResumeInfoController : FDBaseTableViewController{
+    
+    NSFetchedResultsController *_fetchedResultsController;
+}
 
 @end

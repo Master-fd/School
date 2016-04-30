@@ -88,6 +88,7 @@
         if ([FDStudent shareFDStudent].resume.photo.length) {
             [cell.photoBtn setBackgroundImage:[UIImage imageWithData:[FDStudent shareFDStudent].resume.photo] forState:UIControlStateNormal];  //显示图片
         }
+        
         __weak typeof(self) _weakself = self;
         cell.photoBlock = ^(UIButton *btn){  //在block中修改打开相册，读取照片，并显示到btn中
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -105,6 +106,7 @@
         cell.major.text = [FDStudent shareFDStudent].resume.major;
         cell.phoneNumber.text = [FDStudent shareFDStudent].resume.phoneNumber;
         cell.email.text = [FDStudent shareFDStudent].resume.Email;
+        cell.editEnable = YES;
         __weak typeof(self) _weakself = self;
         cell.infoBlock = ^{
             FDEditBaseInfoController *vc = [[FDEditBaseInfoController alloc] init];
@@ -118,6 +120,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.jobTitle.text = [FDStudent shareFDStudent].resume.jobTitle;
         cell.jobContent.text = [FDStudent shareFDStudent].resume.jobContent;
+        cell.editEnable = YES;
         __weak typeof(self) _weakself = self;
         cell.infoBlock = ^{
             FDEditExperienceController *vc = [[FDEditExperienceController alloc] init];
@@ -131,6 +134,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.specialtyOne.text = [FDStudent shareFDStudent].resume.specialtyOne;
         cell.specialtyTwo.text = [FDStudent shareFDStudent].resume.specialtyTwo;
+        cell.editEnable = YES;
         __weak typeof(self) _weakself = self;
         cell.infoBlock = ^{
             FDEditSpecialtyController *vc = [[FDEditSpecialtyController alloc] init];
@@ -142,7 +146,7 @@
     }else if (indexPath.section == 4){//求职意向
         FDResumePurposeCell *cell = [FDResumePurposeCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.editEnable = YES;
         cell.purposeOne.text = [FDStudent shareFDStudent].resume.jobPurposeOne;
         cell.purposeTwo.text = [FDStudent shareFDStudent].resume.jobPurposeTwo;
         __weak typeof(self) _weakself = self;

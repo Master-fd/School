@@ -15,6 +15,13 @@
 @property (nonatomic, strong) UILabel *phoneNumber;
 @property (nonatomic, strong) UILabel *email;
 
+
+/**
+ *  是否允许编辑
+ */
+@property (nonatomic, assign, getter=isEditEnable) BOOL editEnable;
+
+
 @property (nonatomic, copy) void(^infoBlock)();
 
 + (FDResumeBaseInfoCell *)cellWithTableView:(UITableView *)tableView;

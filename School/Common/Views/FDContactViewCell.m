@@ -118,6 +118,7 @@
     //监听通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMessageLab:) name:kNotificationReciveNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMessageLab:) name:kNotificationNewMsgDidRead object:nil];
+
 }
 
 - (void)dealloc
@@ -137,7 +138,7 @@
     if ([jidStr isEqualToString:self.contactModel.jidStr]) {
          static int numOfMsg = 0;
         if ([notification.name isEqualToString:kNotificationReciveNewMsg]) {
-            numOfMsg += 1;
+            numOfMsg = numOfMsg + 1;
             if (numOfMsg > 100) {
                 numOfMsg = 110;
             }

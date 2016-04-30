@@ -9,6 +9,7 @@
 #import "FDOrganization.h"
 #import "XMPPvCardTemp.h"
 #import "FDJobModel.h"
+#import "FDResume.h"
 
 
 @implementation FDOrganization
@@ -105,15 +106,5 @@ singleton_implementation(FDOrganization);
 }
 
 
-- (NSArray *)allResume
-{
-    if (!_allResume) {
-        
-        _allResume = [NSArray array];
-    }
-    
-    
-    return _allResume;
-}
 
 @end
