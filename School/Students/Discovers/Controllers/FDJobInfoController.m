@@ -164,8 +164,8 @@
         [fileManager createFileAtPath:kMyApplyInfoPlistPath contents:nil attributes:nil];
     }
     //先读取文件里面的内容
-    NSMutableArray *data = [NSMutableArray arrayWithContentsOfFile:kMyApplyInfoPlistPath];
-    
+    NSArray *arrayM = [NSArray arrayWithContentsOfFile:kMyApplyInfoPlistPath];
+    NSMutableArray *data = [NSMutableArray arrayWithArray:arrayM];
     //遍历查看这条信息是否已经应聘过了
     for (NSDictionary *dic in data) {
         if ([dic[@"jobName"] isEqualToString:dataDic[@"jobName"]]
@@ -177,8 +177,10 @@
     }
     
     [data addObject:dataDic];//添加一条数据保存
-    
-    [data writeToFile:kMyApplyInfoPlistPath atomically:YES];
+
+    if ([data writeToFile:kMyApplyInfoPlistPath atomically:YES]) {
+        FDLog(@"保存成功");
+    }
     
     //发送简历
     [self sendMyResumeToHr:self.contactModel.jidStr];
@@ -196,7 +198,7 @@
     XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:jidStr]];
     
     //拼接数据 为BodyResume标识符，为了接收到的时候，识别出来信息内容是“BodyResume”，就知道是简历，可以拦截保存起来
-    [msg addBody:@"BodyResume"];
+    [msg addBody:kBodyResume];
 
     //获取自己的简历,logo字段就是简历
     NSData *resume = [FDStudent shareFDStudent].myVcard.logo;

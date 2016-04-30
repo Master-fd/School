@@ -64,7 +64,7 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 
 //保存应聘信息plist文件路径
 #define  kMyApplyInfoPlistPath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] \
-                                 stringByAppendingPathComponent:@"myApplyJobInfo.plist"]
+                                 stringByAppendingPathComponent:@"myApplyinfo.plist"]
 
 //简历字段标识符
 #define  kBodyResume   @"BodyResume"
