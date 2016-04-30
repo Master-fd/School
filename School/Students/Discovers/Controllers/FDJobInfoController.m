@@ -178,9 +178,7 @@
     
     [data addObject:dataDic];//添加一条数据保存
 
-    if ([data writeToFile:kMyApplyInfoPlistPath atomically:YES]) {
-        FDLog(@"保存成功");
-    }
+    [data writeToFile:kMyApplyInfoPlistPath atomically:YES];
     
     //发送简历
     [self sendMyResumeToHr:self.contactModel.jidStr];
