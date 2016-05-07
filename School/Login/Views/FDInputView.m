@@ -10,7 +10,7 @@
 #import "FDUserInfo.h"
 
 
-@interface FDInputView()
+@interface FDInputView()<UITextFieldDelegate>
 {
     //accountBgImg
     UIImageView *_accountBgImg;
@@ -100,6 +100,7 @@
     self.accountTxFeild.keyboardType = UIKeyboardTypeDefault;
     self.accountTxFeild.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.accountTxFeild.returnKeyType = UIReturnKeyJoin;
+    self.accountTxFeild.delegate = self;
     
     //passwordBgImg
     _passwordBgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_input_down"]];
@@ -121,7 +122,8 @@
     self.passwordTxFeild.keyboardType = UIKeyboardTypeDefault;
     self.passwordTxFeild.returnKeyType = UIReturnKeyJoin;
     self.passwordTxFeild.secureTextEntry = YES;
-   
+    self.passwordTxFeild.delegate = self;
+    
     //add 登录图标
     self.loginBtn = [[UIButton alloc] init];
     [self addSubview:self.loginBtn];
@@ -303,4 +305,18 @@
     self.accountTxFeild.text = nil;
     self.passwordTxFeild.text = nil;
 }
+
+//判断用户是否点击了键盘发送按钮
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"\n"])
+    {//点击了发送按钮
+        
+        [self loginClick];
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

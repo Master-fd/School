@@ -140,8 +140,8 @@
 {
     UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] init];
     if (section == 0) {
-    
-        UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"setting_head_bg"]];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"setting_head_bg.jpg" ofType:nil];
+        UIImageView *bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
         [headerView.contentView addSubview:bgImageView];
     
         bgImageView.userInteractionEnabled = YES;

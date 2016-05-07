@@ -15,8 +15,7 @@
 
 @interface FDJobButtonView(){
     UIView *_bgView;
-    UIButton *_sendResumeBtn;
-    UIButton *_sendMessageBtn;
+
 }
 
 @end

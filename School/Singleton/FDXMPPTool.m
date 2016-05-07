@@ -178,7 +178,7 @@ singleton_implementation(FDXMPPTool);
     [_xmppStream sendElement:presence];
     
     //延迟执行，刚开机的时候看看有没有离线消息，有的话就2s后再发通知出来
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if (self.jidStrs.count) {
             for (NSDictionary *dic in self.jidStrs) {
@@ -223,6 +223,7 @@ singleton_implementation(FDXMPPTool);
     //保存block
     _requireResultBlock = requireResultBlock;
     
+    
     //断开之前的连接
     [_xmppStream disconnect];
     
@@ -258,7 +259,6 @@ singleton_implementation(FDXMPPTool);
 {
     //发送在线消息
     [self sendOnlineToHost];
-    
     if (_requireResultBlock) {
         _requireResultBlock(XMPPRequireResultTypeLoginSuccess);
     }
@@ -366,4 +366,32 @@ singleton_implementation(FDXMPPTool);
     [self.roster setNickname:nickname forUser:jid];
 }
 
+/**
+ *  联网添加好友
+ */
+- (void)addFriend:(NSString *)account
+{
+    //判断是否是添加自己
+    if ([account isEqualToString:[FDUserInfo shareFDUserInfo].account]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"不能添加自己"];
+        });
+        
+        return;
+    }
+    
+    //判断好友是否存在
+    NSString *jidStr = [NSString stringWithFormat:@"%@@%@", account, ServerName];
+    XMPPJID *friendJid = [XMPPJID jidWithString:jidStr];
+    if ([[FDXMPPTool shareFDXMPPTool].rosterStorage userExistsWithJID:friendJid xmppStream:[FDXMPPTool shareFDXMPPTool].xmppStream]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"好友已存在"];
+        });
+        
+        return;
+    }
+    
+    //发送订阅请求，将nickname设置成默认account
+    [[FDXMPPTool shareFDXMPPTool].roster addUser:friendJid withNickname:account];
+}
 @end

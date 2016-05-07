@@ -31,6 +31,14 @@ singleton_implementation(FDStudent);
     _nickname = self.myVcard.nickname;
     return _nickname;
 }
+/**
+ *  获取qrcode，使用vcard的sound 字段作为二维码保存
+ */
+- (NSData *)QRCode
+{
+    return self.myVcard.sound;
+}
+
 
 /**
  *  获取简历,视同logo字段来保存简历
@@ -46,6 +54,9 @@ singleton_implementation(FDStudent);
     
     return _resume;
 }
+
+
+
 /**
  *  自己vCard获取
  */

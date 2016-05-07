@@ -15,7 +15,9 @@
 #import "UIResponder+FDExtension.h"
 #import "FDChatController+FDCoreDateExtension.h"
 #import "FDAboutFriendController.h"
-
+#import "XMPPvCardTemp.h"
+#import "FDUserInfo.h"
+#import "FDXMPPTool.h"
 
 #define kMaxBachSize      (30)    //每次最多从数据库读取30条数据
 #define kPageSize         (10)    //一页10条数据
@@ -110,10 +112,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrameTableview) name:kInputBarFrameDidChangeNotification object:_inputBar];
     
     //添加手势识别器，方便退出键盘
-
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chatViewDidTap:)];
     [_tableView addGestureRecognizer:tapGesture];
-
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(chatViewDidTap:)];
+    [_tableView addGestureRecognizer:swipeGesture];
+    
 }
 
 /**
@@ -227,6 +230,19 @@
     
     //设置数据
     cell.chatmodel = chatModel;
+    
+    
+    if (chatModel.isOutgoing) {
+        //自己发送的信息,显示自己的头像
+        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];
+        [cell.headIconBtn setBackgroundImage:[UIImage imageWithData:vcard.photo] forState:UIControlStateNormal];
+    }else {
+        //好友的信息,显示好友的头像
+        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:self.jidStr shouldFetch:YES];
+        [cell.headIconBtn setBackgroundImage:[UIImage imageWithData:vcard.photo] forState:UIControlStateNormal];
+    }
+    
+
 }
 
 

@@ -32,18 +32,19 @@
 
 + (void)UserConnetToHost
 {
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([FDXMPPTool shareFDXMPPTool].isRegisterOperation) {
+            [FDMBProgressHUB showMessage:@"正在注册..."];
+        }else{
+            [FDMBProgressHUB showMessage:@"正在登录..."];
+        }
+    });
+  
     [[FDXMPPTool shareFDXMPPTool] xmppUserConnetToHost:^(XMPPRequireResultType type) {
-        dispatch_sync(dispatch_get_main_queue(), ^{  //同步线程，阻塞在这里
-            if ([FDXMPPTool shareFDXMPPTool].isRegisterOperation) {
-                [FDMBProgressHUB showMessage:@"正在注册..."];
-            }else{
-                [FDMBProgressHUB showMessage:@"正在登录..."];
-            }
-        });
-        [FDMBProgressHUB hideHUD];
+        //连接成功或者失败之后调用block
         [self xmppUserConnetResult:type];
     }];
+
 
 }
 
@@ -56,21 +57,32 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         switch (type) {
             case XMPPRequireResultTypeLoginFailure:
-                [FDMBProgressHUB showError:@"登录失败"];
+                [FDMBProgressHUB hideHUD];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [FDMBProgressHUB showError:@"登录失败"];
+                });
                 //提示是否IP没有设置正确
                 break;
             case XMPPRequireResultTypeLoginSuccess:
-                [FDMBProgressHUB showSuccess:@"登录成功"];
+                [FDMBProgressHUB hideHUD];
                 //跳转页面
                 [self switchUserClient];  //学生端
+                
                 break;
             case XMPPRequireResultTypeRegisterFailure:
-                [FDMBProgressHUB showError:@"注册失败,账户已被使用"];
+                [FDMBProgressHUB hideHUD];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [FDMBProgressHUB showError:@"注册失败,账户已被使用"];
+                });
                 break;
             case XMPPRequireResultTypeRegisterSuccess:
-                [FDMBProgressHUB showSuccess:@"注册成功"];
+                [FDMBProgressHUB hideHUD];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [FDMBProgressHUB showSuccess:@"注册成功"];
+                });
                 break;
             case XMPPRequireResultTypeNetError:
+                [FDMBProgressHUB hideHUD];
                 [FDMBProgressHUB showError:@"连接失败"];
                 break;
             default:
@@ -95,6 +107,7 @@
         //学生账户
         [self enterStudentClientMainPage];
     }
+    [FDMBProgressHUB hideHUD];
 }
 /**
  *  学生端主界面

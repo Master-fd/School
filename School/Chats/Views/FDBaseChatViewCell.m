@@ -44,7 +44,9 @@
     _headIconBtn = [[UIButton alloc] initForAutoLayout];
     [self.contentView addSubview:_headIconBtn];
     _headIconBtn.backgroundColor = [UIColor clearColor];
-    [_headIconBtn setImage:[UIImage imageNamed:@"user_avatar_default"] forState:UIControlStateNormal];
+    _headIconBtn.layer.cornerRadius = 20;
+    _headIconBtn.layer.masksToBounds = YES;
+    [_headIconBtn setBackgroundImage:[UIImage imageNamed:@"user_avatar_default"] forState:UIControlStateNormal];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headIconBtnDidTap:)];  //头像被单击了
     [_headIconBtn addGestureRecognizer:tapGesture];
     

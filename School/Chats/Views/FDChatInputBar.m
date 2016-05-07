@@ -117,7 +117,6 @@
     [_faceBtn setImage:[UIImage imageNamed:@"chat_bottom_keyboard_nor"] forState:UIControlStateSelected];
     [_faceBtn addTarget:self action:@selector(faceBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     //_inputTextView
     _inputTextView = [[FDTextView alloc] init];
     [self addSubview:_inputTextView];
@@ -138,7 +137,7 @@
     _inputTextView.backgroundColor = [UIColor whiteColor];
     _inputTextView.keyboardType = UIKeyboardTypeDefault;
     _inputTextView.keyboardAppearance = UIKeyboardAppearanceDefault;
-    _inputTextView.returnKeyType = UIReturnKeySend;
+    _inputTextView.returnKeyType = UIReturnKeyDefault;
     _inputTextView.textAlignment = NSTextAlignmentLeft;
     _inputTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     

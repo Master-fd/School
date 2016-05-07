@@ -70,6 +70,9 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义�
  */
 - (void)xmppUpdateNickname:(NSString *)nickname forUserJidStr:(NSString *)jidStr;
 
-
+/**
+ *  联网添加好友
+ */
+- (void)addFriend:(NSString *)account;
 
 @end

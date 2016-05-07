@@ -15,11 +15,19 @@
 #import "FDResumeBaseInfoCell.h"
 #import "NSObject+CoreDataHelper.h"
 #import "FDQResume+FDCoreDataProperties.h"
+#import "FDJobButtonView.h"
+#import "FDChatController.h"
+#import "FDChatModel.h"
 
-
-@interface FDQResumeController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FDQResumeController ()<UITableViewDataSource, UITableViewDelegate>{
+    
+    UIButton *_rightBarBtn;
+    
+    
+}
 
 @property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation FDQResumeController
@@ -36,12 +44,26 @@
 
 - (void)setupNav
 {
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_star_select"] style:UIBarButtonItemStyleDone target:self action:@selector(collectClick)];
+    _rightBarBtn = [[UIButton alloc] init];
+    _rightBarBtn.frame = CGRectMake(0, 0, 23, 23);
+    [_rightBarBtn setBackgroundImage:[UIImage imageNamed:@"icon_star_normal"] forState:UIControlStateNormal];
+    [_rightBarBtn setBackgroundImage:[UIImage imageNamed:@"icon_star_select"] forState:UIControlStateSelected];
+    [_rightBarBtn addTarget:self action:@selector(collectClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBarBtn];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 }
 - (void)setupViews
 {
     [self.view addSubview:self.tableView];
+    
+ 
+    
+}
+
+- (void)setupContraints
+{
+    [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
 }
 
 - (UITableView *)tableView
@@ -56,6 +78,7 @@
     
     return _tableView;
 }
+
 
 #pragma mark --UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -168,12 +191,17 @@
  */
 - (void)collectClick
 {
-    [FDQResume updateObjectInManagedObjectContext:self.managedObjectContext atModel:self.model withCollect:YES];
+    _rightBarBtn.selected = !_rightBarBtn.selected;
+    
+    [FDQResume updateObjectInManagedObjectContext:self.managedObjectContext atModel:self.model withCollect:_rightBarBtn.selected];
 }
 
 - (void)setModel:(FDQResume *)model
 {
     _model = model;
     self.title = model.name;
+    
+    _rightBarBtn.selected = model.collect;
+    
 }
 @end

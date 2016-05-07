@@ -42,11 +42,14 @@
     //设置导航栏标题
     [self.navigationItem setTitle:@"欢迎"];
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"welcome_0.jpg" ofType:nil];
     //add  背景
-    _bgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"welcome_0"]];
+    _bgImg = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
     [self.view addSubview:_bgImg];
     _bgImg.alpha = 0.7;
     _bgImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureReturnKeyboard)];
+    [_bgImg addGestureRecognizer:tapGesture];
     
     //add 输入框view
     _inputView = [[FDInputView alloc] init];
@@ -65,6 +68,7 @@
         [_weakSelf userLoginOrRegister:accountStr pwd:passwordStr];
     };
     [_registerBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    
 
 }
 
@@ -92,6 +96,13 @@
     
 }
 
+/**
+ *  单击界面，收回键盘
+ */
+- (void)tapGestureReturnKeyboard
+{
+    [self.view endEditing:YES];
+}
 /**
  *  显示用户信息
  */
@@ -121,6 +132,7 @@
     
     //连接登录/注册
     [FDBaseLoginController UserConnetToHost];
+
 }
 
 - (void)registerClick
@@ -142,13 +154,6 @@
 }
 
 #pragma mark - Navigation
-/**
- *  即将跳转到下一个界面
- */
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   
-}
-
 
 
 @end

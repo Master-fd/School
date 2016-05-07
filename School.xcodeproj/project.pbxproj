@@ -217,10 +217,18 @@
 		1BB0C3D51C9CE87A00E75866 /* UIResponder+FDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D41C9CE87A00E75866 /* UIResponder+FDExtension.m */; };
 		1BB0C3D81C9CF55900E75866 /* FDChatInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */; };
 		1BB0C3DB1C9CF5C900E75866 /* FDChatMessageEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3DA1C9CF5C900E75866 /* FDChatMessageEmoji.m */; };
+		1BB217741CDD7AAE00902817 /* welcome_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BB217711CDD7AAE00902817 /* welcome_0.jpg */; };
+		1BB217751CDD7AAE00902817 /* welcome_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BB217721CDD7AAE00902817 /* welcome_1.jpg */; };
+		1BB217761CDD7AAE00902817 /* welcome_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BB217731CDD7AAE00902817 /* welcome_2.jpg */; };
+		1BB217781CDD7CEF00902817 /* setting_head_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BB217771CDD7CEF00902817 /* setting_head_bg.jpg */; };
 		1BB7E1921C9E782F00D84D39 /* FDChatVoiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7E1911C9E782F00D84D39 /* FDChatVoiseView.m */; };
 		1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBFDCD51C906C4B006496CE /* FDUserInfo.m */; };
 		1BCA9CF51CBA446E00788C91 /* FDEmojiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCA9CF41CBA446E00788C91 /* FDEmojiModel.m */; };
 		1BCA9CF81CBA45E000788C91 /* FDEmojiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BCA9CF71CBA45E000788C91 /* FDEmojiCollectionViewCell.m */; };
+		1BDE1D891CDCC3E500E91788 /* FDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE1D881CDCC3E500E91788 /* FDQRCode.m */; };
+		1BDE1D8C1CDCC48300E91788 /* FDQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE1D8B1CDCC48300E91788 /* FDQRCodeController.m */; };
+		1BDE1D901CDCD01800E91788 /* FDMyQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE1D8F1CDCD01800E91788 /* FDMyQRCodeController.m */; };
+		1BDE1D931CDCE1A300E91788 /* FDQMyQRcodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE1D921CDCE1A300E91788 /* FDQMyQRcodeController.m */; };
 		1BE3087A1CCE424800192F42 /* FDAboutFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE308791CCE424800192F42 /* FDAboutFriendController.m */; };
 		1BE3087D1CCE42BB00192F42 /* FDAboutFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3087C1CCE42BB00192F42 /* FDAboutFriendCell.m */; };
 		1BE308801CCE49E300192F42 /* FDEditBeizhuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3087F1CCE49E300192F42 /* FDEditBeizhuController.m */; };
@@ -670,6 +678,10 @@
 		1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatInputBar.m; sourceTree = "<group>"; };
 		1BB0C3D91C9CF5C900E75866 /* FDChatMessageEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDChatMessageEmoji.h; sourceTree = "<group>"; };
 		1BB0C3DA1C9CF5C900E75866 /* FDChatMessageEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatMessageEmoji.m; sourceTree = "<group>"; };
+		1BB217711CDD7AAE00902817 /* welcome_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome_0.jpg; sourceTree = "<group>"; };
+		1BB217721CDD7AAE00902817 /* welcome_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome_1.jpg; sourceTree = "<group>"; };
+		1BB217731CDD7AAE00902817 /* welcome_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome_2.jpg; sourceTree = "<group>"; };
+		1BB217771CDD7CEF00902817 /* setting_head_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setting_head_bg.jpg; sourceTree = "<group>"; };
 		1BB7E1901C9E782F00D84D39 /* FDChatVoiseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDChatVoiseView.h; sourceTree = "<group>"; };
 		1BB7E1911C9E782F00D84D39 /* FDChatVoiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDChatVoiseView.m; sourceTree = "<group>"; };
 		1BBFDCD41C906C4B006496CE /* FDUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDUserInfo.h; sourceTree = "<group>"; };
@@ -679,6 +691,14 @@
 		1BCA9CF41CBA446E00788C91 /* FDEmojiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEmojiModel.m; sourceTree = "<group>"; };
 		1BCA9CF61CBA45E000788C91 /* FDEmojiCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEmojiCollectionViewCell.h; sourceTree = "<group>"; };
 		1BCA9CF71CBA45E000788C91 /* FDEmojiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEmojiCollectionViewCell.m; sourceTree = "<group>"; };
+		1BDE1D871CDCC3E500E91788 /* FDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDQRCode.h; path = School/Common/QRCode/Model/FDQRCode.h; sourceTree = SOURCE_ROOT; };
+		1BDE1D881CDCC3E500E91788 /* FDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDQRCode.m; path = School/Common/QRCode/Model/FDQRCode.m; sourceTree = SOURCE_ROOT; };
+		1BDE1D8A1CDCC48300E91788 /* FDQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDQRCodeController.h; path = School/Common/QRCode/Controllers/FDQRCodeController.h; sourceTree = SOURCE_ROOT; };
+		1BDE1D8B1CDCC48300E91788 /* FDQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDQRCodeController.m; path = School/Common/QRCode/Controllers/FDQRCodeController.m; sourceTree = SOURCE_ROOT; };
+		1BDE1D8E1CDCD01800E91788 /* FDMyQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDMyQRCodeController.h; path = School/Common/QRCode/Controllers/FDMyQRCodeController.h; sourceTree = SOURCE_ROOT; };
+		1BDE1D8F1CDCD01800E91788 /* FDMyQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDMyQRCodeController.m; path = School/Common/QRCode/Controllers/FDMyQRCodeController.m; sourceTree = SOURCE_ROOT; };
+		1BDE1D911CDCE1A300E91788 /* FDQMyQRcodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDQMyQRcodeController.h; path = School/Common/QRCode/Controllers/FDQMyQRcodeController.h; sourceTree = SOURCE_ROOT; };
+		1BDE1D921CDCE1A300E91788 /* FDQMyQRcodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDQMyQRcodeController.m; path = School/Common/QRCode/Controllers/FDQMyQRcodeController.m; sourceTree = SOURCE_ROOT; };
 		1BE308781CCE424800192F42 /* FDAboutFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAboutFriendController.h; sourceTree = "<group>"; };
 		1BE308791CCE424800192F42 /* FDAboutFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAboutFriendController.m; sourceTree = "<group>"; };
 		1BE3087B1CCE42BB00192F42 /* FDAboutFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAboutFriendCell.h; sourceTree = "<group>"; };
@@ -1692,6 +1712,7 @@
 		1B8ED69E1C8AB61C00FB09F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1BB217701CDD7AAE00902817 /* JpegImage */,
 				1B8ED6AE1C8AB61C00FB09F8 /* Images.xcassets */,
 				1B8ED69F1C8AB61C00FB09F8 /* Info.plist */,
 				1BFD37F91CC340C1009C7E49 /* heros.plist */,
@@ -1974,6 +1995,7 @@
 		1BAEE04C1C93F8990035367A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1BDE1D851CDCC2F800E91788 /* QRCode */,
 				1BAEE0621C93FC1B0035367A /* FDBaseLoginController.h */,
 				1BAEE0631C93FC1B0035367A /* FDBaseLoginController.m */,
 				1BAEE0641C93FC1B0035367A /* FDBaseNavigationController.h */,
@@ -2084,6 +2106,48 @@
 			path = Discovers;
 			sourceTree = "<group>";
 		};
+		1BB217701CDD7AAE00902817 /* JpegImage */ = {
+			isa = PBXGroup;
+			children = (
+				1BB217771CDD7CEF00902817 /* setting_head_bg.jpg */,
+				1BB217711CDD7AAE00902817 /* welcome_0.jpg */,
+				1BB217721CDD7AAE00902817 /* welcome_1.jpg */,
+				1BB217731CDD7AAE00902817 /* welcome_2.jpg */,
+			);
+			path = JpegImage;
+			sourceTree = "<group>";
+		};
+		1BDE1D851CDCC2F800E91788 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				1BDE1D8D1CDCC48E00E91788 /* Controllers */,
+				1BDE1D861CDCC3B300E91788 /* Model */,
+			);
+			name = QRCode;
+			sourceTree = "<group>";
+		};
+		1BDE1D861CDCC3B300E91788 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BDE1D871CDCC3E500E91788 /* FDQRCode.h */,
+				1BDE1D881CDCC3E500E91788 /* FDQRCode.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1BDE1D8D1CDCC48E00E91788 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BDE1D8A1CDCC48300E91788 /* FDQRCodeController.h */,
+				1BDE1D8B1CDCC48300E91788 /* FDQRCodeController.m */,
+				1BDE1D8E1CDCD01800E91788 /* FDMyQRCodeController.h */,
+				1BDE1D8F1CDCD01800E91788 /* FDMyQRCodeController.m */,
+				1BDE1D911CDCE1A300E91788 /* FDQMyQRcodeController.h */,
+				1BDE1D921CDCE1A300E91788 /* FDQMyQRcodeController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		D6F40E25E43305695EF3F72A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2190,10 +2254,14 @@
 				1B8ED6B21C8AB61C00FB09F8 /* LaunchScreen.xib in Resources */,
 				1B2F4C261C93B8B600B6B9BB /* build-libidn.sh in Resources */,
 				1BA043ED1C8DB66500103401 /* MBProgressHUD.bundle in Resources */,
+				1BB217781CDD7CEF00902817 /* setting_head_bg.jpg in Resources */,
+				1BB217761CDD7AAE00902817 /* welcome_2.jpg in Resources */,
 				1B8ED6AF1C8AB61C00FB09F8 /* Images.xcassets in Resources */,
 				1B8E06E01C8BD40D0024EE9B /* Storyboard.storyboard in Resources */,
+				1BB217751CDD7AAE00902817 /* welcome_1.jpg in Resources */,
 				1BFD37FA1CC340C1009C7E49 /* heros.plist in Resources */,
 				1B2F4C091C93B7D200B6B9BB /* README.txt in Resources */,
+				1BB217741CDD7AAE00902817 /* welcome_0.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2277,6 +2345,7 @@
 				1B2F4C6F1C93BDF500B6B9BB /* NSNumber+XMPP.m in Sources */,
 				1B2F4D771C93BE3600B6B9BB /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				1B2F4D711C93BE3600B6B9BB /* XMPPResourceMemoryStorageObject.m in Sources */,
+				1BDE1D891CDCC3E500E91788 /* FDQRCode.m in Sources */,
 				1B3F77E31CD0FCAD008123EB /* FDEditJobInfoView.m in Sources */,
 				1B2F4D941C93BE3600B6B9BB /* XMPPvCardTempLabel.m in Sources */,
 				1B2F4D991C93BE3600B6B9BB /* XMPPIQ+XEP_0060.m in Sources */,
@@ -2315,6 +2384,7 @@
 				1B2F4D8F1C93BE3600B6B9BB /* XMPPvCardTemp.m in Sources */,
 				1B2F4C6C1C93BDF500B6B9BB /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				1B2F4C061C93B7D200B6B9BB /* DDTTYLogger.m in Sources */,
+				1BDE1D931CDCE1A300E91788 /* FDQMyQRcodeController.m in Sources */,
 				1B2F4DAB1C93BE3600B6B9BB /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				1B2F4D701C93BE3600B6B9BB /* XMPPUserCoreDataStorageObject.m in Sources */,
 				1B2F4C041C93B7D200B6B9BB /* DDFileLogger.m in Sources */,
@@ -2365,6 +2435,7 @@
 				1B2F4D911C93BE3600B6B9BB /* XMPPvCardTempAdrTypes.m in Sources */,
 				1B2F4D781C93BE3600B6B9BB /* XMPPJabberRPCModule.m in Sources */,
 				1B19CA7F1CC911CA00E73D8E /* FDResumePurposeCell.m in Sources */,
+				1BDE1D8C1CDCC48300E91788 /* FDQRCodeController.m in Sources */,
 				1B2F4D8E1C93BE3600B6B9BB /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				1B2F4DBD1C93BE3600B6B9BB /* XMPPMessage+XEP_0308.m in Sources */,
 				1B87666B1C9AF465005B9E47 /* FDChatModel.m in Sources */,
@@ -2453,6 +2524,7 @@
 				1B9092991CCBD6A400C88CBB /* FDJobInfoController.m in Sources */,
 				1BE3087A1CCE424800192F42 /* FDAboutFriendController.m in Sources */,
 				1B4B44DB1CCB2BB200F6D48F /* FDEditBaseInfoView.m in Sources */,
+				1BDE1D901CDCD01800E91788 /* FDMyQRCodeController.m in Sources */,
 				1BE4E7E01CCFB30700974969 /* FDMyApplyInfoCell.m in Sources */,
 				1B2F4DA01C93BE3600B6B9BB /* XMPPMessage+XEP_0085.m in Sources */,
 				1B2F4D831C93BE3600B6B9BB /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
@@ -2592,6 +2664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (Z6S43MU38S)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/School/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2606,6 +2679,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = School/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2645,6 +2719,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (Z6S43MU38S)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/School/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2659,6 +2734,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = School/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

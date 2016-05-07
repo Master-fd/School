@@ -27,6 +27,10 @@ singleton_implementation(FDOrganization);
     _photo = self.myVcard.photo;
     return _photo;
 }
+- (NSData *)QRCode
+{
+    return self.myVcard.sound;
+}
 /**
  *  组织名
  */

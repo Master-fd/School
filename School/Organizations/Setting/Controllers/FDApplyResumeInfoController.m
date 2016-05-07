@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self insertTestData];
+//    [self insertTestData];
     
     [self setupNav];
     

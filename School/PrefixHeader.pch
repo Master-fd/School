@@ -48,7 +48,7 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #define  kBaseTableViewControlBackColor        [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1]
 
 #define ServerName    @"feidong.local"
-#define ServerIP      @"127.0.0.1"
+#define ServerIP      @"192.168.31.216"         //@"127.0.0.1"
 #define ClientName    @"iphone"
 #define ServerPort    5222
 

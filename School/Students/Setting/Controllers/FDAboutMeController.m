@@ -11,6 +11,8 @@
 #import "FDSettingCell.h"
 #import "FDEditlPhotoController.h"
 #import "FDEditNicknameController.h"
+#import "FDMyQRCodeController.h"
+
 
 @interface FDAboutMeController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -109,7 +111,9 @@
             [self.navigationController pushViewController:nicknameVc animated:YES];
         }
     }else if (indexPath.section == 2){
-        //增加生成自己的二维码
+        //查看自己的二维码
+        FDMyQRCodeController *vc = [[FDMyQRCodeController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
