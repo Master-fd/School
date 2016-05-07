@@ -9,6 +9,7 @@
 #import "FDQResume.h"
 #import "FDQResume+FDCoreDataProperties.h"
 #import "NSObject+CoreDataHelper.h"
+#import "FDResume.h"
 
 
 @implementation FDQResume
@@ -141,6 +142,29 @@
     [fetchRequest setEntity:entity];
     
     return [self.managedObjectContext countForFetchRequest:fetchRequest error:nil];
+}
+
+/**
+ *  插入一条简历
+ */
++ (void)insertOneResumeData:(FDResume *)resume
+{
+    FDQResume *model = [FDQResume insertNewObjectInManagedObjectContext:self.managedObjectContext];
+    model.jobTitle = resume.jobTitle;
+    model.jobContent = resume.jobContent;
+    model.jobPurposeOne = resume.jobPurposeOne;
+    model.department = resume.department;
+    model.email = resume.Email;
+    model.phoneNumber = resume.phoneNumber;
+    model.major = resume.major;
+    model.name = resume.name;
+    model.specialtyOne = resume.specialtyOne;
+    model.specialtyTwo = resume.specialtyTwo;
+    model.jidStr = resume.jidStr;
+    model.photo = resume.photo;
+    model.collect = NO;
+    
+    [self saveContext];
 }
 
 @end

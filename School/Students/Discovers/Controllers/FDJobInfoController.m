@@ -47,7 +47,7 @@
     [self.view addSubview:_jobButtonView];
     __weak typeof(self) _weakself = self;
     _jobButtonView.sendResumeToXmppJidStrBlock = ^{
-        //发送简历, 将应聘记录保存到plist起来
+        //发送简历, 将应聘记录通过字典保存到plist起来
 
         NSDictionary *applyInfoDic = @{@"jidStr" : _weakself.contactModel.jidStr,
                                        @"jobName" : _weakself.jobModel.jobName,
@@ -55,7 +55,7 @@
                                        @"department" : _weakself.jobModel.department,
                                        @"photo" : _weakself.jobModel.icon
                                        };
-        //保存一条信息到plist,保存
+        //发送简历，同时保存一条信息到plist,保存
         if (![_weakself saveApplyInfoWithPlist:applyInfoDic]) {
             //这条信息已经有记录，说明应聘过了
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -96,10 +96,12 @@
 
 - (void)setupContraints
 {
-    [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeBottom];
+    [_tableView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_jobButtonView];
     
     [_jobButtonView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeTop];
     [_jobButtonView autoSetDimension:ALDimensionHeight toSize:50];
+
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -154,7 +156,7 @@
 
 #pragma mark - 公共方法
 /**
- *  添加一条应聘信息到plist
+ *  发送简历,添加一条应聘信息到plist
  */
 - (BOOL)saveApplyInfoWithPlist:(NSDictionary *)dataDic
 {
@@ -188,7 +190,7 @@
 
 /**
  *  联网发送简历,自己的简历采用NSData的方式保存在myVcard的logo字段中,就是取这个字段发送出去
- *  jidStr：好友的jid
+ *  jidStr：好友的jidstr
  */
 - (void)sendMyResumeToHr:(NSString *)jidStr
 {
@@ -205,7 +207,7 @@
     NSString *base64Str = [resume base64EncodedStringWithOptions:0];
     
     //设置节点内容
-    XMPPElement *attachment = [XMPPElement elementWithName:@"attachment" stringValue:base64Str];
+    XMPPElement *attachment = [XMPPElement elementWithName:@"resume" stringValue:base64Str];
     
     //添加子节点
     [msg addChild:attachment];

@@ -8,6 +8,8 @@
 
 #import "FDXMPPTool.h"
 #import "FDLoginController.h"
+#import "FDQResume.h"
+#import "FDResume.h"
 
 
 @interface FDXMPPTool()<XMPPStreamDelegate>{
@@ -296,19 +298,34 @@ singleton_implementation(FDXMPPTool);
 }
 
 /**
- *  接收到新信息
+ *  接收到新信息,在这里拦截信息，查看是否信息合法，另外查看是否是简历，如果是简历，直接保存
+ * 简历的chat字段是"BodyResume"
  */
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     NSString *from = [[message attributeForName:@"from"] stringValue];
     NSString *msg = [[message elementForName:@"body"] stringValue];
     
-    FDLog(@"msg = %@", msg);
-    FDLog(@"message = %@", message);
     
+    //接收到合法简历，保存起来
+    if ([msg isEqualToString:kBodyResume]) {
+        
+        for (XMPPElement *ele in message.children) {
+            //取出消息编码,里面保存的是一个FDResume
+            if ([ele.name isEqualToString:@"resume"]) {
+                
+                NSString *base64Str = ele.stringValue;
+                NSData *data = [[NSData alloc] initWithBase64EncodedString:base64Str options:0];
+                FDResume *resume = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+                [FDQResume insertOneResumeData:resume];
+      
+            }
+        }
+    }
     
-    //接收到合法信息，发出通知
-    if (msg && from) {
+    //接收到合法聊天信息，发出通知
+    if (msg.length && from.length) {
         
         NSString *pattern = [NSString stringWithFormat:@"^[0-9a-zA-Z]+@%@", ServerName];
         NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
@@ -332,7 +349,6 @@ singleton_implementation(FDXMPPTool);
                 //先记录离线消息，延迟一下在发通知
                 [self.jidStrs addObject:userInfo];
             }
-            
             
         }
     }

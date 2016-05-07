@@ -20,11 +20,14 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView beginUpdates];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView beginUpdates];
+    });
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
     switch (type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -36,9 +39,11 @@
         default:
             break;
     }
+    });
 }
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
     switch (type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -59,11 +64,14 @@
         default:
             break;
     }
+    });
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView endUpdates];
+    });
 }
 /**
  *  懒加载
@@ -94,7 +102,7 @@
         NSError *error = nil;
         if (![_fetchedResultsController performFetch:&error])
         {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            NSLog(@"错误 %@, %@", error, [error userInfo]);
         }
     }
     
@@ -118,6 +126,9 @@
     });
 }
 
+/**
+ *  加载更多
+ */
 -(void)loadMoreResume
 {
     NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;

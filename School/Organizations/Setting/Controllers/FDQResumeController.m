@@ -18,11 +18,15 @@
 #import "FDJobButtonView.h"
 #import "FDChatController.h"
 #import "FDChatModel.h"
+#import "FDResumeSendMsgButtonView.h"
+#import "FDXMPPTool.h"
+#import "XMPPvCardTemp.h"
 
 @interface FDQResumeController ()<UITableViewDataSource, UITableViewDelegate>{
     
     UIButton *_rightBarBtn;
     
+    FDResumeSendMsgButtonView *_jobButtonView;
     
 }
 
@@ -40,6 +44,7 @@
     
     [self setupViews];
     
+    [self setupContraints];
 }
 
 - (void)setupNav
@@ -56,14 +61,31 @@
 {
     [self.view addSubview:self.tableView];
     
- 
+    _jobButtonView = [[FDResumeSendMsgButtonView alloc] init];
+    [self.view addSubview:_jobButtonView];
     
+    __weak typeof(self) _weakself = self;
+    _jobButtonView.sendMessageToXmppJidStrBlock = ^{
+        //push到聊天界面
+        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:_weakself.model.jidStr shouldFetch:YES];
+        FDChatController *vc = [[FDChatController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.title = vcard.nickname;
+        vc.jidStr = _weakself.model.jidStr;
+        vc.nickname = vcard.nickname;  //备注
+        [_weakself.navigationController pushViewController:vc animated:YES];
+        
+    };
+
 }
 
 - (void)setupContraints
 {
-    [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeBottom];
+    [_tableView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_jobButtonView];
     
+    [_jobButtonView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeTop];
+    [_jobButtonView autoSetDimension:ALDimensionHeight toSize:50];
 }
 
 - (UITableView *)tableView
@@ -132,7 +154,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.editEnable = NO;
         cell.purposeOne.text = self.model.jobPurposeOne;
-        cell.purposeTwo.text = self.model.jobPurposeTwo;
+        cell.department.text = self.model.department;
         
         
         return cell;

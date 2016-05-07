@@ -8,7 +8,7 @@
 
 #import "FDStudent.h"
 #import "XMPPvCardTemp.h"
-
+#import "FDUserInfo.h"
 
 @implementation FDStudent
 
@@ -79,6 +79,7 @@ singleton_implementation(FDStudent);
 //保存简历
 - (void)saveResume
 {
+    self.resume.jidStr = [FDUserInfo shareFDUserInfo].jidStr;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.resume];
 
     self.myVcard.logo = data; //使用vcard的logo字段作为简历

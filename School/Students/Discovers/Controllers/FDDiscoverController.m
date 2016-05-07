@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self updateTestMyJob];  //测试用
     
     [self setupViews];
     
@@ -78,7 +77,6 @@
 #pragma mark - uitableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return [FDStudent shareFDStudent].myVcard.jobs.count;
     return self.myOrganizations.count;  //获取组织个数
 }
 
@@ -88,13 +86,11 @@
     XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:model.jidStr shouldFetch:YES];;
     NSArray *array = vCard.jobs; // 从电子名片中可以获取知道这个人有多少个招聘信息
     return array.count;
-//    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //获取数据
-//    FDJobModel *jobModel = [self getTestData:indexPath];
     FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath];
     //新建cell
     FDDiscoverCell *cell = [FDDiscoverCell cellWithTableView:tableView];
@@ -115,7 +111,6 @@
     
     FDContactModel *contactModel = self.myOrganizations[indexPath.section];   //获取从联系人列表,获取联系人模型
     FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
-//    FDJobModel *jobModel = [self getTestData:indexPath];
     
     FDJobInfoController *vc = [[FDJobInfoController alloc] init];
     vc.title = @"职位详情";
@@ -157,45 +152,4 @@
 
 
 
-#pragma mark - 测试用的数据
-/**
- *  测试数据
- */
-- (void)updateTestMyJob
-{
-    NSMutableArray *arrayM = [NSMutableArray array];
-    
-    for (int i=0; i<10; i++) {
-        FDJobModel *model = [[FDJobModel alloc] init];
-        model.jobName = @"高级工程师";
-        model.jobCount = @"15";
-        model.jobDescribe = @"不知道你在说少些什么\n东西恩爱是多厚呢都是\n到欧司等哈说";
-        model.jobHarvest = @"你将会边的更加斗笔更加深的飞洒发案master";
-        model.icon = [FDStudent shareFDStudent].photo;
-        model.organization = @"社团联合部";
-        model.department = @"外联部";
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
-        [arrayM addObject:data];  //保存数据
-        
-    }
-    
-    //更新自己的jobs到服务器
-    [FDStudent shareFDStudent].myVcard.jobs = arrayM;
-    [[FDStudent shareFDStudent] updateMyvCard];
-}
-
-- (FDJobModel *)getTestData:(NSIndexPath *)indexPath
-{
-    FDJobModel *jobModel = nil;
-    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];
-    NSData *data = vCard.jobs[indexPath.row]; // 取出一条数据
-    //Card.jobs  使用这个字段作为招聘信息,保存的nsstring类型
-    //转换成工作模型
-    if (data.length) {
-        jobModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return jobModel;
-
-}
 @end

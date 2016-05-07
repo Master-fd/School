@@ -69,13 +69,13 @@
     [_bgView addSubview:_purposeLabOne];
     _purposeLabOne.font = [UIFont systemFontOfSize:kfontSize];
     _purposeLabOne.textColor = [UIColor grayColor];
-    _purposeLabOne.text = @"职位一：";
+    _purposeLabOne.text = @"职    位：";
     
     _purposeLabTwo = [[UILabel alloc] init];
     [_bgView addSubview:_purposeLabTwo];
     _purposeLabTwo.font = [UIFont systemFontOfSize:kfontSize];
     _purposeLabTwo.textColor = [UIColor grayColor];
-    _purposeLabTwo.text = @"职位二：";
+    _purposeLabTwo.text = @"部    门：";
     
     
     
@@ -86,10 +86,10 @@
     _purposeOne.font = [UIFont systemFontOfSize:kfontSize];
     _purposeOne.textColor = [UIColor grayColor];
     
-    _purposeTwo = [[UILabel alloc] init];
-    [_bgView addSubview:_purposeTwo];
-    _purposeTwo.font = [UIFont systemFontOfSize:kfontSize];
-    _purposeTwo.textColor = [UIColor grayColor];
+    _department = [[UILabel alloc] init];
+    [_bgView addSubview:_department];
+    _department.font = [UIFont systemFontOfSize:kfontSize];
+    _department.textColor = [UIColor grayColor];
     
     
     
@@ -124,10 +124,10 @@
     [_purposeOne autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_purposeLabOne];
     [_purposeOne autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:_editBtn withOffset:-5];
     
-    [_purposeTwo autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_purposeLabTwo withOffset:5];
-    [_purposeTwo autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:_purposeLabTwo];
-    [_purposeTwo autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_purposeLabTwo];
-    [_purposeTwo autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:kmarge];
+    [_department autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_purposeLabTwo withOffset:5];
+    [_department autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:_purposeLabTwo];
+    [_department autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_purposeLabTwo];
+    [_department autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:kmarge];
     
     
 }

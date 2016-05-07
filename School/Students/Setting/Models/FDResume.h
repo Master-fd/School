@@ -21,7 +21,7 @@
 
 @property (nonatomic, copy) NSString *jobPurposeOne;
 
-@property (nonatomic, copy) NSString *jobPurposeTwo;
+@property (nonatomic, copy) NSString *department;
 
 @property (nonatomic, copy) NSString *Email;
 
@@ -32,6 +32,10 @@
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, strong) NSData *photo;
+/**
+ *  简历主人的jidstr
+ */
+@property (nullable, nonatomic, copy) NSString *jidStr;
 
 
 @end

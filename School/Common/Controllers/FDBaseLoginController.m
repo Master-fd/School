@@ -65,9 +65,8 @@
                 break;
             case XMPPRequireResultTypeLoginSuccess:
                 [FDMBProgressHUB hideHUD];
-                //跳转页面
-                [self switchUserClient];  //学生端
-                
+                //跳转到主页面
+                [self switchUserClient];  //学生端和组织端
                 break;
             case XMPPRequireResultTypeRegisterFailure:
                 [FDMBProgressHUB hideHUD];
@@ -82,7 +81,8 @@
                 });
                 break;
             case XMPPRequireResultTypeNetError:
-                [FDMBProgressHUB hideHUD];
+                [FDMBProgressHUB hideHUD];  //回到登录界面
+                [[FDXMPPTool shareFDXMPPTool] xmppUserLogout];
                 [FDMBProgressHUB showError:@"连接失败"];
                 break;
             default:

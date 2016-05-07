@@ -10,14 +10,13 @@
 #import "FDEditBaseInfoView.h"
 #import "FDStudent.h"
 
-
 @interface FDEditPurposeController (){
     
-    //特长1
+    //求职意向职位
     FDEditBaseInfoView *_purposeViewOne;
     
-    //特长2
-    FDEditBaseInfoView *_purposeViewTwo;
+    //部门
+    FDEditBaseInfoView *_department;
 }
 
 
@@ -45,15 +44,15 @@
     if ([FDStudent shareFDStudent].resume.jobPurposeOne.length) {  //
         _purposeViewOne.textField.text = [FDStudent shareFDStudent].resume.jobPurposeOne;
     } else {
-        _purposeViewOne.textField.placeholder = @"职位意向1";
+        _purposeViewOne.textField.placeholder = @"职位意向";
     }
     
-    _purposeViewTwo = [[FDEditBaseInfoView alloc] init];
-    [self.view addSubview:_purposeViewTwo];
-    if ([FDStudent shareFDStudent].resume.jobPurposeTwo.length) {  //
-        _purposeViewTwo.textField.text = [FDStudent shareFDStudent].resume.jobPurposeTwo;
+    _department = [[FDEditBaseInfoView alloc] init];
+    [self.view addSubview:_department];
+    if ([FDStudent shareFDStudent].resume.department.length) {  //
+        _department.textField.text = [FDStudent shareFDStudent].resume.department;
     } else {
-        _purposeViewTwo.textField.placeholder = @"职位意向2";
+        _department.textField.placeholder = @"求职部门";
     }
     
 }
@@ -63,10 +62,10 @@
     [_purposeViewOne autoSetDimension:ALDimensionHeight toSize:40];
     [_purposeViewOne autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(70, 0, 0, 0) excludingEdge:ALEdgeBottom];
     
-    [_purposeViewTwo autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:_purposeViewOne];
-    [_purposeViewTwo autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_purposeViewOne];
-    [_purposeViewTwo autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_purposeViewOne];
-    [_purposeViewTwo autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_purposeViewOne];
+    [_department autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:_purposeViewOne];
+    [_department autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_purposeViewOne];
+    [_department autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_purposeViewOne];
+    [_department autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_purposeViewOne];
     
     
 }
@@ -81,7 +80,8 @@
 {
     //保存到简历
     [FDStudent shareFDStudent].resume.jobPurposeOne = _purposeViewOne.textField.text;
-    [FDStudent shareFDStudent].resume.jobPurposeTwo = _purposeViewTwo.textField.text;
+    [FDStudent shareFDStudent].resume.department = _department.textField.text;
+    
     [[FDStudent shareFDStudent] saveResume];
     
     [self.navigationController popViewControllerAnimated:YES];

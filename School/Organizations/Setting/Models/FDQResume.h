@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class FDResume;
 @interface FDQResume : NSManagedObject
 
 /**
@@ -47,6 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSUInteger)count;
 
+/**
+ *  插入一条简历到数据库
+ */
++ (void)insertOneResumeData:(FDResume *)resume;
 @end
 
 NS_ASSUME_NONNULL_END

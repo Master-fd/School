@@ -15,13 +15,13 @@
 @dynamic specialtyOne;
 @dynamic specialtyTwo;
 @dynamic jobPurposeOne;
-@dynamic jobPurposeTwo;
+@dynamic department;
 @dynamic email;
 @dynamic phoneNumber;
 @dynamic major;
 @dynamic name;
 @dynamic photo;
-@dynamic department;
+@dynamic jidStr;
 @dynamic collect;
 
 @end

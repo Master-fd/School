@@ -4,9 +4,9 @@
         <attribute name="collect" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="department" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jobContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jobPurposeOne" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="jobPurposeTwo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jobTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>

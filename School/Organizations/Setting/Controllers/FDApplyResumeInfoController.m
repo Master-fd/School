@@ -15,45 +15,21 @@
 #import "FDApplyResumeInfoController+FDCoeData.h"
 #import "NSObject+CoreDataHelper.h"
 
-
 /********************************************
  收到的简历，应该保持在coredata数据库中，每个数据库保存一个resume字段和“colloct”字段需要的时候在取出来
  *****************************************/
 
 @interface FDApplyResumeInfoController ()<UIActionSheetDelegate>
 
+
 @end
 
 @implementation FDApplyResumeInfoController
 
-/**
- *  测试数据
- */
-- (void)insertTestData
-{
-    for (int i=0; i<5; i++) {
-        FDQResume *model = [FDQResume insertNewObjectInManagedObjectContext:self.managedObjectContext];
-        model.jobTitle = [NSString stringWithFormat:@"高级工程师%d", i];
-        model.department = [NSString stringWithFormat:@"社联部%d",i];
-        model.jobContent = @"其实我直接的与傲视欧式不回宿舍；打你";
-        model.jobPurposeOne = @"第几共收到";
-        model.jobPurposeTwo = @"sdasd";
-        model.email = @"1003768663@qq.com";
-        model.phoneNumber = @"18898655184";
-        model.major = @"电子信息科学与技术";
-        model.name = @"master";
-        model.specialtyOne = @"羽毛球";
-        model.specialtyTwo = @"篮球";
-        model.photo = [FDOrganization shareFDOrganization].photo;
-        model.collect = i%2;
-        
-    }
-     [self saveContext];
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self insertTestData];
     
     [self setupNav];
     
@@ -63,8 +39,9 @@
 - (void)setupNav
 {
     self.title = @"简历";
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleDone target:self action:@selector(deleteClick)];
-    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleDone target:self action:@selector(deleteClick)];
+
+    self.navigationItem.rightBarButtonItem = deleteBarButtonItem;
 }
 
 - (void)setupViews
@@ -136,26 +113,27 @@
 #pragma mark - uiactionsheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-
-    switch (buttonIndex) {
-        case 0:
-            [FDQResume removeAllObjectInManagedObjectContext:self.managedObjectContext];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [FDMBProgressHUB showError:@"没有收到任何简历"];
-            });
+    if ([actionSheet.title isEqualToString:@"删除简历"]) {
+        switch (buttonIndex) {
+            case 0:
+                [FDQResume removeAllObjectInManagedObjectContext:self.managedObjectContext];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [FDMBProgressHUB showError:@"没有收到任何简历"];
+                    });
             break;
             
-        case 1:
-            [FDQResume removeAllNonCollectObjectInManagedObjectContext:self.managedObjectContext withCollect:NO];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [FDMBProgressHUB showError:@"非收藏的已删除"];
-            });
+            case 1:
+                    [FDQResume removeAllNonCollectObjectInManagedObjectContext:self.managedObjectContext withCollect:NO];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [FDMBProgressHUB showError:@"非收藏的已删除"];
+                    });
 
             break;
     
 
-        default:
+                default:
             break;
+        }
     }
 }
 #pragma mark - 公共方法

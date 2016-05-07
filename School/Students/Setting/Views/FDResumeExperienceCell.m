@@ -88,6 +88,7 @@
     [_bgView addSubview:_jobContent];
     _jobContent.font = [UIFont systemFontOfSize:kfontSize];
     _jobContent.textColor = [UIColor grayColor];
+    
 }
 
 
@@ -103,8 +104,7 @@
     
     [_jobContentLab autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_jobTitleLab];
     [_jobContentLab autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_jobTitleLab withOffset:kmarge];
-    [_jobContentLab autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_jobTitleLab];
-    [_jobContentLab autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:_jobTitleLab];
+    [_jobContentLab autoSetDimensionsToSize:CGSizeMake(70, 20)];
     
     [_editBtn autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:kmarge];
     [_editBtn autoSetDimensionsToSize:CGSizeMake(45, 13)];
@@ -112,16 +112,13 @@
     
     /****************************************************************/
     
-    
     [_jobTitle autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:_jobTitleLab withOffset:5];
     [_jobTitle autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:_jobTitleLab];
     [_jobTitle autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_jobTitleLab];
     [_jobTitle autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:_editBtn withOffset:-5];
-    
-    [_jobContent autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:kmarge];
+
     [_jobContent autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_jobContentLab];
-    [_jobContent autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kmarge];
-    [_jobContent autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:kmarge];
+    [_jobContent autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, kmarge, kmarge, kmarge) excludingEdge:ALEdgeTop];
     
 }
 

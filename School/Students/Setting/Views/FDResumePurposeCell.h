@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UILabel *purposeOne;
 
-@property (nonatomic, strong) UILabel *purposeTwo;
+@property (nonatomic, strong) UILabel *department;
 
 /**
  *  是否可编辑

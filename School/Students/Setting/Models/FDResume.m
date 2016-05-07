@@ -24,12 +24,13 @@
         self.specialtyOne = [aDecoder decodeObjectForKey:@"specialtyOne"];
         self.specialtyTwo = [aDecoder decodeObjectForKey:@"specialtyTwo"];
         self.jobPurposeOne = [aDecoder decodeObjectForKey:@"jobPurposeOne"];
-        self.jobPurposeTwo = [aDecoder decodeObjectForKey:@"jobPurposeTwo"];
+        self.department = [aDecoder decodeObjectForKey:@"department"];
         self.Email = [aDecoder decodeObjectForKey:@"Email"];
         self.phoneNumber = [aDecoder decodeObjectForKey:@"phoneNumber"];
         self.major = [aDecoder decodeObjectForKey:@"major"];
         self.name = [aDecoder decodeObjectForKey:@"name"];
         self.photo = [aDecoder decodeObjectForKey:@"photo"];
+        self.jidStr = [aDecoder decodeObjectForKey:@"jidStr"];
     }
     return self;
 }
@@ -40,12 +41,13 @@
     [aCoder encodeObject:self.specialtyOne forKey:@"specialtyOne"];
     [aCoder encodeObject:self.specialtyTwo forKey:@"specialtyTwo"];
     [aCoder encodeObject:self.jobPurposeOne forKey:@"jobPurposeOne"];
-    [aCoder encodeObject:self.jobPurposeTwo forKey:@"jobPurposeTwo"];
+    [aCoder encodeObject:self.department forKey:@"department"];
     [aCoder encodeObject:self.Email forKey:@"Email"];
     [aCoder encodeObject:self.phoneNumber forKey:@"phoneNumber"];
     [aCoder encodeObject:self.major forKey:@"major"];
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.photo forKey:@"photo"];
+    [aCoder encodeObject:self.jidStr forKey:@"jidStr"];
     
 }
 

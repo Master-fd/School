@@ -129,7 +129,8 @@
         };
 
         return cell;
-    }else if (indexPath.section == 3){//特长
+    }else
+    if (indexPath.section == 3){//特长
         FDResumeSpecialtyCell *cell = [FDResumeSpecialtyCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.specialtyOne.text = [FDStudent shareFDStudent].resume.specialtyOne;
@@ -148,7 +149,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.editEnable = YES;
         cell.purposeOne.text = [FDStudent shareFDStudent].resume.jobPurposeOne;
-        cell.purposeTwo.text = [FDStudent shareFDStudent].resume.jobPurposeTwo;
+        cell.department.text = [FDStudent shareFDStudent].resume.department;
         __weak typeof(self) _weakself = self;
         cell.infoBlock = ^{
             FDEditPurposeController *vc = [[FDEditPurposeController alloc] init];

@@ -87,7 +87,7 @@
 {
     if ([chatmodel.body isEqualToString:kBodyResume])
     {
-        [_textLab AttributedTextFromText:@"!!!简历已发送,请及时查收!!!"];
+        [_textLab AttributedTextFromText:@"简历[999]"];
     }else{
         [_textLab AttributedTextFromText:chatmodel.body];
     }
