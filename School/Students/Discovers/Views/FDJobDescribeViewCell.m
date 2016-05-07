@@ -61,23 +61,23 @@
     self.backgroundColor = [UIColor whiteColor];
     
     _iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jd_zhiwei"]];   //职位描述头像
-    [self addSubview:_iconView];
+    [self.contentView addSubview:_iconView];
     
     _jobDescLab = [[UILabel alloc] init];   //"职位描述"
-    [self addSubview:_jobDescLab];
+    [self.contentView addSubview:_jobDescLab];
     _jobDescLab.font= [UIFont boldSystemFontOfSize:kFontSize + 2];
     _jobDescLab.textColor = [UIColor blackColor];
     _jobDescLab.text = @"职位描述";
     
     /********************************************************************************/
     _gapView = [[UIView alloc] init];  //分割线
-    [self addSubview:_gapView];
+    [self.contentView addSubview:_gapView];
     _gapView.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
     /***************************************************************************************/
     
     
     _jobDescribe = [[UITextView alloc] init];   //职位描述详情
-    [self addSubview:_jobDescribe];
+    [self.contentView addSubview:_jobDescribe];
     _jobDescribe.font = [UIFont systemFontOfSize:kFontSize + 1];
     _jobDescribe.textColor = [UIColor colorWithRed:80/255.0 green:80/255.0 blue:80/255.0 alpha:1];
     _jobDescribe.userInteractionEnabled = NO;
@@ -110,7 +110,6 @@
     [_jobDescribe autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_gapView withOffset:marginMin];
     [_jobDescribe autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:marginMax];
     [_jobDescribe autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:marginMax];
-    
     
 }
 

@@ -79,9 +79,11 @@
         
     };
     if (self.iShideBar) {
-        _jobButtonView.hidden = YES;
+        _jobButtonView.sendMessageBtn.hidden = YES;
+        _jobButtonView.sendResumeBtn.hidden = YES;
     }else{
-        _jobButtonView.hidden = NO;
+        _jobButtonView.sendMessageBtn.hidden = NO;
+        _jobButtonView.sendResumeBtn.hidden = NO;
     }
     
     if (!self.jobModel) {  //job模型为空,不显示，提示没有这个信息

@@ -55,7 +55,7 @@
         _fetchedResultsController.delegate = self;
         
         NSError *error = nil;
-        if ([_fetchedResultsController performFetch:&error]) {
+        if (![_fetchedResultsController performFetch:&error]) {
             FDLog(@"%@", error);
         }
     }

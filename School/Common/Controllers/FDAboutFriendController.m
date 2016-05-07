@@ -10,6 +10,8 @@
 #import "FDAboutFriendCell.h"
 #import "XMPPvCardTemp.h"
 #import "FDEditBeizhuController.h"
+#import "FDQMyQRCodeController.h"
+
 
 @interface FDAboutFriendController ()
 
@@ -135,7 +137,9 @@
         }
     }else if (indexPath.section == 2){
         //查看好友二维码
-        FDLog(@"查看好友二维码");
+        FDQMyQRcodeController *vc = [[FDQMyQRcodeController alloc] init];
+        vc.jidStr = self.jidStr;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
@@ -153,18 +157,12 @@
 - (void)setJidStr:(NSString *)jidStr
 {
     _jidStr = jidStr;
-    //获取vcard
-    self.vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:self.jidStr shouldFetch:YES];
     
 }
 
 - (XMPPvCardTemp *)vCard
 {
-    if (!_vCard) {
-        _vCard = [[XMPPvCardTemp alloc] init];
-    }
-    
-    return _vCard;
+    return [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:self.jidStr shouldFetch:YES];;
 }
 
 @end

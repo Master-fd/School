@@ -10,4 +10,6 @@
 
 @interface FDQMyQRcodeController : FDBaseViewController
 
+@property (nonatomic, copy) NSString *jidStr;
+
 @end

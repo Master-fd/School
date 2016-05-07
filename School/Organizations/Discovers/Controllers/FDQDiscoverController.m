@@ -62,10 +62,9 @@
 {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [FDOrganization shareFDOrganization].jobs.count;;
+    return [FDOrganization shareFDOrganization].jobs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,13 +101,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
+
     //删除一个职位
         NSMutableArray *arrayM = [NSMutableArray arrayWithArray:[FDOrganization shareFDOrganization].myVcard.jobs];
         [arrayM removeObjectAtIndex:indexPath.row];
     
     //更新到vcard
         [FDOrganization shareFDOrganization].myVcard.jobs = arrayM;
+
         [[FDOrganization shareFDOrganization] updateMyvCard];
         [self.tableView reloadData];
     }

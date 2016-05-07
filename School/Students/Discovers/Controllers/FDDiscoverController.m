@@ -28,7 +28,7 @@
     
     [self setupViews];
     
-    [self updateDiscoverData];
+    
 }
 
 - (void)setupViews
@@ -38,7 +38,13 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self updateDiscoverData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
 /**
  *  刷新数据
  */
@@ -57,7 +63,7 @@
  */
 - (void)updateDiscoverData
 {
-//    初始化获取一下discover的数据，目的就是调用一下fetchedResultsController的getter的方法
+//    初始化获取一下discover的数据，目的就是调用一下fetchedResultsController的getter的方法,获取所有的组织好友
     [[self.fetchedResultsController sections] count];
 }
 

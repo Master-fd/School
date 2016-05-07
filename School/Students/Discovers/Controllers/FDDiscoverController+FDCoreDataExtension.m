@@ -15,40 +15,37 @@
 #pragma mark - NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedResultsController
 {
+    //关联上下文
+    static NSManagedObjectContext *context = nil;
+    static NSFetchRequest *request = nil;
     if (!_fetchedResultsController) {
         
         //关联上下文
-        NSManagedObjectContext *context = [FDXMPPTool shareFDXMPPTool].rosterStorage.mainThreadManagedObjectContext;
+        context = [FDXMPPTool shareFDXMPPTool].rosterStorage.mainThreadManagedObjectContext;
         
         //设置查询条件
         NSString *jidStr = [FDUserInfo alloc].jidStr;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", jidStr];  //自己的账号
         //排序
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];  //使用displayName作为查询依据
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];  //使用displayName作为排序依据
         
         //关联表XMPPUserCoreDataStorageObject
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XMPPUserCoreDataStorageObject"];
+        request = [[NSFetchRequest alloc] initWithEntityName:@"XMPPUserCoreDataStorageObject"];
         request.sortDescriptors = @[sort];
         request.predicate = predicate;
         
-        //开始查询
-        NSError *error = nil;
-        NSArray *dataSource = [context executeFetchRequest:request error:&error];
-        if (error) {
-            FDLog(@"%@", error);
-        }else{
-            [self getMyOrganizations:dataSource];  //将属于自己的  是组织的联系人过滤出来,保存到myOrganizations
-        }
         
-        //查询数据变化
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-        _fetchedResultsController.delegate = self;
-        
-        
-        if ([_fetchedResultsController performFetch:&error]) {
-            FDLog(@"%@", error);
-        }
     }
+    
+    //开始查询
+    NSError *error = nil;
+    NSArray *dataSource = [context executeFetchRequest:request error:&error];
+    if (error) {
+        FDLog(@"%@", error);
+    }else{
+        [self getMyOrganizations:dataSource];  //将属于自己的  是组织的联系人过滤出来,保存到myOrganizations
+    }
+    
     
     return _fetchedResultsController;
     
@@ -57,17 +54,7 @@
 
 #pragma mark - NSFetchedResultsController delegate
 
-//数据已经发生改变
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self getMyOrganizations:self.fetchedResultsController.fetchedObjects];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData]; // 刷新tableview
-    });
-    
-    FDLog(@"更新招聘信息");
-}
+
 
 /**
  *  判断是否是合理的数据,获取组织的联系人模型保存到myOrganizations

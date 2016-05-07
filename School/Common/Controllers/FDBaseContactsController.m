@@ -88,7 +88,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-
     return [sectionInfo numberOfObjects];
 }
 
@@ -99,8 +98,9 @@
     FDContactModel *contactModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     //获取联系人vcard信息
-    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:contactModel.jidStr shouldFetch:YES];
-    
+    XMPPvCardTemp *vCard = nil;
+
+    vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:contactModel.jidStr];
     FDContactViewCell *cell = [FDContactViewCell contactViewCellWithTableView:tableView];
  
     //设置数据

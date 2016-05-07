@@ -10,7 +10,7 @@
 #import "FDLoginController.h"
 #import "FDQResume.h"
 #import "FDResume.h"
-
+#import "XMPPvCardTemp.h"
 
 @interface FDXMPPTool()<XMPPStreamDelegate>{
     
@@ -366,12 +366,21 @@ singleton_implementation(FDXMPPTool);
 }
 
 /**
- *  根据传入的jidstr  获取用户vcard
+ *  根据传入的jidstr  获取用户vcard,直接联网获取,更新到本地
  */
 - (XMPPvCardTemp *)xmppvCardTempForJIDStr:(NSString *)jidStr shouldFetch:(BOOL)shouldFetch
 {
     XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    [self.vCard fetchvCardTempForJID:jid ignoreStorage:shouldFetch];  //强制联网获取最新vcard信息
     return [self.vCard vCardTempForJID:jid shouldFetch:shouldFetch];
+}
+/**
+ *  根据传入的jidstr  获取用户vcard,vcard会缓存，有缓存则不联网读取
+ */
+- (XMPPvCardTemp *)xmppvCardTempForJIDStr:(NSString *)jidStr
+{
+    XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    return [self.vCard vCardTempForJID:jid shouldFetch:YES];
 }
 /**
  *  更新用户昵称,自己给用户设置的备注

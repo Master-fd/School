@@ -62,4 +62,12 @@
     [_myRQCode autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.view];
     
 }
+
+- (void)setJidStr:(NSString *)jidStr
+{
+    _jidStr = jidStr;
+    XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:jidStr shouldFetch:YES];
+
+    _myRQCode.image = [UIImage imageWithData:vcard.sound];
+}
 @end

@@ -83,27 +83,22 @@ singleton_implementation(FDOrganization);
 {
     if (!_jobs) {
         _jobs = [NSArray array];
-        if (self.myVcard.jobs.count)
-        {
-            NSMutableArray *arrayM = [[NSMutableArray alloc] init];
-            for (NSData *data in self.myVcard.jobs) {
-                FDJobModel *model = [[FDJobModel alloc] init];
-                model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                [arrayM addObject:model];
-            }
-            _jobs = arrayM;
+        NSMutableArray *arrayM = [[NSMutableArray alloc] init];
+        for (NSData *data in self.myVcard.jobs) {
+            FDJobModel *model = [[FDJobModel alloc] init];
+            model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [arrayM addObject:model];
         }
+        _jobs = arrayM;
+      
     }else if (self.myVcard.jobs.count != _jobs.count){
-        if (self.myVcard.jobs.count)
-        {
-            NSMutableArray *arrayM = [[NSMutableArray alloc] init];
-            for (NSData *data in self.myVcard.jobs) {
-                FDJobModel *model = [[FDJobModel alloc] init];
-                model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                [arrayM addObject:model];
-            }
-            _jobs = arrayM;
+        NSMutableArray *arrayM = [[NSMutableArray alloc] init];
+        for (NSData *data in self.myVcard.jobs) {
+            FDJobModel *model = [[FDJobModel alloc] init];
+            model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [arrayM addObject:model];
         }
+        _jobs = arrayM;
     }
     
     return _jobs;
