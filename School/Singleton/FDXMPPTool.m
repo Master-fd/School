@@ -374,10 +374,9 @@ singleton_implementation(FDXMPPTool);
 
 -(void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(DDXMLElement *)item
 {
-
     NSString *subscription = [item attributeStringValueForName:@"subscription"];
-    if ([subscription isEqualToString:@"both"] || [subscription isEqualToString:@"to"]
-        || [subscription isEqualToString:@"from"]) {
+    if ([subscription isEqualToString:@"both"]) {
+        
         [self xmppFetchBuddyFromServer:[FDUserInfo shareFDUserInfo].jidStr];
     }
 }
@@ -425,6 +424,7 @@ singleton_implementation(FDXMPPTool);
  */
 - (BOOL)addFriend:(NSString *)account
 {
+    BOOL result = NO;
     //判断是否是添加自己
     if ([account isEqualToString:[FDUserInfo shareFDUserInfo].account]) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -441,13 +441,15 @@ singleton_implementation(FDXMPPTool);
         dispatch_async(dispatch_get_main_queue(), ^{
             [FDMBProgressHUB showError:@"好友已存在"];
         });
-        
-        return NO;
+        result = NO;
+    }else{
+        result = YES;
     }
     //发送订阅请求，将nickname设置成默认account
     [[FDXMPPTool shareFDXMPPTool].roster subscribePresenceToUser:friendJid];
     [[FDXMPPTool shareFDXMPPTool].roster setNickname:friendJid.user forUser:friendJid];
-    return YES;
+    
+    return result;
 }
 
 /*
