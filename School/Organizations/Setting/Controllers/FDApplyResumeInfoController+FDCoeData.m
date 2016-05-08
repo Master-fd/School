@@ -10,8 +10,7 @@
 #import "FDQResume.h"
 #import "NSObject+CoreDataHelper.h"
 
-#define kMaxBachSize      (30)    //每次最多从数据库读取30条数据
-#define kPageSize         (10)    //一页10条数据
+
 
 
 @implementation FDApplyResumeInfoController (FDCoeData)
@@ -108,7 +107,54 @@
     
     return _fetchedResultsController;
 }
+/**
+ *  删除所有记录
+ */
+- (void)removeAllObjectInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [FDQResume entityInManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:nil];  //查找
+    
+    for (FDQResume *model in results) {
+        [context deleteObject:model];  //删除
+    }
+    
+    [self saveContext];
+    [self.fetchedResultsController.fetchRequest setFetchOffset:0];  //重置查询请求
+}
 
+/**
+ *  删除非收藏记录
+ */
+- (void)removeAllNonCollectObjectInManagedObjectContext:(NSManagedObjectContext *)context withCollect:(BOOL)collect
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [FDQResume entityInManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"collect = %d", collect];
+    fetchRequest.predicate = predicate;
+    
+    NSArray *results = [context executeFetchRequest:fetchRequest error:nil];  //查找
+    
+    for (FDQResume *model in results) {
+        [context deleteObject:model];
+    }
+    
+    [self saveContext];
+    
+    NSUInteger totalCount = [FDQResume count];//一共多少条记录
+    
+    [self.fetchedResultsController.fetchRequest  setFetchOffset:(totalCount>=kPageSize)?(totalCount-kPageSize):0]; //重置查询请求
+}
+/**
+ *  滚动到底部
+ */
 -(void)scrollToBottom:(BOOL)animated
 {    //让其滚动到底部
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -131,8 +177,8 @@
  */
 -(void)loadMoreResume
 {
-    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
     
+    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
     NSUInteger offset = fetchRequest.fetchOffset;
     NSUInteger limit;
     NSUInteger newRows;//新增了多少条数据?
@@ -173,7 +219,7 @@
         }else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [FDMBProgressHUB showError:@"已经没有更多数据了"];
+                [FDMBProgressHUB showError:@"已经没有更多简历了"];
             });
         }
     }

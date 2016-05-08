@@ -7,7 +7,7 @@
 //
 
 #import "FDBaseContactsController+CoreDataExtension.h"
-
+#import "FDChatModel.h"
 
 @implementation FDBaseContactsController (CoreDataExtension)
 
@@ -18,13 +18,13 @@
 {
     if (!_fetchedResultsController) {
         
+        
         //关联上下文
         NSManagedObjectContext *context = [FDXMPPTool shareFDXMPPTool].rosterStorage.mainThreadManagedObjectContext;
         
         //设置查询条件
         NSString *jidStr = [FDUserInfo shareFDUserInfo].jidStr;
-       
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", jidStr];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND subscription != %@", jidStr, @"none"];
         //排序
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];
         

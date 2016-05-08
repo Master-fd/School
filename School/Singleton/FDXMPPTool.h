@@ -78,6 +78,11 @@ typedef void (^XMPPRequireResultBlock)(XMPPRequireResultType type);   //定义�
 /**
  *  联网添加好友
  */
-- (void)addFriend:(NSString *)account;
+- (BOOL)addFriend:(NSString *)account;
+
+/**
+ *  联网查询好友列表
+ */
+- (void)xmppFetchBuddyFromServer:(NSString *)jidStr;
 
 @end

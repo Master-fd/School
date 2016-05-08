@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  是否执行过删除所有或者删除非收藏的操作
+ */
+
 @class FDResume;
 @interface FDQResume : NSManagedObject
+
 
 /**
  *  表名称
@@ -22,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
  *  插入一条记录
  */
 +(FDQResume *)insertNewObjectInManagedObjectContext:(NSManagedObjectContext *)context;
+
 /**
  *  通过索引，删除一条记录
  */
 +(void)removeObjectInManagedObjectContext:(NSManagedObjectContext *)context atModel:(FDQResume *)model;
+
 /**
- *  删除非收藏记录
+ *  插入一条简历到数据库
  */
-+ (void)removeAllNonCollectObjectInManagedObjectContext:(NSManagedObjectContext *)context withCollect:(BOOL)collect;
-/**
- *  删除所有记录
- */
-+ (void)removeAllObjectInManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)insertOneResumeData:(FDResume *)resume;
+
 /**
  *  update 一条记录的colLect字段
  */
 + (void)updateObjectInManagedObjectContext:(NSManagedObjectContext *)context atModel:(FDQResume *)model withCollect:(BOOL)collect;
+
 /**
  *  获取表
  */
@@ -48,10 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSUInteger)count;
 
-/**
- *  插入一条简历到数据库
- */
-+ (void)insertOneResumeData:(FDResume *)resume;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

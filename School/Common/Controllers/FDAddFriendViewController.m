@@ -157,11 +157,12 @@
             }
         
         //发送账户，添加好友
-        [[FDXMPPTool shareFDXMPPTool] addFriend:searchBar.text];
+        if ([[FDXMPPTool shareFDXMPPTool] addFriend:searchBar.text]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [FDMBProgressHUB showSuccess:@"已添加"];
+            });
+        }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FDMBProgressHUB showSuccess:@"已添加"];
-        });
         
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -9,15 +9,24 @@
 #import "FDDiscoverController+FDCoreDataExtension.h"
 #import "FDContactModel.h"
 
+#define kFetchBatchSize   20   //每次从数据库中最多取20条
+#define kFetchLimit       10   //每页10条
+
+#define kEntity         @"XMPPUserCoreDataStorageObject"
+
+
+
 @implementation FDDiscoverController (FDCoreDataExtension)
 
 
 #pragma mark - NSFetchedResultsController
+
+//查询的是所有的好友FDContactModel，然后筛选出组织账户,myOrganizations只是保存了组织的FDContactModel模型，内存不大
 - (NSFetchedResultsController *)fetchedResultsController
 {
+    static NSManagedObjectContext *context;
+    static NSFetchRequest *request;
     //关联上下文
-    static NSManagedObjectContext *context = nil;
-    static NSFetchRequest *request = nil;
     if (!_fetchedResultsController) {
         
         //关联上下文
@@ -30,13 +39,13 @@
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];  //使用displayName作为排序依据
         
         //关联表XMPPUserCoreDataStorageObject
-        request = [[NSFetchRequest alloc] initWithEntityName:@"XMPPUserCoreDataStorageObject"];
+        request = [[NSFetchRequest alloc] initWithEntityName:kEntity];
         request.sortDescriptors = @[sort];
         request.predicate = predicate;
         
+        [request setFetchOffset:0];
         
     }
-    
     //开始查询
     NSError *error = nil;
     NSArray *dataSource = [context executeFetchRequest:request error:&error];
@@ -50,9 +59,6 @@
     return _fetchedResultsController;
     
 }
-
-
-#pragma mark - NSFetchedResultsController delegate
 
 
 

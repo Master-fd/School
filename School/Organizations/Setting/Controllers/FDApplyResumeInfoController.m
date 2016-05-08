@@ -14,7 +14,7 @@
 #import "FDQResumeController.h"
 #import "FDApplyResumeInfoController+FDCoeData.h"
 #import "NSObject+CoreDataHelper.h"
-
+#import "FDResume.h"
 /********************************************
  收到的简历，应该保持在coredata数据库中，每个数据库保存一个resume字段和“colloct”字段需要的时候在取出来
  *****************************************/
@@ -29,8 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+        
     [self setupNav];
     
     [self setupViews];
@@ -116,14 +115,14 @@
     if ([actionSheet.title isEqualToString:@"删除简历"]) {
         switch (buttonIndex) {
             case 0:
-                [FDQResume removeAllObjectInManagedObjectContext:self.managedObjectContext];
+                    [self removeAllObjectInManagedObjectContext:self.managedObjectContext];
                     dispatch_async(dispatch_get_main_queue(), ^{
                     [FDMBProgressHUB showError:@"没有收到任何简历"];
                     });
             break;
             
             case 1:
-                    [FDQResume removeAllNonCollectObjectInManagedObjectContext:self.managedObjectContext withCollect:NO];
+                    [self removeAllNonCollectObjectInManagedObjectContext:self.managedObjectContext withCollect:NO];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [FDMBProgressHUB showError:@"非收藏的已删除"];
                     });

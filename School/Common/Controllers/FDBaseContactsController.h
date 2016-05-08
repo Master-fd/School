@@ -6,10 +6,10 @@
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
 
-#import "FDBaseTableViewController.h"
+#import <UIKit/UIKit.h>
 
 
-@interface FDBaseContactsController : FDBaseTableViewController{
+@interface FDBaseContactsController : UITableViewController{
     
     NSFetchedResultsController *_fetchedResultsController;
 }

@@ -56,17 +56,8 @@
                                        @"photo" : _weakself.jobModel.icon
                                        };
         //发送简历，同时保存一条信息到plist,保存
-        if (![_weakself saveApplyInfoWithPlist:applyInfoDic]) {
-            //这条信息已经有记录，说明应聘过了
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [FDMBProgressHUB showError:@"不能重复应聘"];
-            });
-        }else{
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [FDMBProgressHUB showSuccess:@"简历发送成功"];
-            });
-        }
+        [_weakself saveApplyInfoWithPlist:applyInfoDic];
+
     };
     _jobButtonView.sendMessageToXmppJidStrBlock = ^{
         //push到聊天界面
@@ -162,7 +153,14 @@
  */
 - (BOOL)saveApplyInfoWithPlist:(NSDictionary *)dataDic
 {
-  
+    // 0 在线。1 离开 2离线
+//    if ([self.contactModel.sectionNum intValue]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [FDMBProgressHUB showError:@"好友不在线，不能简历"];
+//        });
+//        return NO;
+//    }
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:kMyApplyInfoPlistPath]) {  //文件不存在，则创建
         [fileManager createFileAtPath:kMyApplyInfoPlistPath contents:nil attributes:nil];
@@ -176,6 +174,10 @@
             && [dic[@"organization"] isEqualToString:dataDic[@"organization"]]
             && [dic[@"department"] isEqualToString:dataDic[@"department"]]) {
             //已经应聘过了
+            //这条信息已经有记录，说明应聘过了
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [FDMBProgressHUB showError:@"不能重复应聘"];
+            });
             return NO;
         }
     }
@@ -187,6 +189,10 @@
     //发送简历
     [self sendMyResumeToHr:self.contactModel.jidStr];
     
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [FDMBProgressHUB showSuccess:@"简历发送成功"];
+    });
     return YES;
 }
 

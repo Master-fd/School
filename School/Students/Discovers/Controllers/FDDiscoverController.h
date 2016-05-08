@@ -10,6 +10,7 @@
 
 @interface FDDiscoverController : FDBaseDiscoverController{
     NSFetchedResultsController *_fetchedResultsController;
+    
 }
 
 @property (nonatomic, strong) NSArray *myOrganizations;   //自己的所有组织好友

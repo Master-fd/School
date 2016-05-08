@@ -50,7 +50,7 @@
 - (NSArray *)dataSources
 {
     if (!_dataSources) {
-        //从plist里面加载工作数据
+        //从plist里面加载所有已应聘工作数据
         NSArray *data = [NSArray arrayWithContentsOfFile:kMyApplyInfoPlistPath];
         NSMutableArray *arrayM = [NSMutableArray array];
         for (NSDictionary *dic in data) {
@@ -94,7 +94,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     FDJobModel *jobModel = [self getJobModelAtIndexPath:indexPath]; // 获取工作模型数据
-//    FDJobModel *jobModel = [self getTestData:indexPath];   //测试使用
     FDJobInfoController *vc = [[FDJobInfoController alloc] init];
     vc.title = @"职位详情";
     vc.jobModel = jobModel; //传递数据
@@ -164,19 +163,5 @@
     [data writeToFile:kMyApplyInfoPlistPath atomically:YES];
 }
 
-- (FDJobModel *)getTestData:(NSIndexPath *)indexPath
-{
-    FDJobModel *jobModel = nil;
-    XMPPvCardTemp *vCard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];
-    NSData *data = vCard.jobs[indexPath.row]; // 取出一条数据
-    //Card.jobs  使用这个字段作为招聘信息,保存的nsstring类型
-    //转换成工作模型
-    if (data.length) {
-        jobModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }else{
-        jobModel = nil;
-    }
-    return jobModel;
-    
-}
+
 @end

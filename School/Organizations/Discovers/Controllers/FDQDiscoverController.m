@@ -19,7 +19,6 @@
 @interface FDQDiscoverController ()
 
 
-
 @end
 
 
@@ -38,6 +37,7 @@
 {
     self.title = self.navigationController.tabBarItem.title;
 }
+
 
 /**
  *  设置导航栏
@@ -72,6 +72,7 @@
     //获取数据
     NSArray *array = [FDOrganization shareFDOrganization].jobs;
     FDJobModel *jobModel = array[indexPath.row];
+    
     //新建cell
     FDDiscoverCell *cell = [FDDiscoverCell cellWithTableView:tableView];
     //设置数据
@@ -98,6 +99,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -138,6 +140,5 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
-#pragma mark - 测试用的数据
 
 @end

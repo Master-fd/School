@@ -12,10 +12,6 @@
 @interface FDContactModel : NSObject
 
 //这些名称字母必须完全和xmpp向对应,名称可以减少,但是不能出现没有的
-/**
- *  好友头像
- */
-@property (nonatomic, strong) NSData *photo;
 
 /**
  *  好友nickname
@@ -32,5 +28,8 @@
  */
 @property (nonatomic, copy) NSString *jidStr;
 
-
+/**
+ *  是否在线
+ */
+@property (nonatomic, copy) NSString *sectionNum;
 @end

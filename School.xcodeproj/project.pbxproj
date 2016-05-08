@@ -212,7 +212,6 @@
 		1BAE00361C8AC717002B4570 /* FDInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE00351C8AC717002B4570 /* FDInputView.m */; };
 		1BAEE0681C93FC1B0035367A /* FDBaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE0631C93FC1B0035367A /* FDBaseLoginController.m */; };
 		1BAEE0691C93FC1B0035367A /* FDBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE0651C93FC1B0035367A /* FDBaseNavigationController.m */; };
-		1BAEE07C1C940D7C0035367A /* FDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE07B1C940D7C0035367A /* FDTestViewController.m */; };
 		1BAEFFF31C8ABDBD002B4570 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */; };
 		1BB0C3D51C9CE87A00E75866 /* UIResponder+FDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D41C9CE87A00E75866 /* UIResponder+FDExtension.m */; };
 		1BB0C3D81C9CF55900E75866 /* FDChatInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0C3D71C9CF55900E75866 /* FDChatInputBar.m */; };
@@ -669,8 +668,6 @@
 		1BAEE0641C93FC1B0035367A /* FDBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDBaseNavigationController.h; sourceTree = "<group>"; };
 		1BAEE0651C93FC1B0035367A /* FDBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDBaseNavigationController.m; sourceTree = "<group>"; };
 		1BAEE0661C93FC1B0035367A /* FDBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDBaseTableViewController.h; sourceTree = "<group>"; };
-		1BAEE07A1C940D7C0035367A /* FDTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDTestViewController.h; sourceTree = "<group>"; };
-		1BAEE07B1C940D7C0035367A /* FDTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDTestViewController.m; sourceTree = "<group>"; };
 		1BAEFFF11C8ABDBD002B4570 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1BAEFFF21C8ABDBD002B4570 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1BB0C3D31C9CE87A00E75866 /* UIResponder+FDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+FDExtension.h"; sourceTree = "<group>"; };
@@ -2011,8 +2008,6 @@
 				1B8D81731C95723600E57402 /* FDBaseContactsController.m */,
 				1B8B19681CC1E704002EE4FF /* FDBaseContactsController+CoreDataExtension.h */,
 				1B8B19691CC1E704002EE4FF /* FDBaseContactsController+CoreDataExtension.m */,
-				1BAEE07A1C940D7C0035367A /* FDTestViewController.h */,
-				1BAEE07B1C940D7C0035367A /* FDTestViewController.m */,
 				1B4280E61CC12610009DD6F4 /* FDAddFriendViewController.h */,
 				1B4280E71CC12610009DD6F4 /* FDAddFriendViewController.m */,
 				1B8B19651CC1DE95002EE4FF /* FDBaseViewController.h */,
@@ -2463,7 +2458,6 @@
 				1BBFDCD61C906C4B006496CE /* FDUserInfo.m in Sources */,
 				1B2F4D7F1C93BE3600B6B9BB /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				1B2F4C021C93B7D200B6B9BB /* DDAbstractDatabaseLogger.m in Sources */,
-				1BAEE07C1C940D7C0035367A /* FDTestViewController.m in Sources */,
 				1B2F4D891C93BE3600B6B9BB /* XMPPRoom.m in Sources */,
 				1B2F4DA11C93BE3600B6B9BB /* XMPPSoftwareVersion.m in Sources */,
 				1B2F4D751C93BE3600B6B9BB /* XMPPSystemInputActivityMonitor.m in Sources */,

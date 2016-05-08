@@ -12,6 +12,7 @@
 #import "FDResume.h"
 
 
+
 @implementation FDQResume
 
 /**
@@ -54,46 +55,6 @@
         }
     }
     
-    
-    [self saveContext];
-}
-/**
- *  删除所有记录
- */
-+ (void)removeAllObjectInManagedObjectContext:(NSManagedObjectContext *)context
-{
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [self entityInManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    NSArray *results = [context executeFetchRequest:fetchRequest error:nil];  //查找
-    
-    for (FDQResume *model in results) {
-        [context deleteObject:model];  //删除
-    }
- 
-    [self saveContext];
-}
-/**
- *  删除非收藏记录
- */
-+ (void)removeAllNonCollectObjectInManagedObjectContext:(NSManagedObjectContext *)context withCollect:(BOOL)collect
-{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [self entityInManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"collect = %d", collect];
-    fetchRequest.predicate = predicate;
-    
-    NSArray *results = [context executeFetchRequest:fetchRequest error:nil];  //查找
-    
-    for (FDQResume *model in results) {
-        [context deleteObject:model];
-    }
     
     [self saveContext];
 }

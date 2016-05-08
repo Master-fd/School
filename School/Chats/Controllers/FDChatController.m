@@ -64,6 +64,7 @@
                                @"account" : account,
                                @"jidStr" : jidStr};
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsgDidRead object:self userInfo:userInfo];
+
 }
 /**
  *  单击view界面，退出键盘或者faceview，或者voiseview

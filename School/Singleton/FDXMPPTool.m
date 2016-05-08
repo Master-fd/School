@@ -12,7 +12,7 @@
 #import "FDResume.h"
 #import "XMPPvCardTemp.h"
 
-@interface FDXMPPTool()<XMPPStreamDelegate>{
+@interface FDXMPPTool()<XMPPStreamDelegate, XMPPRosterDelegate, UIAlertViewDelegate>{
     
     XMPPRequireResultBlock _requireResultBlock;
     XMPPReconnect *_reconnect;
@@ -26,6 +26,7 @@
 @property (nonatomic, assign, getter=iSRecord) BOOL record;
 //记录离线收到的jidstr信息
 @property (nonatomic, strong) NSMutableArray *jidStrs;
+
 @end
 
 
@@ -89,6 +90,7 @@ singleton_implementation(FDXMPPTool);
     _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
     _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
     [_roster activate:_xmppStream];
+    [_roster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
     //电子名片
     _vCardStorage = [[XMPPvCardCoreDataStorage alloc] init];
@@ -141,7 +143,12 @@ singleton_implementation(FDXMPPTool);
     
     NSError *error = nil;
     if (![_xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
-        FDLog(@"xmpp 连接错误%@", error);
+        FDLog(@"xmpp 连接超时%@", error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB hideHUD];
+            [FDMBProgressHUB showError:@"连接超时"];
+        });
+        
     }
 }
 
@@ -225,7 +232,6 @@ singleton_implementation(FDXMPPTool);
     //保存block
     _requireResultBlock = requireResultBlock;
     
-    
     //断开之前的连接
     [_xmppStream disconnect];
     
@@ -306,7 +312,6 @@ singleton_implementation(FDXMPPTool);
     NSString *from = [[message attributeForName:@"from"] stringValue];
     NSString *msg = [[message elementForName:@"body"] stringValue];
     
-    
     //接收到合法简历，保存起来
     if ([msg isEqualToString:kBodyResume]) {
         
@@ -344,6 +349,7 @@ singleton_implementation(FDXMPPTool);
                                        @"account" : account,
                                        @"jidStr" : jidStr};
             if (self.iSRecord) {
+                //接收到信息，发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReciveNewMsg object:self userInfo:userInfo];
             } else {
                 //先记录离线消息，延迟一下在发通知
@@ -353,6 +359,29 @@ singleton_implementation(FDXMPPTool);
         }
     }
 }
+
+
+#pragma mark - xmppRosterdelegate
+-(void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
+{
+    NSString * presenceType = [presence type];
+    XMPPJID * fromJid = presence.from;
+    if ([presenceType isEqualToString:@"subscribe"]) {//是订阅请求  直接通过,同时也订阅对方
+        [_roster acceptPresenceSubscriptionRequestFrom:fromJid andAddToRoster:YES];
+        [[FDXMPPTool shareFDXMPPTool].roster setNickname:fromJid.user forUser:fromJid];
+    }
+}
+
+-(void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(DDXMLElement *)item
+{
+
+    NSString *subscription = [item attributeStringValueForName:@"subscription"];
+    if ([subscription isEqualToString:@"both"] || [subscription isEqualToString:@"to"]
+        || [subscription isEqualToString:@"from"]) {
+        [self xmppFetchBuddyFromServer:[FDUserInfo shareFDUserInfo].jidStr];
+    }
+}
+
 
 
 #pragma mark - 公共方法
@@ -394,7 +423,7 @@ singleton_implementation(FDXMPPTool);
 /**
  *  联网添加好友
  */
-- (void)addFriend:(NSString *)account
+- (BOOL)addFriend:(NSString *)account
 {
     //判断是否是添加自己
     if ([account isEqualToString:[FDUserInfo shareFDUserInfo].account]) {
@@ -402,7 +431,7 @@ singleton_implementation(FDXMPPTool);
             [FDMBProgressHUB showError:@"不能添加自己"];
         });
         
-        return;
+        return NO;
     }
     
     //判断好友是否存在
@@ -413,10 +442,45 @@ singleton_implementation(FDXMPPTool);
             [FDMBProgressHUB showError:@"好友已存在"];
         });
         
-        return;
+        return NO;
     }
-    
     //发送订阅请求，将nickname设置成默认account
-    [[FDXMPPTool shareFDXMPPTool].roster addUser:friendJid withNickname:account];
+    [[FDXMPPTool shareFDXMPPTool].roster subscribePresenceToUser:friendJid];
+    [[FDXMPPTool shareFDXMPPTool].roster setNickname:friendJid.user forUser:friendJid];
+    return YES;
 }
+
+/*
+ 一个 IQ 请求：
+ <iq type="get"
+ 　　from="xiaoming@example.com"
+ 　　to="example.com"
+ 　　id="1234567">
+ 　　<query xmlns="jabber:iq:roster"/>
+ <iq />
+ 
+ type 属性，说明了该 iq 的类型为 get，与 HTTP 类似，向服务器端请求信息
+ from 属性，消息来源，这里是你的 JID
+ to 属性，消息目标，这里是服务器域名
+ id 属性，标记该请求 ID，当服务器处理完毕请求 get 类型的 iq 后，响应的 result 类型 iq 的 ID 与 请求 iq 的 ID 相同
+ <query xmlns="jabber:iq:roster"/> 子标签，说明了客户端需要查询 roster
+ */
+- (void)xmppFetchBuddyFromServer:(NSString *)jidStr
+{
+    NSString * const fetchBuddyQueryID = @"fetchBuddyQueryID";
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"type" stringValue:@"get"];
+    [iq addAttributeWithName:@"from" stringValue:jidStr];
+    [iq addAttributeWithName:@"to" stringValue:ServerName];
+    [iq addAttributeWithName:@"id" stringValue:fetchBuddyQueryID];
+    
+    // 添加查询类型
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
+    [iq addChild:query];
+
+    // 发送查询
+    [_xmppStream sendElement:iq];
+}
+
+
 @end

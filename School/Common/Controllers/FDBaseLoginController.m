@@ -5,7 +5,7 @@
 //  Created by asus on 16/3/12.
 //  Copyright (c) 2016年 asus. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "FDBaseLoginController.h"
 #import "FDBaseNavigationController.h"
 //学生端
@@ -44,7 +44,7 @@
         //连接成功或者失败之后调用block
         [self xmppUserConnetResult:type];
     }];
-
+    
 
 }
 
@@ -81,8 +81,7 @@
                 });
                 break;
             case XMPPRequireResultTypeNetError:
-                [FDMBProgressHUB hideHUD];  //回到登录界面
-                [[FDXMPPTool shareFDXMPPTool] xmppUserLogout];
+                [FDMBProgressHUB hideHUD];
                 [FDMBProgressHUB showError:@"连接失败"];
                 break;
             default:
@@ -107,7 +106,7 @@
         //学生账户
         [self enterStudentClientMainPage];
     }
-    [FDMBProgressHUB hideHUD];
+    
 }
 /**
  *  学生端主界面
@@ -118,29 +117,27 @@
     [FDUserInfo shareFDUserInfo].loginStatus = YES;
     [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
     
-    FDContactController *organizationsVC = [[FDContactController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDContactController *organizationsVC = [[FDContactController alloc] init];
     FDBaseNavigationController *organizationsNav  = [[FDBaseNavigationController alloc] initWithRootViewController:organizationsVC];
-    FDDiscoverController *discoversVC = [[FDDiscoverController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDDiscoverController *discoversVC = [[FDDiscoverController alloc] init];
     FDBaseNavigationController *discoversNav  = [[FDBaseNavigationController alloc] initWithRootViewController:discoversVC];
-    FDSettingController *settingVC = [[FDSettingController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDSettingController *settingVC = [[FDSettingController alloc] init];
     FDBaseNavigationController *settingNav  = [[FDBaseNavigationController alloc] initWithRootViewController:settingVC];
     
     
     //获取主窗口
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UITabBarController *tabbarVc = [[UITabBarController alloc] init];
-    
-    [tabbarVc addChildViewController:organizationsNav];
-    [tabbarVc addChildViewController:discoversNav];
-    [tabbarVc addChildViewController:settingNav];
     //
     organizationsNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人" image:[UIImage imageNamed:@"tabbar_contacts"] selectedImage:[UIImage imageNamed:@"tabbar_contactsHL"]];
     discoversNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_discover"] selectedImage:[UIImage imageNamed:@"tabbar_discoverHL"]];
     settingNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage imageNamed:@"tabbar_meHL"]];
 
+    [tabbarVc addChildViewController:organizationsNav];
+    [tabbarVc addChildViewController:discoversNav];
+    [tabbarVc addChildViewController:settingNav];
     
     window.rootViewController = tabbarVc;
-    
 }
 
 /**
@@ -148,15 +145,15 @@
  */
 + (void)enterOrganizationClientMainPage
 {
+    
     //保存该用户已经登录过,只要能进来主界面，说明就是登录过了
     [FDUserInfo shareFDUserInfo].loginStatus = YES;
     [[FDUserInfo shareFDUserInfo] writeUserInfoToSabox];
-    
-    FDOContactController *organizationsVC = [[FDOContactController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDOContactController *organizationsVC = [[FDOContactController alloc] init];
     FDBaseNavigationController *organizationsNav  = [[FDBaseNavigationController alloc] initWithRootViewController:organizationsVC];
-    FDQDiscoverController *discoversVC = [[FDQDiscoverController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDQDiscoverController *discoversVC = [[FDQDiscoverController alloc] init];
     FDBaseNavigationController *discoversNav  = [[FDBaseNavigationController alloc] initWithRootViewController:discoversVC];
-    FDQSettingTableViewController *settingVC = [[FDQSettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    FDQSettingTableViewController *settingVC = [[FDQSettingTableViewController alloc] init];
     FDBaseNavigationController *settingNav  = [[FDBaseNavigationController alloc] initWithRootViewController:settingVC];
 
 
@@ -164,15 +161,15 @@
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UITabBarController *tabbarVc = [[UITabBarController alloc] init];
     
-    [tabbarVc addChildViewController:organizationsNav];
-    [tabbarVc addChildViewController:discoversNav];
-    [tabbarVc addChildViewController:settingNav];
-    
     organizationsNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"联系人" image:[UIImage imageNamed:@"tabbar_contacts"] selectedImage:[UIImage imageNamed:@"tabbar_contactsHL"]];
     discoversNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_discover"] selectedImage:[UIImage imageNamed:@"tabbar_discoverHL"]];
     settingNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage imageNamed:@"tabbar_meHL"]];
     
+    [tabbarVc addChildViewController:organizationsNav];
+    [tabbarVc addChildViewController:discoversNav];
+    [tabbarVc addChildViewController:settingNav];
     
     window.rootViewController = tabbarVc;
+
 }
 @end

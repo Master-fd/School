@@ -272,10 +272,6 @@
         
         //转成不带声调的拼音
         CFStringTransform((CFMutableStringRef)stringM, NULL, kCFStringTransformStripDiacritics, NO);
-    }else if ([self isEnglishFristWithString:string]) {
-        
-    } else {
-        return @"unknown";
     }
     //转为大写字符
     NSString *capitalized = [stringM capitalizedString];

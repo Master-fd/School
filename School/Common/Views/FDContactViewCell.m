@@ -66,6 +66,24 @@
     }else{//没有备注
         self.remark = NO;
     }
+    
+    switch ([contactModel.sectionNum intValue]) {//好友状态
+        case 0:
+            _nickName.textColor = [UIColor redColor];
+            _accocunt.textColor = [UIColor redColor];
+            break;
+        case 1:
+            _nickName.textColor = [UIColor grayColor];
+            _accocunt.textColor = [UIColor grayColor];
+            break;
+        case 2:
+            _nickName.textColor = [UIColor blackColor];
+            _accocunt.textColor = [UIColor blackColor];
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)setVCard:(XMPPvCardTemp *)vCard
@@ -75,7 +93,7 @@
     _iconView.image = [UIImage imageWithData:self.vCard.photo];
     
     if (!self.isRemark) {
-        //没有使用备注,, 使用用户的vcard上nickname
+        //没有使用备注, 使用用户的vcard上nickname
         if (self.vCard.nickname.length) {
             _nickName.text = self.vCard.nickname;
         }else{//用户自己也没有设置昵称，使用用户的account
@@ -134,30 +152,17 @@
     NSDictionary *userInfo = [notification userInfo];
     
     NSString *jidStr = [userInfo objectForKey:@"jidStr"];
-    
     if ([jidStr isEqualToString:self.contactModel.jidStr]) {
-         static int numOfMsg = 0;
+
         if ([notification.name isEqualToString:kNotificationReciveNewMsg]) {
-            numOfMsg = numOfMsg + 1;
-            if (numOfMsg > 100) {
-                numOfMsg = 110;
-            }
             _messageLab.hidden = NO;
         }
         
         if ([notification.name isEqualToString:kNotificationNewMsgDidRead]) {
-            numOfMsg = 0;
             _messageLab.hidden = YES;
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (numOfMsg > 100) {
-                _messageLab.text = @"...";
-            }else{
-                _messageLab.text = [NSString  stringWithFormat:@"%d", numOfMsg];
-            }
-        });
-        
+
     }
     
     
