@@ -7,7 +7,6 @@
 //
 
 #import "NSString+FDExtension.h"
-#import "NSString+MJExtension.h"
 @implementation NSString (FDExtension)
 
 
