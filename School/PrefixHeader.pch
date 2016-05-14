@@ -47,8 +47,9 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 #define  kBaseViewControlBackColor             [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1]
 #define  kBaseTableViewControlBackColor        [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1]
 
-#define ServerName    @"feidong.local"
-#define ServerIP      @"192.168.31.216"         //@"127.0.0.1"
+//119.29.202.162是我的云服务器域名和IP地址，同一个
+#define ServerName    @"119.29.202.162"//@"feidong.local"
+#define ServerIP      @"119.29.202.162"//@"192.168.31.216"         //@"127.0.0.1"
 #define ClientName    @"iphone"
 #define ServerPort    5222
 
@@ -69,10 +70,11 @@ case FDYellowColor:view.backgroundColor = [UIColor whiteColor];break;\
 //简历字段标识符
 #define  kBodyResume   @"BodyResume"
 
+#import "UIImageView+FDExtension.h"
+#import "UIImage+FDExtension.h"
 #import "FDSingleton.h"
 #import "PureLayout.h"
 #import "UIView+FDViewExtension.h"
-#import "UIView+MJExtension.h"
 #import "FDMBProgressHUB.h"
 #import "FDXMPPTool.h"
 #import "FDUserInfo.h"

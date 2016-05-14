@@ -90,7 +90,6 @@
     }
     
     cell.textLabel.text = model.title;
-    cell.textLabel.alpha = 0.8;
     if ((indexPath.section == self.dataSources.count-1)) {
         cell.textLabel.textColor = [UIColor orangeColor];
     }

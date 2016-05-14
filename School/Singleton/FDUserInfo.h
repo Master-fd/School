@@ -59,7 +59,10 @@ singleton_interface(FDUserInfo);
  */
 @property (nonatomic, assign, getter=isLoginStatus) BOOL loginStatus;
 
-
+/**
+ *  确认用户是否在线，应用程序没有退出，只是IOS息屏断网使用
+ */
+@property (nonatomic, assign, getter=isOnlineStatus) BOOL onlineStatus;
 
 
 

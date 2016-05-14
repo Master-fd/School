@@ -41,12 +41,10 @@
     self.contentView.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;   //设置选定是无变化
     
-    _headIconBtn = [[UIButton alloc] initForAutoLayout];
+    _headIconBtn = [[UIImageView alloc] initForAutoLayout];
     [self.contentView addSubview:_headIconBtn];
     _headIconBtn.backgroundColor = [UIColor clearColor];
-    _headIconBtn.layer.cornerRadius = 20;
-    _headIconBtn.layer.masksToBounds = YES;
-    [_headIconBtn setBackgroundImage:[UIImage imageNamed:@"user_avatar_default"] forState:UIControlStateNormal];
+    _headIconBtn.image = [UIImage imageNamed:@"user_avatar_default"];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headIconBtnDidTap:)];  //头像被单击了
     [_headIconBtn addGestureRecognizer:tapGesture];
     

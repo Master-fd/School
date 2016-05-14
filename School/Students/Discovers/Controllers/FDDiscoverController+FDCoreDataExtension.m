@@ -34,7 +34,7 @@
         
         //设置查询条件
         NSString *jidStr = [FDUserInfo alloc].jidStr;
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", jidStr];  //自己的账号
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = % @AND subscription != %@", jidStr, @"none"];  //自己的账号
         //排序
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];  //使用displayName作为排序依据
         

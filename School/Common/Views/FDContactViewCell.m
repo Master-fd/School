@@ -90,7 +90,8 @@
 {
     _vCard = vCard;
     
-    _iconView.image = [UIImage imageWithData:self.vCard.photo];
+    _iconView.image = [[UIImage imageWithData:self.vCard.photo] imageWithSize:CGSizeMake(40, 40)];
+    [_iconView addCorner:10];
     
     if (!self.isRemark) {
         //没有使用备注, 使用用户的vcard上nickname
@@ -110,9 +111,7 @@
 {
     _iconView = [[UIImageView alloc] init];
     [self.contentView addSubview:_iconView];
-    _iconView.layer.cornerRadius = 4;
-    _iconView.layer.masksToBounds = YES;
-    _iconView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    _iconView.backgroundColor = [UIColor clearColor];
     
     _nickName = [[UILabel alloc] init];
     [self.contentView addSubview:_nickName];
@@ -128,9 +127,6 @@
     [self.contentView addSubview:_messageLab];
     _messageLab.layer.cornerRadius = 10;
     _messageLab.layer.masksToBounds = YES;
-    _messageLab.textColor = [UIColor whiteColor];
-    _messageLab.textAlignment = NSTextAlignmentCenter;
-    _messageLab.font = [UIFont systemFontOfSize:10];
     _messageLab.backgroundColor = [UIColor redColor];
     _messageLab.hidden = YES;
     //监听通知
@@ -155,11 +151,14 @@
     if ([jidStr isEqualToString:self.contactModel.jidStr]) {
 
         if ([notification.name isEqualToString:kNotificationReciveNewMsg]) {
-            _messageLab.hidden = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _messageLab.hidden = NO;
+            });
         }
-        
         if ([notification.name isEqualToString:kNotificationNewMsgDidRead]) {
-            _messageLab.hidden = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _messageLab.hidden = YES;
+            });
         }
         
 

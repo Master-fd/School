@@ -10,6 +10,8 @@
 #import "FDLoginController.h"
 #import "FDQResume.h"
 #import "FDResume.h"
+#import "FDOrganization.h"
+#import "FDStudent.h"
 #import "XMPPvCardTemp.h"
 
 @interface FDXMPPTool()<XMPPStreamDelegate, XMPPRosterDelegate, UIAlertViewDelegate>{
@@ -222,6 +224,9 @@ singleton_implementation(FDXMPPTool);
     [[UIApplication sharedApplication] keyWindow].rootViewController = loginVC;
     
     self.record = NO;
+    [FDUserInfo shareFDUserInfo].onlineStatus = NO;
+    [FDOrganization shareFDOrganization].jobs = nil;
+    [FDStudent shareFDStudent].resume = nil;
 }
 
 /**

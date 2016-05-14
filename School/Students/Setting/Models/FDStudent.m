@@ -46,10 +46,12 @@ singleton_implementation(FDStudent);
 - (FDResume *)resume
 {
     if (!_resume) {
-        _resume = [[FDResume alloc] init];
-        
         NSData *data = self.myVcard.logo;
         _resume = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (!_resume)
+        {
+            _resume = [[FDResume alloc] init];
+        }
     }
     
     return _resume;

@@ -235,12 +235,12 @@
     
     if (chatModel.isOutgoing) {
         //自己发送的信息,显示自己的头像
-        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr shouldFetch:YES];
-        [cell.headIconBtn setBackgroundImage:[UIImage imageWithData:vcard.photo] forState:UIControlStateNormal];
+        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:[FDUserInfo shareFDUserInfo].jidStr];
+        cell.headIconBtn.image = [UIImage imageWithData:vcard.photo];
     }else {
         //好友的信息,显示好友的头像
-        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:self.jidStr shouldFetch:YES];
-        [cell.headIconBtn setBackgroundImage:[UIImage imageWithData:vcard.photo] forState:UIControlStateNormal];
+        XMPPvCardTemp *vcard = [[FDXMPPTool shareFDXMPPTool] xmppvCardTempForJIDStr:self.jidStr];
+        cell.headIconBtn.image = [UIImage imageWithData:vcard.photo];
     }
     
 
@@ -367,10 +367,9 @@
             [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];//如何避免一闪?
             [self.tableView endUpdates];
-            FDLog(@"offset = %d", offset);
         }else
         {
-            NSLog(@"已经没有更多数据啦。");
+            FDLog(@"已经没有更多数据啦。");
         }
     }
     

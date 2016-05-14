@@ -68,7 +68,6 @@
     [_bgView addSubview:_titleLab];
     _titleLab.text = @"点击更换";
     _titleLab.textColor = [UIColor grayColor];
-    _titleLab.alpha = 0.7;
     _titleLab.font = [UIFont systemFontOfSize:14];
 }
 

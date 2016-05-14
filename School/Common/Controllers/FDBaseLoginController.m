@@ -58,6 +58,7 @@
         switch (type) {
             case XMPPRequireResultTypeLoginFailure:
                 [FDMBProgressHUB hideHUD];
+                [FDUserInfo shareFDUserInfo].onlineStatus = NO;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [FDMBProgressHUB showError:@"登录失败"];
                 });
@@ -65,8 +66,12 @@
                 break;
             case XMPPRequireResultTypeLoginSuccess:
                 [FDMBProgressHUB hideHUD];
-                //跳转到主页面
-                [self switchUserClient];  //学生端和组织端
+                if ([FDUserInfo shareFDUserInfo].isOnlineStatus == NO) {
+                    [FDUserInfo shareFDUserInfo].onlineStatus = YES;
+                    //跳转到主页面
+                    [self switchUserClient];  //学生端和组织端
+                }
+                
                 break;
             case XMPPRequireResultTypeRegisterFailure:
                 [FDMBProgressHUB hideHUD];
@@ -82,7 +87,7 @@
                 break;
             case XMPPRequireResultTypeNetError:
                 [FDMBProgressHUB hideHUD];
-                [FDMBProgressHUB showError:@"连接失败"];
+//                [FDMBProgressHUB showError:@"连接失败"];
                 break;
             default:
                 break;

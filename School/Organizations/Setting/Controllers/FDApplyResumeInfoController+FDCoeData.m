@@ -101,7 +101,7 @@
         NSError *error = nil;
         if (![_fetchedResultsController performFetch:&error])
         {
-            NSLog(@"错误 %@, %@", error, [error userInfo]);
+            FDLog(@"错误 %@, %@", error, [error userInfo]);
         }
     }
     

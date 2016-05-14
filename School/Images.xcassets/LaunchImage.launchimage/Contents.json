@@ -1,18 +1,19 @@
 {
   "images" : [
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "8.0",
+      "idiom" : "iphone",
       "subtype" : "736h",
+      "filename" : "LaunchImage-800-Portrait-736h@3x.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "portrait",
       "scale" : "3x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "Msn Messenger 2 800-667h@2x.png",
+      "filename" : "LaunchImage-800-667h@2x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -22,42 +23,68 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "Msn Messenger 2 -700@2x.png",
+      "filename" : "LaunchImage-700@2x.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "Msn Messenger 2 -700-568h@2x.png",
+      "filename" : "LaunchImage-700-568h@2x..png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
-      "idiom" : "iphone",
+      "idiom" : "ipad",
       "extent" : "full-screen",
-      "filename" : "Msn Messenger 2  320x480.png",
+      "minimum-system-version" : "7.0",
+      "filename" : "LaunchImage-768-Portrait~ipad-1-1.png",
       "scale" : "1x"
     },
     {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "filename" : "Msn Messenger 2 320x480@2x.png",
-      "minimum-system-version" : "7.0",
       "orientation" : "portrait",
-      "unassigned" : true,
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "minimum-system-version" : "7.0",
+      "filename" : "LaunchImage-700-Portrait@2x~ipad-1.png",
       "scale" : "2x"
     },
     {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "subtype" : "retina4",
-      "filename" : "Msn Messenger 2 568h@2x.png",
-      "minimum-system-version" : "7.0",
       "orientation" : "portrait",
-      "unassigned" : true,
+      "idiom" : "iphone",
+      "extent" : "full-screen",
+      "filename" : "LaunchImage-320x480-1.png",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "extent" : "full-screen",
+      "filename" : "LaunchImage-700@2x-1-1.png",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "extent" : "full-screen",
+      "filename" : "LaunchImage-568h@2x-1.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "filename" : "LaunchImage-768-Portrait~ipad-1.png",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "filename" : "LaunchImage-700-Portrait@2x~ipad.png",
       "scale" : "2x"
     }
   ],

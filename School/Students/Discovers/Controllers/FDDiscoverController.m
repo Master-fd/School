@@ -42,6 +42,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self updateDiscoverData];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];

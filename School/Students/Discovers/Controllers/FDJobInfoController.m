@@ -154,12 +154,12 @@
 - (BOOL)saveApplyInfoWithPlist:(NSDictionary *)dataDic
 {
     // 0 在线。1 离开 2离线
-//    if ([self.contactModel.sectionNum intValue]) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [FDMBProgressHUB showError:@"好友不在线，不能简历"];
-//        });
-//        return NO;
-//    }
+    if ([self.contactModel.sectionNum intValue]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FDMBProgressHUB showError:@"好友不在线，不能简历"];
+        });
+        return NO;
+    }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:kMyApplyInfoPlistPath]) {  //文件不存在，则创建

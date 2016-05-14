@@ -106,4 +106,32 @@
     self.frame = frame;
 }
 
+
+- (UIImage *)drawRectWithCornerRadius:(CGFloat )radius
+{
+    CGSize size = self.size;
+    UIGraphicsBeginImageContextWithOptions(size, false, [UIScreen mainScreen].scale);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, size.width, size.height) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
+    CGContextAddPath(context, path.CGPath);
+    
+    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+/**
+ *  给一个uiview高效的添加圆角，但是请不要使用背景色
+ */
+- (void)addCorner:(CGFloat )radius 
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[self drawRectWithCornerRadius:radius]];
+    
+    [self insertSubview:imageView atIndex:0];
+}
 @end

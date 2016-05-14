@@ -39,7 +39,6 @@
     _iconView.backgroundColor = [UIColor clearColor];
 
     [self.contentView addSubview:self.titleLab];
-    self.titleLab.alpha = 0.8;
 }
 
 - (void)setupContraints

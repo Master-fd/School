@@ -42,10 +42,10 @@
 {
     _textLab = [[FDLable alloc] initForAutoLayout];
     [self.contentView addSubview:_textLab];
-    _textLab.backgroundColor = [UIColor clearColor];
+    _textLab.backgroundColor = _textLab.superview.backgroundColor;
     _textLab.font = [UIFont systemFontOfSize:16];
     _textLab.textColor = [UIColor blackColor];
-    _textLab.alpha = 0.8;
+    _textLab.alpha = 1;
     _textLab.numberOfLines = 0;//自动换行
     
 }

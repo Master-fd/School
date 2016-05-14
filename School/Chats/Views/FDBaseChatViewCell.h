@@ -27,7 +27,7 @@
 @interface FDBaseChatViewCell : UITableViewCell
 
 //头像
-@property (nonatomic, strong) UIButton *headIconBtn;
+@property (nonatomic, strong) UIImageView *headIconBtn;
 
 //消息内容背景
 @property (nonatomic, strong) UIImageView *contentBg;

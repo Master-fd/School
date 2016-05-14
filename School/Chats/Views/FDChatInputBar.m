@@ -100,9 +100,8 @@
     //_sendBtn
     _sendBtn = [[UIButton alloc] init];
     [self addSubview:_sendBtn];
-    _sendBtn.backgroundColor = [UIColor grayColor];
+    _sendBtn.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
     [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
-    _sendBtn.alpha = 0.5;
     _sendBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     _sendBtn.layer.cornerRadius = 4;
     _sendBtn.layer.masksToBounds = YES;
@@ -121,7 +120,6 @@
     _inputTextView = [[FDTextView alloc] init];
     [self addSubview:_inputTextView];
     _inputTextView.delegate = self;  //设置代理
-    _inputTextView.alpha = 0.8;
     _inputTextView.layer.cornerRadius = 4;
     _inputTextView.layer.masksToBounds = YES;
     _inputTextView.layer.borderWidth = 1;

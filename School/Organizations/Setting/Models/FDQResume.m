@@ -53,6 +53,11 @@
             [context deleteObject:model];  //删除
             break;
         }
+        
+        if (mod.jobTitle ==nil) {
+            [context deleteObject:model];  //删除
+            break;
+        }
     }
     
     

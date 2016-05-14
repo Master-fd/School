@@ -60,9 +60,14 @@
     CGImageRef imageRefResized = CGBitmapContextCreateImage(contextRef);
     
     //Release
+    UIImage *qrImage = [UIImage imageWithCGImage:imageRefResized];
+
+    CGColorSpaceRelease(colorSpaceRef);
     CGContextRelease(contextRef);
     CGImageRelease(imageRef);
-    return [UIImage imageWithCGImage:imageRefResized];
+    CGImageRelease(imageRefResized);
+    
+    return qrImage;
 }
 
 /**

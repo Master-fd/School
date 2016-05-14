@@ -48,7 +48,7 @@ static NSManagedObjectModel *__managedObjectModel;
         dict[NSUnderlyingErrorKey] = error;
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        FDLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     
@@ -82,7 +82,7 @@ static NSManagedObjectModel *__managedObjectModel;
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            NSLog(@"保存失败 %@, %@", error, [error userInfo]);
+            FDLog(@"保存失败 %@, %@", error, [error userInfo]);
         }
     }
 }
