@@ -97,7 +97,6 @@ static const CGFloat kMargin = 30;
 -(void)setupNavView{
     
     //1.返回
-    
     UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(20, 30, 25, 25);
     [backBtn setBackgroundImage:[UIImage imageNamed:@"qrcode_scan_titlebar_back_nor"] forState:UIControlStateNormal];
@@ -105,8 +104,12 @@ static const CGFloat kMargin = 30;
     [backBtn addTarget:self action:@selector(disMiss) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];
     
-    
+   
+
 }
+/**
+ *  设置遮罩
+ */
 - (void)setupMaskView
 {
     UIView *mask = [[UIView alloc] init];
@@ -118,8 +121,8 @@ static const CGFloat kMargin = 30;
     mask.bounds = CGRectMake(0, 0, self.view.width + kBorderW + kMargin , self.view.width + kBorderW + kMargin);
     mask.center = CGPointMake(self.view.width * 0.5, self.view.height * 0.5);
     mask.y = 0;
-    
     [self.view addSubview:mask];
+    
 }
 
 - (void)setupBottomBar
@@ -128,9 +131,7 @@ static const CGFloat kMargin = 30;
     //1.下边栏
     UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height * 0.9, self.view.width, self.view.height * 0.1)];
     bottomBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
-    
     [self.view addSubview:bottomBar];
-    
     
     
 }
@@ -279,7 +280,5 @@ static const CGFloat kMargin = 30;
         [self disMiss];  //退出二维码扫描
     }
 }
-
-
 
 @end

@@ -28,6 +28,12 @@
 
 /**
  * 创建二维码CIImage
+ *
+ * 错误修正容量 
+ * L水平 7%的字码可被修正
+ * M水平 15%的字码可被修正
+ * Q水平 25%的字码可被修正
+ * H水平 30%的字码可被修正
  */
 + (CIImage *)createQRCodeImage:(NSString *)source
 {

@@ -13,7 +13,7 @@
 #import "FDAddFriendViewController.h"
 #import "FDBaseContactsController+CoreDataExtension.h"
 #import "XMPPvCardTemp.h"
-
+#import "FDHeaderView.h"
 
 @interface FDBaseContactsController ()
 
@@ -133,21 +133,13 @@
         sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     }
     
-    UITableViewHeaderFooterView *headview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headViewId];
+    FDHeaderView *headview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headViewId];
     if (!headview) {
-        headview = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headViewId];
+        headview = [[FDHeaderView alloc] initWithReuseIdentifier:headViewId];
     }
-    headview.contentView.backgroundColor = [UIColor clearColor];
     
-    UILabel *nameLab = [[UILabel alloc] init];
-    [headview.contentView addSubview:nameLab];
-    nameLab.text = sectionInfo.name;
-    nameLab.backgroundColor = [UIColor clearColor];
-    nameLab.textColor = [UIColor grayColor];
-    nameLab.alpha = 0.9;
-    nameLab.font = [UIFont systemFontOfSize:14];
-    [nameLab sizeToFit];
-    [nameLab autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 0) excludingEdge:ALEdgeRight];
+    headview.title = sectionInfo.name;
+    
     
     return headview;
 }
